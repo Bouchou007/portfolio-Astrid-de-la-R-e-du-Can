@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refonte LP "Devenir Client" — Astrid de la Rüe du Can</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1DE9B6; --green-dark: #00C9A7;
+    --navy: #0D1B2A; --text: #0D1B2A; --text-muted: #6B7280;
+    --bg: #F4F4F0; --white: #FFFFFF; --border: #E0E0D8;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; position: sticky; top: 0; background: var(--bg); z-index: 100; border-bottom: 1px solid var(--border); }
+  .nav-logo-placeholder { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--green); font-weight: 600; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; position: relative; padding-bottom: 2px; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--green-dark); transition: width 0.2s; }
+  .nav-links a:hover::after { width: 100%; }
+
+  .breadcrumb { padding: 20px 48px 0; }
+  .breadcrumb a { font-size: 12px; color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--green-dark); }
+
+  .project-hero { max-width: 1200px; margin: 0 auto; padding: 40px 48px 60px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tag { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-muted); background: var(--white); }
+  .project-title { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 4vw, 48px); font-weight: 400; line-height: 1.1; margin-bottom: 8px; }
+  .project-subtitle { font-size: 14px; color: var(--text-muted); font-style: italic; margin-bottom: 32px; }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .meta-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+  .meta-value { font-size: 13px; font-weight: 500; }
+  .context-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .context-box h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dark); font-weight: 600; margin-bottom: 10px; }
+  .context-box p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+  .hero-visual { border-radius: 16px; background: linear-gradient(135deg, #f0e8ff 0%, #0D1B2A 100%); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+
+  .project-content { max-width: 1200px; margin: 0 auto; padding: 0 48px 80px; }
+  .step { margin-bottom: 64px; }
+  .step-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .step-number { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--green); line-height: 1; font-weight: 400; }
+  .step-title { font-family: 'Instrument Serif', serif; font-size: 28px; font-weight: 400; }
+  .step-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+  .step-body strong { color: var(--text); font-weight: 600; }
+
+  .highlight-box { background: var(--navy); border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
+  .highlight-box p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; }
+  .highlight-box strong { color: var(--green); }
+
+  .two-col-step { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+  .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .info-card h5 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
+  .info-card ul { list-style: none; }
+  .info-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; }
+  .info-card ul li:last-child { border: none; }
+  .info-card ul li::before { content: '→'; color: var(--green-dark); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+
+  .visual-placeholder { background: var(--white); border: 1px solid var(--border); border-radius: 12px; aspect-ratio: 16/7; display: flex; align-items: center; justify-content: center; margin-top: 20px; color: var(--text-muted); font-size: 13px; }
+
+  /* Section UI showcases */
+  .ui-section { background: var(--navy); border-radius: 16px; padding: 32px; margin-top: 20px; }
+  .ui-section h4 { font-size: 13px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+  .ui-section p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 12px; }
+  .ui-section ul { list-style: none; }
+  .ui-section ul li { font-size: 13px; color: rgba(255,255,255,0.65); padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; gap: 8px; }
+  .ui-section ul li:last-child { border: none; }
+  .ui-section ul li::before { content: '↳'; color: var(--green); font-size: 12px; }
+
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+  .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .feature-card h5 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .feature-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+  .takeaway-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; border-top: 3px solid var(--green); }
+  .takeaway-card h5 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .takeaway-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .collab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .collab-tag { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; background: var(--navy); color: var(--white); }
+
+  .project-nav { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
+  .proj-nav-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-muted); font-size: 13px; transition: color 0.2s; }
+  .proj-nav-link:hover { color: var(--green-dark); }
+  .arrow-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; background: var(--white); }
+
+  footer { background: var(--navy); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .footer-name { color: var(--green); font-size: 13px; font-weight: 600; }
+
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav, .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
+    .project-hero { grid-template-columns: 1fr; padding: 24px; }
+    .two-col-step, .three-col, .takeaway-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html"><div class="nav-logo-placeholder">A</div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Mes projets</a></li>
+    <li><a href="about.html">Qui suis-je ?</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">← Retour accueil</a>
+</div>
+
+<div class="project-hero">
+  <div class="project-meta fade-up">
+    <div class="project-tags">
+      <span class="tag">A/B Test</span>
+      <span class="tag">Refonte</span>
+      <span class="tag">Responsive</span>
+      <span class="tag">UX / UI</span>
+    </div>
+    <h1 class="project-title">Refonte de la Landing page "Devenir client"</h1>
+    <p class="project-subtitle">Refonte graphique complète de la landing page</p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Rôle</div>
+        <div class="meta-value">UX/UI designer</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Périmètre</div>
+        <div class="meta-value">Acquisition, cible particulier</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Équipe</div>
+        <div class="meta-value">Design, PO, des développeurs, accessibilité, SEO, legal</div>
+      </div>
+    </div>
+
+    <div class="context-box">
+      <h4>Contexte</h4>
+      <p>Dans un contexte concurrentiel extrêmement compétitif, Hello bank! souhaitait moderniser son image et renforcer sa visibilité. En raison d'une capacité interne limitée liée à la taille de l'équipe, nous nous sommes tournés vers une agence digitale pour identifier et définir des éléments (expressions de marque). Notre priorité était de nous avoir 2 pages ambitieuses en premier lieu, notre homepage et notre landing page devenir client.</p>
+    </div>
+
+    <div class="context-box">
+      <h4>Objectif du projet</h4>
+      <p>Construire une image de marque homogène, cohérente et déclinable sur l'ensemble de nos devices et supports de com.</p>
+    </div>
+
+    <div class="context-box">
+      <h4>Problématique</h4>
+      <p>Comment moderniser la marque et se différencier de la concurrence tout en préservant son identité ?</p>
+    </div>
+  </div>
+
+  <div class="hero-visual fade-up" style="transition-delay:0.15s">
+    <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+      <rect x="15" y="15" width="80" height="140" rx="8" fill="white" opacity="0.15"/>
+      <rect x="105" y="30" width="80" height="110" rx="8" fill="white" opacity="0.1"/>
+      <rect x="20" y="22" width="70" height="10" rx="3" fill="white"/>
+      <rect x="20" y="38" width="50" height="6" rx="2" fill="white" opacity="0.5"/>
+      <rect x="20" y="52" width="70" height="40" rx="6" fill="#1DE9B6" opacity="0.4"/>
+      <rect x="20" y="100" width="35" height="8" rx="4" fill="white" opacity="0.7"/>
+      <rect x="60" y="100" width="25" height="8" rx="4" fill="#1DE9B6"/>
+      <rect x="110" y="38" width="70" height="10" rx="3" fill="white" opacity="0.8"/>
+      <rect x="110" y="55" width="55" height="6" rx="2" fill="white" opacity="0.4"/>
+      <rect x="110" y="68" width="70" height="35" rx="5" fill="white" opacity="0.15"/>
+      <rect x="110" y="112" width="55" height="8" rx="4" fill="#1DE9B6" opacity="0.8"/>
+    </svg>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">1.</div><div class="step-title">Collaboration</div></div>
+    <p class="step-body">Je n'y ai pas participé directement, mais des ateliers ont été menés en collaboration avec l'agence (équipes communication, marketing et acquisition), afin d'affiner les besoins et de définir collectivement la direction à prendre en matière d'expression digitale.</p>
+    <p class="step-body">Ces échanges ont porté sur les <strong>marqueurs identitaires de la marque</strong>, à travers différents éléments comme : le langage visuel, les points ports créatifs, l'introduction de nouveau codes.</p>
+    <div class="collab-tags">
+      <span class="collab-tag">Communication</span>
+      <span class="collab-tag">Marketing</span>
+      <span class="collab-tag">Acquisition</span>
+      <span class="collab-tag">Agence digitale</span>
+      <span class="collab-tag">Product Design</span>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">2.</div><div class="step-title">Refonte</div></div>
+    <p class="step-body">Sous l'impulsion de notre Lead UI, nous avons :</p>
+    <div class="two-col-step">
+      <div class="info-card">
+        <h5>Palette & identité</h5>
+        <ul>
+          <li>Réévalué l'ensemble de la palette de couleurs afin de rendre notre couleur de marque accessible, ce qui n'était pas le cas jusqu'alors</li>
+          <li>Réalisé de nombreux tests sur mobile et desktop pour garantir la lisibilité</li>
+          <li>Travaillé également sur les typographies pour renforcer le professionnalisme de la marque</li>
+          <li>Conservé un Human touch dans la relation client sur le marché</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h5>Direction artistique</h5>
+        <ul>
+          <li>Nouvelle palette accessible WCAG AA</li>
+          <li>Nouvelles typographies sélectionnées</li>
+          <li>Nouveau système d'illustration</li>
+          <li>Iconographie redessinée</li>
+          <li>Composants UI mis à jour</li>
+        </ul>
+      </div>
+    </div>
+    <div class="visual-placeholder">Nouvelles couleurs, typographies, composants</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">3.</div><div class="step-title">Synchro</div></div>
+    <p class="step-body">L'agence nous a proposé plusieurs pistes pour la homepage. À partir des ateliers nous avons décidé de tester la landing page en utilisant certaines pistes. Je me suis chargé de de définir les stratégies / marquants, à savoir :</p>
+    <div class="three-col">
+      <div class="feature-card">
+        <h5>Le banner</h5>
+        <p>Hero banner impactant avec la nouvelle identité visuelle, mettant en avant l'offre principale.</p>
+      </div>
+      <div class="feature-card">
+        <h5>Le comparatif</h5>
+        <p>Tableau comparatif des offres revu pour faciliter la lecture et la prise de décision.</p>
+      </div>
+      <div class="feature-card">
+        <h5>Le stepper</h5>
+        <p>Parcours d'ouverture de compte simplifié et visuellement guidé, étape par étape.</p>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <p>Ces échanges ont porté sur les strates (marquants), à savoir le banner, le comparatif et le stepper. Des points de partage étaient établis, des maquettes de partage étant obligatoires, avec l'équipe (équipe communication, marketing et acquisition). Une fois l'alignement trouvé sur le contenu, la problématique et la solution design, la présenter aux parties prenantes à valider.</p>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">4.</div><div class="step-title">Recherches UI</div></div>
+
+    <div class="ui-section">
+      <h4>Hero banner</h4>
+      <p><strong>Objectifs :</strong></p>
+      <ul>
+        <li>Trouver un juste milieu entre les attentes des PO métier, les contraintes techniques des développeurs et les besoins des utilisateurs</li>
+        <li>Trouver un juste milieu attractivité des offres, incitation de la marque, dimension humaine, le tout sans allonger la longueur de la page</li>
+      </ul>
+    </div>
+
+    <div class="visual-placeholder" style="margin-top:16px;">Explorations Hero banner — propositions A / B / C</div>
+
+    <p class="step-body" style="margin-top:20px;">Réalisation d'un prototype haute fidélité afin de présenter la solution à l'équipe de développement et d'en valider la faisabilité technique, notamment le passage des offres vers le trio principal sur le scroll, tout en conservant une image de fond sticky.</p>
+
+    <div class="visual-placeholder" style="margin-top:16px;">Prototype Hero — démo scroll</div>
+
+    <div class="two-col-step">
+      <div class="ui-section">
+        <h4>Deux offres, zéro frais de tenue de compte</h4>
+        <p>Tableau comparatif avec capitalisation sur les enseignements des A/B tests menés.</p>
+        <ul>
+          <li>Utilisation d'un segment control pour faciliter la navigation entre les offres</li>
+          <li>Faciliter la compréhension et la mise en avant des plus plan avantageux</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h5>Contraintes conservées par rapport à l'assistant</h5>
+        <ul>
+          <li>À compléter / remettre en avant des pills les plus attractives</li>
+          <li>Ajout d'une dégradé orange à côté pour éviter toutes confusion avec les CTAs</li>
+          <li>Codes visuels issus des cartes de Hi BP pour lier les cartes</li>
+          <li>L'objectif n'étant pas de tromper l'utilisateur sur leur apparence</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ui-section" style="margin-top:20px;">
+      <h4>Stepper</h4>
+      <p>Conçu pour rassurer sur la durée du parcours d'ouverture de compte, celui-ci est composé de 3 étapes maximum, chaque étape présentée sur trois lignes maximum, afin d'éviter toute perception de complexité ou de longueur.</p>
+      <ul>
+        <li>Continuité visuelle assurée par l'usage des pills sélectés, complémentaires au fond orange, permettant d'indiquer clairement la CTA de chaque temps, qui demeure le point focal principal de la section</li>
+      </ul>
+    </div>
+
+    <div class="highlight-box" style="margin-top:20px;">
+      <p><strong>Intention globale :</strong> La page est plus légère, plus fiable et un peu plus haut de gamme. Une expérience fluide, claire, qui valorise l'offre et renforce la perception premium de la marque.</p>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">8.</div><div class="step-title">Maquette finale</div></div>
+    <div class="visual-placeholder" style="aspect-ratio: 21/9;">Maquettes finales Desktop & Mobile — Nouvelle identité</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">9.</div><div class="step-title">Ce que ça m'a apporté</div></div>
+    <div class="takeaway-grid">
+      <div class="takeaway-card">
+        <h5>Collaboration agence</h5>
+        <p>Apprendre à travailler avec un partenaire externe, intégrer ses livrables dans un contexte produit et assurer la cohérence avec les contraintes internes.</p>
+      </div>
+      <div class="takeaway-card">
+        <h5>Refonte systémique</h5>
+        <p>Comprendre qu'une refonte visuelle n'est pas que de l'esthétique — c'est un travail d'accessibilité, de cohérence et de storytelling de marque.</p>
+      </div>
+      <div class="takeaway-card">
+        <h5>Ownership design</h5>
+        <p>Prendre en charge un projet de A à Z sur un périmètre stratégique, arbitrer, défendre ses choix auprès des parties prenantes.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="project-nav">
+  <a href="projet-abtest.html" class="proj-nav-link">
+    <span class="arrow-circle">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    Projet précédent : A/B Test LP
+  </a>
+  <a href="index.html" class="proj-nav-link">
+    Retour aux projets
+    <span class="arrow-circle">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </a>
+</div>
+
+<footer>
+  <p class="footer-name">Astrid de la Rüe du Can</p>
+  <p>Product Designer — Paris</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

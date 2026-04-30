@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astrid de la Rüe du Can — Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1DE9B6;
+    --green-dark: #00C9A7;
+    --navy: #0D1B2A;
+    --navy-mid: #1A2B3C;
+    --text: #0D1B2A;
+    --text-muted: #6B7280;
+    --bg: #F4F4F0;
+    --white: #FFFFFF;
+    --border: #E0E0D8;
+    --tag-bg: #EFEFEB;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--border); }
+  .nav-logo { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; }
+  .nav-logo img { width: 100%; height: 100%; object-fit: cover; }
+  .nav-logo-placeholder {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: var(--green); font-weight: 600; letter-spacing: 0.5px;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500;
+    position: relative; padding-bottom: 2px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 1.5px; background: var(--green-dark);
+    transition: width 0.2s;
+  }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-links a.active { font-weight: 600; }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 80px 48px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 16px; font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 32px;
+    letter-spacing: -1px;
+  }
+  .hero h1 em { font-style: italic; color: var(--navy-mid); }
+  .hero-actions { display: flex; align-items: center; justify-content: center; gap: 24px; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--navy); color: var(--white);
+    padding: 14px 28px; border-radius: 60px;
+    text-decoration: none; font-size: 14px; font-weight: 500;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .btn-primary:hover { background: var(--navy-mid); transform: translateY(-1px); }
+  .btn-primary .arrow {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--green); display: flex; align-items: center; justify-content: center;
+  }
+  .btn-secondary {
+    color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500;
+    border-bottom: 1px solid var(--text); padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--green-dark); border-color: var(--green-dark); }
+
+  /* SKILLS MARQUEE */
+  .skills-bar {
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 16px 0; overflow: hidden; margin-bottom: 60px;
+  }
+  .skills-marquee {
+    display: flex; gap: 48px; width: max-content;
+    animation: marquee 20s linear infinite;
+  }
+  .skills-marquee span {
+    font-size: 12px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .skills-marquee .dot { color: var(--green-dark); }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* STATS */
+  .stats-band {
+    background: var(--navy);
+    padding: 48px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 80px;
+  }
+  .stat-item { text-align: center; }
+  .stat-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px; font-weight: 400;
+    color: var(--white); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-number span { color: var(--green); }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
+
+  /* PROJECTS */
+  .projects-section { padding: 0 48px 80px; max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 600; margin-bottom: 40px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .project-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex; flex-direction: column;
+    border: 1px solid var(--border);
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,27,42,0.1); }
+  .project-card.large { grid-column: span 1; }
+
+  .card-image {
+    width: 100%; aspect-ratio: 4/3; overflow: hidden;
+    background: linear-gradient(135deg, #1DE9B6 0%, #0D1B2A 100%);
+    position: relative;
+  }
+  .card-image-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-image-placeholder svg { opacity: 0.3; }
+
+  /* Color themes for cards */
+  .card-legalplace .card-image { background: linear-gradient(135deg, #e8f5ff 0%, #b3d9f5 100%); }
+  .card-banners .card-image { background: linear-gradient(135deg, #e8fff8 0%, #0D1B2A 100%); }
+  .card-abtest .card-image { background: linear-gradient(135deg, #fff3e8 0%, #1DE9B6 100%); }
+  .card-refonte .card-image { background: linear-gradient(135deg, #f0e8ff 0%, #0D1B2A 100%); }
+
+  .card-mockup {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: top;
+  }
+
+  .card-body { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .tag {
+    font-size: 11px; font-weight: 500; padding: 4px 10px;
+    border-radius: 20px; border: 1px solid var(--border);
+    color: var(--text-muted); background: var(--tag-bg);
+    white-space: nowrap;
+  }
+  .card-client { font-size: 11px; color: var(--green-dark); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
+  .card-title { font-size: 17px; font-weight: 600; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
+  .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; flex: 1; }
+  .card-arrow {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--green); border: none;
+    display: flex; align-items: center; justify-content: center;
+    align-self: flex-end; margin-top: 16px; cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    text-decoration: none;
+  }
+  .card-arrow:hover { transform: scale(1.1); background: var(--green-dark); }
+
+  /* CTA ABOUT */
+  .about-teaser {
+    max-width: 1200px; margin: 0 auto 80px;
+    padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 40px;
+  }
+  .about-teaser-text { max-width: 480px; }
+  .about-teaser-text p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px; font-style: italic; color: var(--text-muted);
+    line-height: 1.5; margin-bottom: 16px;
+  }
+  .about-teaser-links { display: flex; flex-direction: column; gap: 8px; }
+  .about-teaser-links a {
+    font-size: 13px; color: var(--text-muted); text-decoration: none;
+    border-bottom: 1px solid var(--border); padding-bottom: 1px;
+    transition: color 0.2s;
+  }
+  .about-teaser-links a:hover { color: var(--green-dark); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .footer-name { color: var(--green); font-size: 13px; font-weight: 600; }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .hero { padding: 60px 24px 40px; }
+    .stats-band { gap: 40px; padding: 32px 24px; flex-wrap: wrap; }
+    .projects-section { padding: 0 24px 60px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .about-teaser { flex-direction: column; padding: 0 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-logo-placeholder">A</div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Mes projets</a></li>
+    <li><a href="about.html">Qui suis-je ?</a></li>
+  </ul>
+</nav>
+
+<section class="hero fade-up">
+  <p class="hero-eyebrow">Astrid de la Rüe du Can</p>
+  <h1>PRODUCT<br><em>DESIGNER</em></h1>
+  <div class="hero-actions">
+    <a href="#projets" class="btn-primary">
+      Découvrir mes projets
+      <span class="arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </a>
+    <a href="#" class="btn-secondary">Consulter mon CV</a>
+  </div>
+</section>
+
+<div class="skills-bar">
+  <div class="skills-marquee">
+    <span>Refonte</span><span class="dot">·</span>
+    <span>A/B Testing</span><span class="dot">·</span>
+    <span>UX/UI</span><span class="dot">·</span>
+    <span>Branding</span><span class="dot">·</span>
+    <span>User Research</span><span class="dot">·</span>
+    <span>Wireframe</span><span class="dot">·</span>
+    <span>Prototypage</span><span class="dot">·</span>
+    <span>Design System</span><span class="dot">·</span>
+    <span>Refonte</span><span class="dot">·</span>
+    <span>A/B Testing</span><span class="dot">·</span>
+    <span>UX/UI</span><span class="dot">·</span>
+    <span>Branding</span><span class="dot">·</span>
+    <span>User Research</span><span class="dot">·</span>
+    <span>Wireframe</span><span class="dot">·</span>
+    <span>Prototypage</span><span class="dot">·</span>
+    <span>Design System</span><span class="dot">·</span>
+  </div>
+</div>
+
+<div class="stats-band">
+  <div class="stat-item fade-up">
+    <div class="stat-number"><span>+</span>5</div>
+    <div class="stat-label">ans d'expérience</div>
+  </div>
+  <div class="stat-item fade-up" style="transition-delay:0.1s">
+    <div class="stat-number"><span>+</span>2</div>
+    <div class="stat-label">clients grands comptes</div>
+  </div>
+  <div class="stat-item fade-up" style="transition-delay:0.2s">
+    <div class="stat-number"><span>+</span>X</div>
+    <div class="stat-label">projets</div>
+  </div>
+</div>
+
+<section class="projects-section" id="projets">
+  <div class="section-label">Mes projets</div>
+  <div class="projects-grid">
+
+    <a href="projet-legalplace.html" class="project-card card-legalplace fade-up">
+      <div class="card-image">
+        <div class="card-image-placeholder">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <rect x="10" y="10" width="60" height="8" rx="4" fill="#0D1B2A"/>
+            <rect x="10" y="26" width="45" height="6" rx="3" fill="#0D1B2A"/>
+            <rect x="10" y="40" width="55" height="6" rx="3" fill="#1DE9B6"/>
+            <rect x="10" y="54" width="38" height="6" rx="3" fill="#0D1B2A"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Responsive</span>
+          <span class="tag">Desktop</span>
+          <span class="tag">Partenariat</span>
+          <span class="tag">UX / UI</span>
+        </div>
+        <div class="card-client">Hello bank!</div>
+        <div class="card-title">Partenariat avec LegalPlace</div>
+        <div class="card-desc">Réalisation d'une page dédiée à l'accompagnement des utilisateurs dans la création de leur entreprise, en partenariat avec LegalPlace.</div>
+        <span class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="projet-banners.html" class="project-card card-banners fade-up" style="transition-delay:0.1s">
+      <div class="card-image">
+        <div class="card-image-placeholder">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <rect x="8" y="12" width="64" height="20" rx="4" fill="#0D1B2A"/>
+            <rect x="8" y="38" width="64" height="20" rx="4" fill="#1DE9B6" opacity="0.6"/>
+            <rect x="8" y="64" width="64" height="8" rx="3" fill="#0D1B2A" opacity="0.3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">A/B Test</span>
+          <span class="tag">Desktop</span>
+          <span class="tag">Responsive</span>
+          <span class="tag">UX / UI</span>
+        </div>
+        <div class="card-client">Hello bank!</div>
+        <div class="card-title">A/B Test de bannières CRMD</div>
+        <div class="card-desc">Lancement d'un A/B test sur les bannières rebond et bannières d'offres sur le ROP.</div>
+        <span class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="projet-abtest.html" class="project-card card-abtest fade-up" style="transition-delay:0.2s">
+      <div class="card-image">
+        <div class="card-image-placeholder">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <rect x="8" y="8" width="28" height="40" rx="4" fill="#0D1B2A"/>
+            <rect x="44" y="8" width="28" height="40" rx="4" fill="#1DE9B6"/>
+            <rect x="8" y="56" width="64" height="6" rx="3" fill="#0D1B2A" opacity="0.3"/>
+            <text x="22" y="32" fill="white" font-size="14" font-weight="bold" font-family="sans-serif">A</text>
+            <text x="58" y="32" fill="#0D1B2A" font-size="14" font-weight="bold" font-family="sans-serif">B</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Refonte</span>
+          <span class="tag">Responsive</span>
+          <span class="tag">Desktop</span>
+          <span class="tag">UX / UI</span>
+          <span class="tag">A/B Test</span>
+        </div>
+        <div class="card-client">Hello bank!</div>
+        <div class="card-title">A/B test de la Landing page "devenir client"</div>
+        <div class="card-desc">Refonte graphique complète de la landing page</div>
+        <span class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="projet-refonte.html" class="project-card card-refonte fade-up" style="transition-delay:0.3s">
+      <div class="card-image">
+        <div class="card-image-placeholder">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <rect x="20" y="8" width="24" height="48" rx="4" fill="#0D1B2A"/>
+            <rect x="50" y="16" width="22" height="36" rx="4" fill="#1DE9B6" opacity="0.7"/>
+            <rect x="8" y="64" width="64" height="6" rx="3" fill="#0D1B2A" opacity="0.2"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Responsive</span>
+          <span class="tag">Desktop</span>
+          <span class="tag">Partenariat</span>
+          <span class="tag">Refonte</span>
+        </div>
+        <div class="card-client">Hello bank!</div>
+        <div class="card-title">Refonte de la LP devenir client</div>
+        <div class="card-desc">Refonte graphique complète de la landing page en partenariat avec une agence de communication.</div>
+        <span class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="about-teaser fade-up">
+  <div class="about-teaser-text">
+    <p>Gymnaste, grimpeuse et product designer… quoi de commun ? Un goût pour l'équilibre, les défis… et les solutions qui font dire "ah, c'était simple en fait".</p>
+    <p style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--text-muted); font-style:normal;">Curieux ?</p>
+  </div>
+  <a href="about.html" class="btn-primary">Découvrir mon profil
+    <span class="arrow">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </a>
+</div>
+
+<footer>
+  <p class="footer-name">Astrid de la Rüe du Can</p>
+  <p>Product Designer — Paris</p>
+</footer>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

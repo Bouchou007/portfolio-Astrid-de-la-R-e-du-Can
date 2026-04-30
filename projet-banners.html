@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A/B Test Bannières CRMD — Astrid de la Rüe du Can</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1DE9B6; --green-dark: #00C9A7;
+    --navy: #0D1B2A; --text: #0D1B2A; --text-muted: #6B7280;
+    --bg: #F4F4F0; --white: #FFFFFF; --border: #E0E0D8;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; position: sticky; top: 0; background: var(--bg); z-index: 100; border-bottom: 1px solid var(--border); }
+  .nav-logo-placeholder { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--green); font-weight: 600; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; position: relative; padding-bottom: 2px; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--green-dark); transition: width 0.2s; }
+  .nav-links a:hover::after { width: 100%; }
+
+  .breadcrumb { padding: 20px 48px 0; }
+  .breadcrumb a { font-size: 12px; color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--green-dark); }
+
+  .project-hero { max-width: 1200px; margin: 0 auto; padding: 40px 48px 60px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tag { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-muted); background: var(--white); }
+  .project-title { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 400; line-height: 1.1; margin-bottom: 8px; }
+  .project-subtitle { font-size: 14px; color: var(--text-muted); font-style: italic; margin-bottom: 32px; }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .meta-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+  .meta-value { font-size: 13px; font-weight: 500; }
+  .context-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .context-box h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dark); font-weight: 600; margin-bottom: 10px; }
+  .context-box p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+  .hero-visual { border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, #e8fff8 0%, #0D1B2A 100%); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+
+  .project-content { max-width: 1200px; margin: 0 auto; padding: 0 48px 80px; }
+  .step { margin-bottom: 64px; }
+  .step-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .step-number { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--green); line-height: 1; font-weight: 400; }
+  .step-title { font-family: 'Instrument Serif', serif; font-size: 28px; font-weight: 400; }
+  .step-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+  .step-body strong { color: var(--text); font-weight: 600; }
+
+  .highlight-box { background: var(--navy); border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
+  .highlight-box p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; }
+  .highlight-box strong { color: var(--green); }
+
+  .two-col-step { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+  .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .info-card h5 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
+  .info-card ul { list-style: none; }
+  .info-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; }
+  .info-card ul li:last-child { border: none; }
+  .info-card ul li::before { content: '→'; color: var(--green-dark); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+
+  .visual-placeholder { background: var(--white); border: 1px solid var(--border); border-radius: 12px; aspect-ratio: 16/7; display: flex; align-items: center; justify-content: center; margin-top: 20px; color: var(--text-muted); font-size: 13px; }
+
+  /* AB comparison */
+  .ab-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  .ab-card { border-radius: 12px; padding: 24px; border: 2px solid var(--border); }
+  .ab-card.variant-a { border-color: var(--navy); background: var(--white); }
+  .ab-card.variant-b { border-color: var(--green-dark); background: var(--white); }
+  .ab-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .ab-badge { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+  .ab-badge.a { background: var(--navy); color: white; }
+  .ab-badge.b { background: var(--green); color: var(--navy); }
+  .ab-card ul { list-style: none; }
+  .ab-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+  .ab-card ul li:last-child { border: none; }
+
+  /* results */
+  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+  .result-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .result-number { font-family: 'Instrument Serif', serif; font-size: 32px; font-weight: 400; color: var(--green-dark); margin-bottom: 4px; }
+  .result-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+  .takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+  .takeaway-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; border-top: 3px solid var(--green); }
+  .takeaway-card h5 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .takeaway-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .project-nav { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
+  .proj-nav-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-muted); font-size: 13px; transition: color 0.2s; }
+  .proj-nav-link:hover { color: var(--green-dark); }
+  .arrow-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; background: var(--white); }
+
+  footer { background: var(--navy); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .footer-name { color: var(--green); font-size: 13px; font-weight: 600; }
+
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav, .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
+    .project-hero { grid-template-columns: 1fr; padding: 24px; }
+    .two-col-step, .ab-compare { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+    .takeaway-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html"><div class="nav-logo-placeholder">A</div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Mes projets</a></li>
+    <li><a href="about.html">Qui suis-je ?</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">← Retour accueil</a>
+</div>
+
+<div class="project-hero">
+  <div class="project-meta fade-up">
+    <div class="project-tags">
+      <span class="tag">A/B Test</span>
+      <span class="tag">Desktop</span>
+      <span class="tag">Responsive</span>
+      <span class="tag">UX / UI</span>
+    </div>
+    <h1 class="project-title">A/B Test Banner CRMD</h1>
+    <p class="project-subtitle">Mise en avant des bannières CRMD offres et rebonds</p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Rôle</div>
+        <div class="meta-value">UX/UI designer</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Périmètre</div>
+        <div class="meta-value">Acquisition, cible particulier</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Équipe</div>
+        <div class="meta-value">PO, développeurs, analystes CRO</div>
+      </div>
+    </div>
+
+    <div class="context-box">
+      <h4>Contexte</h4>
+      <p>L'outil de retargeting augmente le nombre des offres aux utilisateurs qui ont un parcours général et de la génération de CA distribué. L'objectif était d'augmenter la performance des bannières CRMD existantes via un A/B test comparatif.</p>
+    </div>
+
+    <div class="context-box">
+      <h4>Objectif du projet</h4>
+      <p>Augmenter le taux de clic (et in fine les conversions) sur les bannières rebond et d'offres, en repensant leur wording, leur design et leur emplacement comparatif.</p>
+    </div>
+
+    <div class="context-box">
+      <h4>Contraintes</h4>
+      <p>Respect de la charte Hello bank! · Accessibilité · Format imposé par le template · Maintien de l'emplacement des bannières comparatives</p>
+    </div>
+  </div>
+
+  <div class="hero-visual fade-up" style="transition-delay:0.15s">
+    <svg width="200" height="160" viewBox="0 0 200 160" fill="none">
+      <rect x="10" y="10" width="85" height="60" rx="8" fill="white" opacity="0.9"/>
+      <rect x="105" y="10" width="85" height="60" rx="8" fill="#1DE9B6" opacity="0.7"/>
+      <text x="52" y="44" text-anchor="middle" fill="#0D1B2A" font-size="18" font-weight="bold" font-family="sans-serif">A</text>
+      <text x="147" y="44" text-anchor="middle" fill="#0D1B2A" font-size="18" font-weight="bold" font-family="sans-serif">B</text>
+      <rect x="10" y="82" width="180" height="8" rx="4" fill="white" opacity="0.3"/>
+      <rect x="10" y="98" width="140" height="8" rx="4" fill="white" opacity="0.3"/>
+      <rect x="10" y="120" width="80" height="16" rx="6" fill="white" opacity="0.8"/>
+    </svg>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">1.</div>
+      <div class="step-title">Existant</div>
+    </div>
+    <p class="step-body">Analyse de l'existant pour comprendre les <strong>problèmes actuels</strong> des bannières en place. Revue des métriques de performance et identification des points de friction.</p>
+    <div class="two-col-step">
+      <div class="info-card">
+        <h5>Problèmes identifiés</h5>
+        <ul>
+          <li>CTR très en dessous des benchmarks comparatifs</li>
+          <li>Wording peu engageant et générique</li>
+          <li>Visuel peu différenciant de la concurrence</li>
+          <li>Mauvais positionnement dans la page</li>
+          <li>Manque de personnalisation selon le profil</li>
+        </ul>
+      </div>
+      <div class="visual-placeholder" style="aspect-ratio:4/3; margin-top:0;">Capture bannières existantes</div>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">2.</div>
+      <div class="step-title">Récupération de data</div>
+    </div>
+    <p class="step-body">Récupération des <strong>données analytiques</strong> des bannières actuelles pour objectiver les problèmes et construire des hypothèses solides.</p>
+    <div class="highlight-box">
+      <p>Le taux de clic "de référence" a été défini à partir de la moyenne sectorielle bancaire. <strong>Les données actuelles montraient un écart significatif</strong> avec ce référentiel, justifiant l'urgence d'un A/B test.</p>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">3.</div>
+      <div class="step-title">Guidelines</div>
+    </div>
+    <p class="step-body">Revue des guidelines de la marque Hello bank! pour s'assurer que les nouvelles variantes restent dans le cadre identitaire tout en testant des améliorations significatives.</p>
+    <div class="two-col-step">
+      <div class="info-card">
+        <h5>À respecter impérativement</h5>
+        <ul>
+          <li>Palette couleurs Hello bank!</li>
+          <li>Typographie officielle</li>
+          <li>Ratio de contraste WCAG AA</li>
+          <li>Format et dimensions imposés</li>
+          <li>Mentions légales obligatoires</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h5>Marges de manœuvre</h5>
+        <ul>
+          <li>Wording et copywriting</li>
+          <li>Hiérarchie visuelle interne</li>
+          <li>Mise en avant de l'offre</li>
+          <li>CTA (libellé et couleur)</li>
+          <li>Illustration / icône</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">4.</div>
+      <div class="step-title">Formulation d'hypothèses</div>
+    </div>
+    <p class="step-body">Définition des hypothèses à tester, basées sur les données collectées et les bonnes pratiques CRO.</p>
+    <div class="ab-compare">
+      <div class="ab-card variant-a">
+        <div class="ab-label">
+          <span class="ab-badge a">A</span>
+          Variante contrôle
+        </div>
+        <ul>
+          <li>Bannière existante sans modification</li>
+          <li>Wording générique</li>
+          <li>CTA standard "En savoir plus"</li>
+          <li>Visuel existant</li>
+        </ul>
+      </div>
+      <div class="ab-card variant-b">
+        <div class="ab-label">
+          <span class="ab-badge b">B</span>
+          Variante challenger
+        </div>
+        <ul>
+          <li>Wording orienté bénéfice utilisateur</li>
+          <li>Mise en avant du gain financier</li>
+          <li>CTA plus engageant "Je profite de l'offre"</li>
+          <li>Nouveau visuel différenciant</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">5.</div>
+      <div class="step-title">Pistes de recherches</div>
+    </div>
+    <p class="step-body">Exploration de plusieurs directions créatives pour les nouvelles bannières avant de sélectionner les variantes à tester.</p>
+    <div class="visual-placeholder">Explorations créatives — bannières rebond & offres</div>
+    <div class="highlight-box" style="margin-top:20px;">
+      <p><strong>Capitaliser sur d'anciens A/B Tests :</strong> Nous avons analysé les résultats de tests précédents pour identifier les patterns gagnants : couleurs de CTA, longueur optimale du wording, position des éléments clés dans la bannière.</p>
+    </div>
+    <div class="visual-placeholder" style="margin-top:16px;">Changement de positionnement et de graphisme des bannières rebond</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">6.</div>
+      <div class="step-title">Validation</div>
+    </div>
+    <p class="step-body">Validation des maquettes finales avec l'équipe avant lancement du test. Vérification de la conformité légale, technique et graphique.</p>
+    <div class="two-col-step">
+      <div class="info-card">
+        <h5>Bannières rebond ✓</h5>
+        <ul>
+          <li>Wording validé par l'équipe juridique</li>
+          <li>Accessibilité vérifiée</li>
+          <li>Intégration technique confirmée</li>
+          <li>Métriques de suivi définies</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h5>Bannières offres ✓</h5>
+        <ul>
+          <li>Conformité guidelines respectée</li>
+          <li>Responsive vérifié sur tous les breakpoints</li>
+          <li>CTA clairement identifiable</li>
+          <li>Durée du test déterminée</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">8.</div>
+      <div class="step-title">Maquette finale</div>
+    </div>
+    <div class="visual-placeholder" style="aspect-ratio: 21/9;">Maquettes finales des bannières A et B</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">9.</div>
+      <div class="step-title">Ce que ça m'a apporté</div>
+    </div>
+    <div class="takeaway-grid">
+      <div class="takeaway-card">
+        <h5>Approche data-driven</h5>
+        <p>Apprendre à construire des hypothèses solides basées sur des données réelles plutôt que sur l'intuition.</p>
+      </div>
+      <div class="takeaway-card">
+        <h5>Compromis design/contraintes</h5>
+        <p>Innover dans un cadre très contraint : guidelines strictes, formats imposés, mentions légales obligatoires.</p>
+      </div>
+      <div class="takeaway-card">
+        <h5>Culture du test</h5>
+        <p>Intégrer l'expérimentation comme méthode de travail régulière et valoriser l'apprentissage par l'échec.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="project-nav">
+  <a href="projet-legalplace.html" class="proj-nav-link">
+    <span class="arrow-circle">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    Projet précédent : LegalPlace
+  </a>
+  <a href="projet-abtest.html" class="proj-nav-link">
+    Projet suivant : A/B Test LP
+    <span class="arrow-circle">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </a>
+</div>
+
+<footer>
+  <p class="footer-name">Astrid de la Rüe du Can</p>
+  <p>Product Designer — Paris</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

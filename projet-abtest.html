@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A/B Test LP "Devenir Client" — Astrid de la Rüe du Can</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1DE9B6; --green-dark: #00C9A7;
+    --navy: #0D1B2A; --text: #0D1B2A; --text-muted: #6B7280;
+    --bg: #F4F4F0; --white: #FFFFFF; --border: #E0E0D8;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; position: sticky; top: 0; background: var(--bg); z-index: 100; border-bottom: 1px solid var(--border); }
+  .nav-logo-placeholder { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--green); font-weight: 600; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; position: relative; padding-bottom: 2px; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--green-dark); transition: width 0.2s; }
+  .nav-links a:hover::after { width: 100%; }
+
+  .breadcrumb { padding: 20px 48px 0; }
+  .breadcrumb a { font-size: 12px; color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--green-dark); }
+
+  .project-hero { max-width: 1200px; margin: 0 auto; padding: 40px 48px 60px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tag { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-muted); background: var(--white); }
+  .project-title { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 4vw, 48px); font-weight: 400; line-height: 1.1; margin-bottom: 8px; }
+  .project-subtitle { font-size: 14px; color: var(--text-muted); font-style: italic; margin-bottom: 32px; }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .meta-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+  .meta-value { font-size: 13px; font-weight: 500; }
+  .context-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .context-box h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dark); font-weight: 600; margin-bottom: 10px; }
+  .context-box p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+  .hero-visual { border-radius: 16px; background: linear-gradient(135deg, #fff3e8 0%, #1DE9B6 100%); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+
+  .project-content { max-width: 1200px; margin: 0 auto; padding: 0 48px 80px; }
+  .step { margin-bottom: 64px; }
+  .step-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .step-number { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--green); line-height: 1; font-weight: 400; }
+  .step-title { font-family: 'Instrument Serif', serif; font-size: 28px; font-weight: 400; }
+  .step-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+  .step-body strong { color: var(--text); font-weight: 600; }
+
+  .highlight-box { background: var(--navy); border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
+  .highlight-box p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; }
+  .highlight-box strong { color: var(--green); }
+
+  .two-col-step { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+  .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .info-card h5 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
+  .info-card ul { list-style: none; }
+  .info-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; }
+  .info-card ul li:last-child { border: none; }
+  .info-card ul li::before { content: '→'; color: var(--green-dark); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+
+  .visual-placeholder { background: var(--white); border: 1px solid var(--border); border-radius: 12px; aspect-ratio: 16/7; display: flex; align-items: center; justify-content: center; margin-top: 20px; color: var(--text-muted); font-size: 13px; }
+
+  /* kpis */
+  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+  .kpi-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .kpi-device { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .kpi-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .kpi-item:last-child { border: none; }
+  .kpi-label { font-size: 12px; color: var(--text-muted); }
+  .kpi-value { font-size: 13px; font-weight: 600; color: var(--navy); }
+
+  /* results */
+  .results-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+  .result-card { border-radius: 12px; padding: 24px; text-align: center; }
+  .result-card.positive { background: rgba(29,233,182,0.1); border: 1px solid rgba(29,233,182,0.3); }
+  .result-card.negative { background: rgba(255,100,100,0.08); border: 1px solid rgba(255,100,100,0.2); }
+  .result-card.neutral { background: var(--white); border: 1px solid var(--border); }
+  .result-number { font-family: 'Instrument Serif', serif; font-size: 36px; font-weight: 400; line-height: 1; margin-bottom: 6px; }
+  .result-card.positive .result-number { color: var(--green-dark); }
+  .result-card.negative .result-number { color: #e24b4a; }
+  .result-card.neutral .result-number { color: var(--navy); }
+  .result-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+  .takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+  .takeaway-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; border-top: 3px solid var(--green); }
+  .takeaway-card h5 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .takeaway-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .next-cta { background: var(--navy); border-radius: 16px; padding: 40px; text-align: center; margin: 40px 0; }
+  .next-cta p { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 16px; }
+  .next-cta a { display: inline-flex; align-items: center; gap: 10px; background: var(--green); color: var(--navy); padding: 14px 28px; border-radius: 60px; text-decoration: none; font-size: 14px; font-weight: 600; transition: transform 0.2s; }
+  .next-cta a:hover { transform: translateY(-1px); }
+
+  .project-nav { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
+  .proj-nav-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-muted); font-size: 13px; transition: color 0.2s; }
+  .proj-nav-link:hover { color: var(--green-dark); }
+  .arrow-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; background: var(--white); }
+
+  footer { background: var(--navy); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .footer-name { color: var(--green); font-size: 13px; font-weight: 600; }
+
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav, .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
+    .project-hero { grid-template-columns: 1fr; padding: 24px; }
+    .two-col-step, .kpi-row, .results-strip, .takeaway-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html"><div class="nav-logo-placeholder">A</div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Mes projets</a></li>
+    <li><a href="about.html">Qui suis-je ?</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">← Retour accueil</a>
+</div>
+
+<div class="project-hero">
+  <div class="project-meta fade-up">
+    <div class="project-tags">
+      <span class="tag">Refonte</span>
+      <span class="tag">Responsive</span>
+      <span class="tag">Desktop</span>
+      <span class="tag">UX / UI</span>
+      <span class="tag">A/B Test</span>
+    </div>
+    <h1 class="project-title">Landing page "devenir client"</h1>
+    <p class="project-subtitle">Refonte graphique complète de la landing page</p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Rôle</div>
+        <div class="meta-value">UX/UI designer</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Périmètre</div>
+        <div class="meta-value">Acquisition, cible particulier</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Équipe</div>
+        <div class="meta-value">Design, PO, des développeurs, SEO, CRO</div>
+      </div>
+    </div>
+
+    <div class="context-box">
+      <h4>Contexte</h4>
+      <p>Projet en 2 temps : Des A/B tests dans un premier temps, puis une refonte complète avec une toute nouvelle UI (à voir dans le projet suivant). Cette landing page, utilisée comme point de redirection pour nos campagnes médias acquisition (Hello bank!), n'était plus alignée visuellement sur la stratégie actuelle de la marque. La page présentait les bénéfices et les différentes offres Hello bank!, mais n'avait pas été rénovée en profondeur depuis plus d'un an.</p>
+    </div>
+
+    <div class="context-box">
+      <h4>Objectif du projet</h4>
+      <p>Améliorer la conversion des prospects en clients.</p>
+    </div>
+
+    <div class="context-box">
+      <h4>Problématique</h4>
+      <p>Comment faire évoluer cette landing page pour maximiser la performance des campagnes médias et augmenter le taux de conversion vers les offres Hello bank! ?</p>
+    </div>
+  </div>
+
+  <div class="hero-visual fade-up" style="transition-delay:0.15s">
+    <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+      <rect x="30" y="15" width="65" height="110" rx="6" fill="white" opacity="0.9"/>
+      <rect x="105" y="15" width="65" height="110" rx="6" fill="white" opacity="0.5"/>
+      <rect x="35" y="22" width="55" height="8" rx="3" fill="#0D1B2A"/>
+      <rect x="35" y="36" width="42" height="5" rx="2" fill="#0D1B2A" opacity="0.4"/>
+      <rect x="35" y="50" width="55" height="30" rx="4" fill="#1DE9B6" opacity="0.6"/>
+      <rect x="35" y="88" width="40" height="10" rx="5" fill="#0D1B2A"/>
+      <rect x="110" y="22" width="55" height="8" rx="3" fill="#0D1B2A"/>
+      <rect x="110" y="36" width="42" height="5" rx="2" fill="#0D1B2A" opacity="0.4"/>
+      <rect x="110" y="50" width="55" height="30" rx="4" fill="#0D1B2A" opacity="0.3"/>
+      <rect x="110" y="88" width="40" height="10" rx="5" fill="#0D1B2A" opacity="0.5"/>
+      <rect x="60" y="145" width="80" height="30" rx="8" fill="#0D1B2A"/>
+      <text x="100" y="165" text-anchor="middle" fill="#1DE9B6" font-size="10" font-weight="600" font-family="sans-serif">RÉSULTATS</text>
+    </svg>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">1.</div><div class="step-title">Contraintes</div></div>
+    <div class="two-col-step">
+      <div class="info-card">
+        <h5>Contraintes techniques</h5>
+        <ul>
+          <li>Impossible de modifier le mini formulaire qui se fait au niveau du contenu, de l'agencement des questions ou du design, car celui-ci est géré par Maaza (domaine CX)</li>
+          <li>Respect de la charte Hello bank!</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h5>Contraintes business</h5>
+        <ul>
+          <li>Maintien des KPIs de tracking en place</li>
+          <li>Budget et délais contraints</li>
+          <li>Intégration par les développeurs existants</li>
+          <li>Compatibilité avec les campagnes médias en cours</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">2.</div><div class="step-title">Empathy map & études</div></div>
+    <p class="step-body">Réalisation d'empathy map dans le but de mieux comprendre les utilisateurs afin d'identifier ce qu'ils pensent, ressentent, voient et font et ainsi construire une proposition de valeur qui répond à leurs besoins.</p>
+    <div class="visual-placeholder">Empathy map + études utilisateurs</div>
+    <div class="two-col-step">
+      <div class="info-card">
+        <h5>Axes d'améliorations identifiés</h5>
+        <ul>
+          <li>Clarifier immédiatement la comparaison des offres</li>
+          <li>Structure / hiérarchisation de l'information</li>
+          <li>Simplification de la page</li>
+          <li>Ajouter des indicateurs de comparaison et mise en avant</li>
+          <li>Ajouter de la réassurance visuelle</li>
+          <li>Apparition du formulaire dans un second temps</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h5>Hypothèses d'impact business</h5>
+        <ul>
+          <li>Renforcer la crédibilité de la marque</li>
+          <li>Réduire le taux de rebond</li>
+          <li>Accélérer la prise de décision</li>
+          <li>Réduire la charge cognitive</li>
+          <li>Améliorer la compréhension de l'offre</li>
+          <li>Accélérer complétion formulaire</li>
+          <li>Améliorer la fluidité du parcours</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">3.</div><div class="step-title">Wireframe</div></div>
+    <p class="step-body">Réalisation de wireframes high fidelity afin d'aligner l'ensemble des parties prenantes sur une vision commune et validée, avant de passer à la phase de design UI, et représenter les deux offres sur le tableau, et non du bas en haut sur la page.</p>
+    <div class="highlight-box">
+      <p>Sur mobile, ajout d'un CTA sticky présent tout au long de la page · Simplification du tableau comparatif et mise en avant des 3 offres les plus intéressantes · Ajouter du blocs bannières, pour guider l'utilisateur · Mise en avant de l'offre Hello Prime</p>
+    </div>
+    <div class="visual-placeholder">Wireframes haute fidélité — Desktop & Mobile</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">4.</div><div class="step-title">Maquettes UI validées pour l'A/B Test</div></div>
+    <div class="visual-placeholder" style="aspect-ratio: 21/9;">Maquettes UI finales A et B</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">5.</div><div class="step-title">Résultats et hypothèses</div></div>
+    <p class="step-body">Cette version démontre de bonnes performances.</p>
+
+    <div class="results-strip">
+      <div class="result-card positive">
+        <div class="result-number">+2,01%</div>
+        <div class="result-label">Taux de clic sur l'offre Prime</div>
+      </div>
+      <div class="result-card positive">
+        <div class="result-number">+7,07%</div>
+        <div class="result-label">Augmentation leads (RCP)</div>
+      </div>
+      <div class="result-card positive">
+        <div class="result-number">+7,06%</div>
+        <div class="result-label">Leads (totaux)</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p>Le seul point négatif observé a été une hausse des clics sur l'hero banner. Nous proposons dans un second temps un quick-win pour cet hero banner en capitalisant sur le fait que les utilisateurs cliquent sur les cartes : il faut co-rédiger le tableau comparatif. Les données montraient que les utilisateurs ne scrollent pas suffisamment. Cela pousse à expliquer le nombre d'offres, qui induit au scroll, et la page — dans un contexte différent, avec seulement deux offres, nous avons alors choisi de retirer l'expérience. <strong>→ En attendant le lancement du second test (à-dessus), la version précédente sera implémentée</strong></p>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">6.</div><div class="step-title">Finalité</div></div>
+    <p class="step-body">Une refonte globale de la charte étant programmée, ce quick-win bien qu'il démontre son efficacité, n'a pas été déployé. Cette refonte capitalisera sur les enseignements clés issus des deux A/B tests menés en amont.</p>
+    <div class="next-cta">
+      <p>Curieux de voir jusqu'où ce projet a été poussé ?</p>
+      <a href="projet-refonte.html">
+        Découvrir la suite du projet
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header"><div class="step-number">7.</div><div class="step-title">Ce que ça m'a apporté</div></div>
+    <div class="takeaway-grid">
+      <div class="takeaway-card">
+        <h5>Gestion des compromis</h5>
+        <p>Naviguer entre contraintes techniques fortes et ambitions design tout en restant centré sur la performance.</p>
+      </div>
+      <div class="takeaway-card">
+        <h5>Lecture des résultats</h5>
+        <p>Analyser des résultats d'A/B test, distinguer signaux forts et bruit, formuler des hypothèses pour la suite.</p>
+      </div>
+      <div class="takeaway-card">
+        <h5>Vision long terme</h5>
+        <p>Comprendre qu'un test peut ne pas être déployé mais nourrir la stratégie design sur le long terme.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="project-nav">
+  <a href="projet-banners.html" class="proj-nav-link">
+    <span class="arrow-circle">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    Projet précédent : Bannières CRMD
+  </a>
+  <a href="projet-refonte.html" class="proj-nav-link">
+    Projet suivant : Refonte LP
+    <span class="arrow-circle">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </a>
+</div>
+
+<footer>
+  <p class="footer-name">Astrid de la Rüe du Can</p>
+  <p>Product Designer — Paris</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

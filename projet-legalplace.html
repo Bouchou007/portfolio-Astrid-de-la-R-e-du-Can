@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partenariat LegalPlace — Astrid de la Rüe du Can</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1DE9B6; --green-dark: #00C9A7;
+    --navy: #0D1B2A; --text: #0D1B2A; --text-muted: #6B7280;
+    --bg: #F4F4F0; --white: #FFFFFF; --border: #E0E0D8;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 48px; position: sticky; top: 0; background: var(--bg);
+    z-index: 100; border-bottom: 1px solid var(--border);
+  }
+  .nav-logo-placeholder {
+    width: 40px; height: 40px; border-radius: 50%; background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: var(--green); font-weight: 600;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; position: relative; padding-bottom: 2px; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--green-dark); transition: width 0.2s; }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* BREADCRUMB */
+  .breadcrumb { padding: 20px 48px 0; display: flex; align-items: center; gap: 8px; }
+  .breadcrumb a { font-size: 12px; color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--green-dark); }
+  .breadcrumb span { font-size: 12px; color: var(--text-muted); }
+
+  /* HERO PROJECT */
+  .project-hero { max-width: 1200px; margin: 0 auto; padding: 40px 48px 60px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+  .project-meta { }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tag { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-muted); background: var(--white); }
+  .project-title { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 400; line-height: 1.1; margin-bottom: 8px; }
+  .project-subtitle { font-size: 14px; color: var(--text-muted); font-style: italic; margin-bottom: 32px; }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .meta-item { }
+  .meta-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+  .meta-value { font-size: 13px; font-weight: 500; }
+
+  .context-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+  .context-box h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dark); font-weight: 600; margin-bottom: 12px; }
+  .context-box p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+  .hero-visual { border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, #e8f5ff 0%, #0D1B2A 100%); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+  .hero-visual svg { opacity: 0.4; }
+
+  /* SECTION STEPS */
+  .project-content { max-width: 1200px; margin: 0 auto; padding: 0 48px 80px; }
+  .step { margin-bottom: 64px; }
+  .step-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .step-number { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--green); line-height: 1; font-weight: 400; }
+  .step-title { font-family: 'Instrument Serif', serif; font-size: 28px; font-weight: 400; }
+  .step-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+  .step-body strong { color: var(--text); font-weight: 600; }
+
+  .highlight-box { background: var(--navy); border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
+  .highlight-box p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; }
+  .highlight-box strong { color: var(--green); }
+
+  .two-col-step { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+  .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .info-card h5 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
+  .info-card ul { list-style: none; }
+  .info-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); color: var(--text); display: flex; align-items: flex-start; gap: 8px; }
+  .info-card ul li:last-child { border: none; }
+  .info-card ul li::before { content: '→'; color: var(--green-dark); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+
+  .visual-placeholder { background: var(--white); border: 1px solid var(--border); border-radius: 12px; aspect-ratio: 16/7; display: flex; align-items: center; justify-content: center; margin-top: 20px; color: var(--text-muted); font-size: 13px; }
+  .visual-placeholder-tall { aspect-ratio: 4/3; }
+
+  .takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+  .takeaway-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; border-top: 3px solid var(--green); }
+  .takeaway-card .icon { font-size: 20px; margin-bottom: 10px; }
+  .takeaway-card h5 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .takeaway-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* NAV PROJETS */
+  .project-nav { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
+  .proj-nav-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-muted); font-size: 13px; transition: color 0.2s; }
+  .proj-nav-link:hover { color: var(--green-dark); }
+  .proj-nav-link .arrow-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; background: var(--white); }
+
+  footer { background: var(--navy); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .footer-name { color: var(--green); font-size: 13px; font-weight: 600; }
+
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav, .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
+    .project-hero { grid-template-columns: 1fr; padding: 24px; }
+    .two-col-step { grid-template-columns: 1fr; }
+    .takeaway-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html"><div class="nav-logo-placeholder">A</div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Mes projets</a></li>
+    <li><a href="about.html">Qui suis-je ?</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">← Retour accueil</a>
+</div>
+
+<div class="project-hero">
+  <div class="project-meta fade-up">
+    <div class="project-tags">
+      <span class="tag">Responsive</span>
+      <span class="tag">Desktop</span>
+      <span class="tag">Partenariat</span>
+      <span class="tag">UX / UI</span>
+    </div>
+    <h1 class="project-title">Partenariat avec LegalPlace</h1>
+    <p class="project-subtitle">Création d'une page d'accompagnement à la création d'entreprise en partenariat avec LegalPlace</p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Rôle</div>
+        <div class="meta-value">UX/UI designer</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Périmètre</div>
+        <div class="meta-value">Acquisition, cible professionnelle</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Equipe</div>
+        <div class="meta-value">Communication, product manager, équipe légale, legal</div>
+      </div>
+    </div>
+
+    <div class="context-box">
+      <h4>Contexte</h4>
+      <p>Dans le cadre de l'élargissement de la cible Pro, il nous a été demandé de créer une page permettant d'informer le prospect sur la possibilité d'un partenariat avec LegalPlace. Partenariat d'adresser aux personnes non cliente.</p>
+    </div>
+
+    <div class="context-box">
+      <h4>Objectif du projet</h4>
+      <p>Aiguiller le prospect sur les démarches à réaliser pour créer son entreprise avec LegalPlace et le faire ouvrir un compte (à la suite) chez Hello bank!</p>
+    </div>
+
+    <div class="context-box">
+      <h4>Problématique</h4>
+      <p>Comment convaincre l'utilisateur d'ouvrir un compte chez Hello bank! après qu'il ait fait les démarches de création d'entreprise sur LegalPlace ?</p>
+    </div>
+  </div>
+
+  <div class="hero-visual fade-up" style="transition-delay:0.15s">
+    <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+      <rect x="20" y="20" width="160" height="20" rx="6" fill="white"/>
+      <rect x="20" y="52" width="120" height="12" rx="4" fill="white"/>
+      <rect x="20" y="72" width="140" height="12" rx="4" fill="white"/>
+      <rect x="20" y="100" width="160" height="60" rx="8" fill="white" opacity="0.3"/>
+      <rect x="20" y="170" width="80" height="14" rx="6" fill="#1DE9B6"/>
+    </svg>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">1.</div>
+      <div class="step-title">Research</div>
+    </div>
+    <p class="step-body">Mise en place d'une <strong>empathy map</strong> par mois de projeter dans les besoins utilisateurs. Puis calibration d'un persona.</p>
+    <div class="two-col-step">
+      <div class="info-card">
+        <h5>Empathy Map — points clés</h5>
+        <ul>
+          <li>Ce que l'utilisateur pense et ressent</li>
+          <li>Ce qu'il entend dans son environnement</li>
+          <li>Ce qu'il voit au quotidien</li>
+          <li>Ce qu'il dit et fait</li>
+          <li>Ses douleurs (pains)</li>
+          <li>Ses gains espérés</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h5>Persona — profil cible</h5>
+        <ul>
+          <li>Futur entrepreneur, 28-40 ans</li>
+          <li>Cherche à simplifier ses démarches</li>
+          <li>Peu familier des aspects juridiques</li>
+          <li>Mobile-first dans son usage</li>
+          <li>Sensible à la réassurance et la clarté</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">2.</div>
+      <div class="step-title">Benchmark</div>
+    </div>
+    <p class="step-body">Analyse des pratiques concurrentes et des pages de partenariat similaires pour identifier les best practices en matière de co-branding et de conversion.</p>
+    <div class="visual-placeholder">Captures benchmark concurrentiel</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">3.</div>
+      <div class="step-title">Flow</div>
+    </div>
+    <p class="step-body">Mise en place d'un <strong>flow</strong> pour comprendre le parcours, détecter les points de potentiels friction, aligner les équipes.</p>
+    <div class="highlight-box">
+      <p><strong>Fond de l'histoire :</strong> Confusion entre les deux offres (Hello Business vs Créateur d'entreprise) · Incompréhension de l'ordre des étapes : création d'entreprise puis ouverture de compte · Identifier les utilisateurs poussés par LegalPlace · Marque du client au moment où l'offre devient accessible</p>
+    </div>
+    <div class="two-col-step">
+      <div class="info-card">
+        <h5>Éléments à retenir</h5>
+        <ul>
+          <li>Clarifier la différence entre les deux offres</li>
+          <li>Clarifier l'ordre des étapes visibles et compréhensibles</li>
+          <li>Expliquer le mécanisme de tracking entre LegalPlace et Hello bank!</li>
+          <li>Indiquer précisément quand et comment l'utilisateur bénéfice de l'offre</li>
+        </ul>
+      </div>
+      <div class="visual-placeholder visual-placeholder-tall">Schéma du flow utilisateur</div>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">4.</div>
+      <div class="step-title">Wireframe</div>
+    </div>
+    <p class="step-body">Proposition de wireframe <strong>"co-construit"</strong> avec les équipes de LegalPlace et nos PO métiers pour co-accorder sur la stratégie.</p>
+    <div class="highlight-box">
+      <p><strong>Fictions vs études de l'équipe :</strong> L'objectif de notre côté, était d'y intégrer une étape informant l'utilisateur de la nouvelle de revenir sur le site (là où ils auront un compte & bénéficier de l'offre). Cette évolution a finalement pas été retenu.</p>
+    </div>
+    <div class="visual-placeholder">Wireframes basse fidélité</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">5.</div>
+      <div class="step-title">Storyboard</div>
+    </div>
+    <p class="step-body">Proposition de la réalisation d'un storyboard afin de formaliser, illustrer et défendre nos recommandations auprès des parties prenantes.</p>
+    <div class="visual-placeholder">Storyboard du parcours</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">6.</div>
+      <div class="step-title">Recherches UI</div>
+    </div>
+    <p class="step-body">Prise en compte des contraintes projet · Prise en compte des retours LegalPlace · Prise en compte de la nouvelle loi sur l'accessibilité.</p>
+    <div class="visual-placeholder">Explorations UI</div>
+    <p class="step-body" style="margin-top:16px;">Ajout d'une entrée dans le menu de navigation accompagné d'une gesture pour mettre en avant son contexte-relever.</p>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">7.</div>
+      <div class="step-title">Création de composants</div>
+    </div>
+    <p class="step-body">Ralentissement d'un nouveau sloper.</p>
+    <div class="two-col-step">
+      <div class="info-card">
+        <h5>Critères du composant</h5>
+        <ul>
+          <li>Réutilisable dans les deux environnements de la marque (particulier et professionnel)</li>
+          <li>Fonctionnel en desktop et en responsive</li>
+          <li>Comprend les différents états (Titre, supprimable)</li>
+          <li>Prend en compte les contraintes d'accessibilité</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h5>États du composant</h5>
+        <ul>
+          <li>Default / Hover / Active</li>
+          <li>Avec et sans icône</li>
+          <li>Variante mobile / desktop</li>
+          <li>Dark mode compatible</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">8.</div>
+      <div class="step-title">Maquettes finales</div>
+    </div>
+    <div class="visual-placeholder" style="aspect-ratio: 21/9;">Maquettes finales — Desktop & Mobile</div>
+  </div>
+
+  <div class="step fade-up">
+    <div class="step-header">
+      <div class="step-number">9.</div>
+      <div class="step-title">Ce que ça m'a apporté</div>
+    </div>
+    <div class="takeaway-grid">
+      <div class="takeaway-card">
+        <div class="icon">🤝</div>
+        <h5>Collaboration partenaire</h5>
+        <p>Travailler avec une équipe externe, aligner les visions et arbitrer les compromis de co-branding.</p>
+      </div>
+      <div class="takeaway-card">
+        <div class="icon">🗺️</div>
+        <h5>Cartographie de parcours</h5>
+        <p>Modéliser un parcours cross-plateforme complexe avec plusieurs points d'entrée.</p>
+      </div>
+      <div class="takeaway-card">
+        <div class="icon">⚙️</div>
+        <h5>Design système</h5>
+        <p>Créer des composants réutilisables et conformes aux contraintes d'accessibilité.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="project-nav">
+  <span></span>
+  <a href="projet-banners.html" class="proj-nav-link">
+    Projet suivant : A/B Test Bannières
+    <span class="arrow-circle">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </a>
+</div>
+
+<footer>
+  <p class="footer-name">Astrid de la Rüe du Can</p>
+  <p>Product Designer — Paris</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
