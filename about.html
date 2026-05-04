@@ -3,205 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qui suis-je ? — Astrid de la Rüe du Can</title>
+<title>Astrid de la Rüe du Can — Product Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --green: #1DE9B6; --green-dark: #00C9A7;
-    --navy: #0D1B2A; --navy-mid: #1A2B3C;
-    --text: #0D1B2A; --text-muted: #6B7280;
-    --bg: #F4F4F0; --white: #FFFFFF; --border: #E0E0D8; --tag-bg: #EFEFEB;
+    --green: #1DE9B6; --green-dark: #00C9A7; --navy: #0D1B2A; --navy-mid: #1A2B3C;
+    --text: #0D1B2A; --text-muted: #6B7280; --bg: #F4F4F0; --white: #FFFFFF;
+    --border: #E0E0D8; --tag-bg: #EFEFEB;
   }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
-
-  nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 48px; position: sticky; top: 0; background: var(--bg);
-    z-index: 100; border-bottom: 1px solid var(--border);
-  }
-  .nav-logo-placeholder {
-    width: 40px; height: 40px; border-radius: 50%; background: var(--navy);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; color: var(--green); font-weight: 600;
-  }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; position: sticky; top: 0; background: var(--bg); z-index: 100; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+  nav.scrolled { border-color: var(--border); }
+  .nav-logo { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; }
+  .nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500;
-    position: relative; padding-bottom: 2px;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    width: 0; height: 1.5px; background: var(--green-dark); transition: width 0.2s;
-  }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; position: relative; padding-bottom: 2px; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--green-dark); transition: width 0.2s; }
   .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
   .nav-links a.active { font-weight: 600; }
-
-  /* HERO ABOUT */
-  .hero-about {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 0; max-width: 1200px; margin: 0 auto;
-    padding: 80px 48px 60px; align-items: start;
-  }
-  .hero-left h1 {
-    font-family: 'Instrument Serif', serif;
-    font-size: clamp(42px, 5vw, 72px);
-    font-weight: 400; line-height: 1.05; margin-bottom: 8px;
-  }
-  .hero-left .subtitle {
-    font-size: 14px; color: var(--text-muted); font-style: italic; margin-bottom: 32px;
-  }
-  .hero-left p {
-    font-size: 15px; color: var(--text); line-height: 1.75;
-    max-width: 480px; margin-bottom: 16px;
-  }
-  .hero-left p strong { font-weight: 600; }
-  .hero-right { display: flex; justify-content: flex-end; align-items: flex-start; }
-  .photo-frame {
-    width: 260px; height: 320px; border-radius: 16px; overflow: hidden;
-    background: var(--navy); position: relative;
-    border: 3px solid var(--green);
-  }
-  .photo-placeholder {
-    width: 100%; height: 100%; display: flex;
-    align-items: center; justify-content: center;
-    background: linear-gradient(160deg, #1A2B3C 0%, #0D1B2A 100%);
-  }
-  .photo-placeholder span {
-    font-family: 'Instrument Serif', serif; font-size: 80px; color: rgba(29,233,182,0.3);
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--navy); color: var(--white);
-    padding: 14px 28px; border-radius: 60px;
-    text-decoration: none; font-size: 14px; font-weight: 500;
-    transition: transform 0.2s;
-  }
-  .btn-primary:hover { transform: translateY(-1px); }
-  .btn-primary .arrow {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: var(--green); display: flex; align-items: center; justify-content: center;
-  }
-
-  /* STATS ROW */
-  .stats-row {
-    background: var(--navy); display: flex; justify-content: center;
-    gap: 80px; padding: 40px 48px; margin-bottom: 80px;
-  }
-  .stat { text-align: center; }
-  .stat-n {
-    font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--white);
-    line-height: 1; margin-bottom: 6px;
-  }
-  .stat-n span { color: var(--green); }
-  .stat-l { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 2px; text-transform: uppercase; }
-
-  /* LAYOUT 2COL */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1200px; margin: 0 auto; padding: 0 48px 80px; }
-  .one-col { max-width: 1200px; margin: 0 auto; padding: 0 48px 80px; }
-
-  .section-label {
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--text-muted); font-weight: 600; margin-bottom: 40px;
-    display: flex; align-items: center; gap: 12px;
-  }
+  .hero { text-align: center; padding: 80px 48px 60px; max-width: 900px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; font-weight: 500; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-size: clamp(52px, 8vw, 96px); line-height: 1; font-weight: 400; color: var(--text); margin-bottom: 32px; letter-spacing: -1px; }
+  .hero h1 em { font-style: italic; color: var(--navy-mid); }
+  .hero-actions { display: flex; align-items: center; justify-content: center; gap: 24px; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--navy); color: var(--white); padding: 14px 28px; border-radius: 60px; text-decoration: none; font-size: 14px; font-weight: 500; transition: transform 0.2s, background 0.2s; }
+  .btn-primary:hover { background: var(--navy-mid); transform: translateY(-1px); }
+  .btn-primary .arrow { width: 28px; height: 28px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; }
+  .btn-secondary { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; border-bottom: 1px solid var(--text); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+  .btn-secondary:hover { color: var(--green-dark); border-color: var(--green-dark); }
+  .skills-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 16px 0; overflow: hidden; margin-bottom: 60px; }
+  .skills-marquee { display: flex; gap: 48px; width: max-content; animation: marquee 20s linear infinite; }
+  .skills-marquee span { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+  .skills-marquee .dot { color: var(--green-dark); }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .stats-band { background: var(--navy); padding: 48px; display: flex; justify-content: center; gap: 80px; margin-bottom: 80px; }
+  .stat-item { text-align: center; }
+  .stat-number { font-family: 'Instrument Serif', serif; font-size: 56px; font-weight: 400; color: var(--white); line-height: 1; margin-bottom: 8px; }
+  .stat-number span { color: var(--green); }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
+  .projects-section { padding: 0 48px 80px; max-width: 1200px; margin: 0 auto; }
+  .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  /* TIMELINE */
-  .timeline { position: relative; padding-left: 24px; }
-  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: var(--border); }
-  .timeline-item { position: relative; margin-bottom: 36px; }
-  .timeline-item::before {
-    content: ''; position: absolute; left: -28px; top: 6px;
-    width: 8px; height: 8px; border-radius: 50%; background: var(--green);
-    border: 2px solid var(--bg);
-  }
-  .timeline-date { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 4px; }
-  .timeline-logo {
-    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px;
-    color: var(--navy); margin-bottom: 6px; text-transform: uppercase;
-  }
-  .timeline-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-  .timeline-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
-  .timeline-bullets { list-style: none; padding: 0; }
-  .timeline-bullets li { font-size: 12px; color: var(--text-muted); padding-left: 14px; position: relative; line-height: 1.6; margin-bottom: 2px; }
-  .timeline-bullets li::before { content: '·'; position: absolute; left: 0; color: var(--green-dark); font-size: 16px; line-height: 1.4; }
-
-  /* SKILLS */
-  .skills-block { margin-bottom: 32px; }
-  .skills-category { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
-  .skills-icons { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
-  .skill-badge {
-    padding: 6px 14px; border-radius: 20px; background: var(--white);
-    border: 1px solid var(--border); font-size: 12px; font-weight: 500; color: var(--text);
-  }
-  .skill-badge.soft { background: var(--navy); color: var(--white); border-color: var(--navy); }
-  .skill-icon {
-    width: 36px; height: 36px; border-radius: 8px; background: var(--white);
-    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; color: var(--navy);
-  }
-
-  /* DARK CARD */
-  .dark-card {
-    background: var(--navy); border-radius: 16px; padding: 32px;
-    color: var(--white);
-  }
-  .dark-card h3 { font-size: 14px; font-weight: 600; color: var(--green); margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
-  .value-item { margin-bottom: 20px; }
-  .value-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
-  .value-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
-
-  /* SPORTS */
-  .sports-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .sports-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-  .sports-card h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
-  .sports-list { list-style: none; }
-  .sports-list li { font-size: 13px; padding: 4px 0; border-bottom: 1px solid var(--border); }
-  .sports-list li:last-child { border: none; }
-
-  /* FOOTER */
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .project-card { background: var(--white); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; border: 1px solid var(--border); }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,27,42,0.1); }
+  .card-image { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
+  .card-image img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.4s ease; }
+  .project-card:hover .card-image img { transform: scale(1.03); }
+  .card-body { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .tag { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-muted); background: var(--tag-bg); white-space: nowrap; }
+  .card-client { font-size: 11px; color: var(--green-dark); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
+  .card-title { font-size: 17px; font-weight: 600; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
+  .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; flex: 1; }
+  .card-arrow { width: 36px; height: 36px; border-radius: 50%; background: var(--green); border: none; display: flex; align-items: center; justify-content: center; align-self: flex-end; margin-top: 16px; cursor: pointer; transition: transform 0.2s, background 0.2s; text-decoration: none; }
+  .card-arrow:hover { transform: scale(1.1); background: var(--green-dark); }
+  .about-teaser { max-width: 1200px; margin: 0 auto 80px; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .about-teaser-text { max-width: 480px; }
+  .about-teaser-text p { font-family: 'Instrument Serif', serif; font-size: 22px; font-style: italic; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; }
   footer { background: var(--navy); padding: 48px; display: flex; justify-content: space-between; align-items: center; }
   footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
   .footer-name { color: var(--green); font-size: 13px; font-weight: 600; }
-
   .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
-
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
-    .hero-about { grid-template-columns: 1fr; padding: 40px 24px; }
-    .hero-right { justify-content: center; margin-top: 32px; }
-    .stats-row { gap: 32px; padding: 32px 24px; flex-wrap: wrap; }
-    .two-col { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 60px; }
-    .one-col { padding: 0 24px 60px; }
-    .sports-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+    .hero { padding: 60px 24px 40px; }
+    .stats-band { gap: 40px; padding: 32px 24px; flex-wrap: wrap; }
+    .projects-section { padding: 0 24px 60px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .about-teaser { flex-direction: column; padding: 0 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
   }
 </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-logo-placeholder">A</div>
+ 
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="Photo-astrid.png" alt="Astrid">
+  </div>
   <ul class="nav-links">
-    <li><a href="index.html">Mes projets</a></li>
-    <li><a href="about.html" class="active">Qui suis-je ?</a></li>
+    <li><a href="index.html" class="active">Mes projets</a></li>
+    <li><a href="about.html">Qui suis-je ?</a></li>
   </ul>
 </nav>
-
-<section class="hero-about">
-  <div class="hero-left fade-up">
-    <h1>HELLO !<br>Je m'appelle<br><em>Astrid</em></h1>
-    <p class="subtitle">Bon c'est bien moi, pas mon alternat</p>
-    <p>J'ai 31 ans et je conçois des produits qui font dire "ah, c'était simple en fait"... <strong>bref je suis Product designer.</strong></p>
-    <p>Avec 12 ans de gymnastique artistique derrière moi, l'équilibre est devenu une seconde nature : utile pour jongler entre idées, contraintes et créativité... et surtout <strong>rester stable quand tout part un peu en vrille.</strong></p>
-    <p>L'escalade, elle, m'a appris à observer, anticiper et trouver la bonne voie, même quand elle n'est pas évidente.</p>
-    <p>On dit également que j'ai une <strong>énergie contagieuse</strong>, le sourire facile et un <strong>goût prononcé pour les défis</strong> (dans le travail et en dehors).</p>
-    <p style="margin-top:24px; margin-bottom:32px;"><strong>Bonus :</strong> je parle couramment "utilisateur perdu", "stakeholder pressé" et "deadline imminente".</p>
-    <a href="index.html" class="btn-primary">
+ 
+<section class="hero fade-up">
+  <p class="hero-eyebrow">Astrid de la Rüe du Can</p>
+  <h1>PRODUCT<br><em>DESIGNER</em></h1>
+  <div class="hero-actions">
+    <a href="#projets" class="btn-primary">
       Découvrir mes projets
       <span class="arrow">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -209,254 +104,166 @@
         </svg>
       </span>
     </a>
-  </div>
-  <div class="hero-right fade-up" style="transition-delay:0.15s">
-    <div class="photo-frame">
-      <img src="Photo-astrid.png" alt="Astrid de la Rüe du Can" style="width:100%; height:100%; object-fit:cover; object-position:top;">
-
-    </div>
+    <a href="#" class="btn-secondary">Consulter mon CV</a>
   </div>
 </section>
-
-<div class="stats-row">
-  <div class="stat">
-    <div class="stat-n">30</div>
-    <div class="stat-l">ans d'existence</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n">12</div>
-    <div class="stat-l">années de gymnastique</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n"><span>+</span> ∞</div>
-    <div class="stat-l">idées farfelues</div>
-  </div>
-</div>
-
-<!-- EXPÉRIENCES + COMPÉTENCES -->
-<div class="two-col">
-  <div class="fade-up">
-    <div class="section-label">Mes expériences</div>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-date">2023 — 2026</div>
-        <div class="timeline-logo">Hello bank!</div>
-        <div class="timeline-title">UX/UI · Product Designer · 3 ans</div>
-        <div class="timeline-sub">Réflexion, testing et conception d'écrans et parcours sur nos principaux périmètres digitaux (web-acquisition / client et application mobile).</div>
-        <ul class="timeline-bullets">
-          <li>Conception maquettes (web et app) / prototypes</li>
-          <li>A/B Testing</li>
-          <li>Recherche design sur le site acquisition</li>
-          <li>Mise en place et maintien de librairie</li>
-          <li>Driver des agences artistique</li>
-          <li>Migration sketch vers figma</li>
-          <li>Passage d'UX/UI à Product</li>
-          <li>Utilisation du design system</li>
-          <li>Apprentissage sur des outils d'analyse (Analytics, Content square)</li>
-          <li>Participation à une refonte et charte (icon/illus/ colorimétrie/typo...)</li>
-        </ul>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2020 — 2023</div>
-        <div class="timeline-logo">✕ Crit France</div>
-        <div class="timeline-title">UX/UI · 2 ans et 4 mois</div>
-        <div class="timeline-sub">Refonte globale de l'application mobile et existant sur le site web.</div>
-        <ul class="timeline-bullets">
-          <li>Recherche utilisateur (protocoles de test, interviews)</li>
-          <li>Benchmark concurrentiel</li>
-          <li>Structure des parcours mobile</li>
-          <li>Mise en place d'un outil d'analyse</li>
-          <li>Conception de maquettes et prototypes (web et app)</li>
-          <li>Création persona</li>
-          <li>Recherche graphique et adaptation à la charte de l'entreprise (création d'icon)</li>
-        </ul>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2020</div>
-        <div class="timeline-logo">Belazar</div>
-        <div class="timeline-title">Agence de communication · Stage 6 mois</div>
-        <ul class="timeline-bullets">
-          <li>Logo</li>
-          <li>Flyers</li>
-          <li>Plaquette informative</li>
-          <li>Campagnes publicitaire</li>
-          <li>Présentation client</li>
-          <li>Recherche créative, moodboard</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="fade-up" style="transition-delay:0.15s">
-    <div class="section-label">Mes compétences</div>
-
-    <div class="skills-block">
-      <div class="skills-category">Logiciels</div>
-      <div class="skills-icons">
-        <div class="skill-icon">Ae</div>
-        <div class="skill-icon">Ai</div>
-        <div class="skill-icon">Xd</div>
-        <div class="skill-icon">Ps</div>
-        <div class="skill-icon">Fg</div>
-        <div class="skill-icon" style="background:var(--green);color:var(--navy);">♥</div>
-      </div>
-    </div>
-
-    <div class="skills-block">
-      <div class="skills-category">Outils</div>
-      <div class="skills-icons">
-        <div class="skill-badge">Notion</div>
-        <div class="skill-badge">LinkedIn</div>
-        <div class="skill-badge">Miro</div>
-      </div>
-    </div>
-
-    <div class="skills-block">
-      <div class="skills-category">Outils d'analyse</div>
-      <div class="skills-icons">
-        <div class="skill-badge">Google Analytics</div>
-        <div class="skill-badge">Content Square</div>
-      </div>
-    </div>
-
-    <div class="skills-block">
-      <div class="skills-category">Langues</div>
-      <div class="skills-icons">
-        <div class="skill-badge">Français — Maternelle</div>
-        <div class="skill-badge">Anglais — En cours d'apprentissage</div>
-      </div>
-    </div>
-
-    <div class="skills-block">
-      <div class="skills-category">Centres d'intérêts</div>
-      <div class="skills-icons">
-        <div class="skill-badge">Illustration</div>
-        <div class="skill-badge">Peinture sur céramique</div>
-        <div class="skill-badge">Escalade</div>
-        <div class="skill-badge">Boxe</div>
-        <div class="skill-badge">Urbex</div>
-      </div>
-    </div>
+ 
+<div class="skills-bar">
+  <div class="skills-marquee">
+    <span>Refonte</span><span class="dot">·</span>
+    <span>A/B Testing</span><span class="dot">·</span>
+    <span>UX/UI</span><span class="dot">·</span>
+    <span>Branding</span><span class="dot">·</span>
+    <span>User Research</span><span class="dot">·</span>
+    <span>Wireframe</span><span class="dot">·</span>
+    <span>Prototypage</span><span class="dot">·</span>
+    <span>Design System</span><span class="dot">·</span>
+    <span>Refonte</span><span class="dot">·</span>
+    <span>A/B Testing</span><span class="dot">·</span>
+    <span>UX/UI</span><span class="dot">·</span>
+    <span>Branding</span><span class="dot">·</span>
+    <span>User Research</span><span class="dot">·</span>
+    <span>Wireframe</span><span class="dot">·</span>
+    <span>Prototypage</span><span class="dot">·</span>
+    <span>Design System</span><span class="dot">·</span>
   </div>
 </div>
-
-<!-- ÉTUDES -->
-<div class="two-col" style="padding-top:0">
-  <div class="fade-up">
-    <div class="section-label">Mes études</div>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-date">2020 — 2023</div>
-        <div class="timeline-title">Mastère UX/UI designer</div>
-        <div class="timeline-sub">En Alternance chez Crit — DC Campus · Paris</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2015 — 2020</div>
-        <div class="timeline-title">Licence design graphique et multimédia</div>
-        <div class="timeline-sub">Spécialité web — École Brassart · Tours</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2014</div>
-        <div class="timeline-title">MANAA</div>
-        <div class="timeline-sub">Mise à niveau en Art Appliqués — École de Condé · Paris</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2013</div>
-        <div class="timeline-title">Bac SES</div>
-        <div class="timeline-sub">Science Économique et Sociale — Sainte Marie · Blois</div>
-      </div>
-    </div>
+ 
+<div class="stats-band">
+  <div class="stat-item fade-up">
+    <div class="stat-number"><span>+</span>5</div>
+    <div class="stat-label">ans d'expérience</div>
   </div>
-
-  <!-- BÉNÉVOLAT -->
-  <div class="fade-up" style="transition-delay:0.15s">
-    <div class="section-label">Bénévolat</div>
-    <div style="margin-bottom:28px;">
-      <div class="timeline-title" style="margin-bottom:6px;">Cheftaine assistante de compagnie — Scouts Unitaires de France</div>
-      <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Encadrement d'une vingtaine de filles, âgées de 8 à 12 ans, durant une année et comptant une à deux activités par mois, un week-end campé, des évènements avec le groupe, et un camp d'été de 7 jours.</p>
-      <div class="dark-card">
-        <h3>Ce que ça m'a apporté</h3>
-        <div class="value-item">
-          <div class="value-title">Le sens des responsabilités</div>
-          <div class="value-desc">encadrer, à prendre des décisions, à assurer la sécurité et le bien-être d'un groupe</div>
-        </div>
-        <div class="value-item">
-          <div class="value-title">Le leadership bienveillant</div>
-          <div class="value-desc">guider sans imposer, motiver, écouter, faire grandir les autres</div>
-        </div>
-        <div class="value-item">
-          <div class="value-title">La capacité d'adaptation</div>
-          <div class="value-desc">gérer l'imprévu, les émotions, les conflits, la fatigue, le terrain, la météo...</div>
-        </div>
-        <div class="value-item">
-          <div class="value-title">Le sens de la pédagogie</div>
-          <div class="value-desc">savoir expliquer, accompagner, encourager, donner confiance</div>
-        </div>
-        <div class="value-item">
-          <div class="value-title">La richesse humaine immense</div>
-          <div class="value-desc">des liens forts, le sens du service et la fierté de voir des jeunes s'épanouir grâce à toi</div>
-        </div>
-      </div>
-    </div>
+  <div class="stat-item fade-up" style="transition-delay:0.1s">
+    <div class="stat-number"><span>+</span>2</div>
+    <div class="stat-label">clients grands comptes</div>
+  </div>
+  <div class="stat-item fade-up" style="transition-delay:0.2s">
+    <div class="stat-number"><span>+</span>4</div>
+    <div class="stat-label">projets</div>
   </div>
 </div>
-
-<!-- SPORTS -->
-<div class="one-col fade-up">
-  <div class="section-label">Sports</div>
-  <div class="sports-grid">
-    <div class="dark-card">
-      <h3>Ce que ça m'a apporté</h3>
-      <div class="value-item">
-        <div class="value-title">La rigueur et le sens du détail</div>
-        <div class="value-desc">répéter, corriger, ajuster pour progresser avec précision et régularité</div>
+ 
+<section class="projects-section" id="projets">
+  <div class="section-label">Mes projets</div>
+  <div class="projects-grid">
+ 
+    <a href="projet-legalplace.html" class="project-card fade-up">
+      <div class="card-image">
+        <img src="Projet_1_LegalPlace.png" alt="Partenariat LegalPlace">
       </div>
-      <div class="value-item">
-        <div class="value-title">La persévérance & la résilience</div>
-        <div class="value-desc">combativité, surmonter les obstacles, accepter l'échec, tomber, remonter et recommencer</div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Responsive</span>
+          <span class="tag">Desktop</span>
+          <span class="tag">Partenariat</span>
+          <span class="tag">UX / UI</span>
+        </div>
+        <div class="card-client">Hello bank!</div>
+        <div class="card-title">Partenariat avec LegalPlace</div>
+        <div class="card-desc">Réalisation d'une page dédiée à l'accompagnement des utilisateurs dans la création de leur entreprise, en partenariat avec LegalPlace.</div>
+        <span class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
       </div>
-      <div class="value-item">
-        <div class="value-title">La maîtrise de soi</div>
-        <div class="value-desc">gestion du stress, de la pression, de la peur et de la fatigue</div>
+    </a>
+ 
+    <a href="projet-banners.html" class="project-card fade-up" style="transition-delay:0.1s">
+      <div class="card-image">
+        <img src="ABtest.png" alt="A/B Test Bannières CRMD">
       </div>
-      <div class="value-item">
-        <div class="value-title">La richesse humaine</div>
-        <div class="value-desc">partage, soutien, respect des autres, esprit d'équipe et dépassement collectif</div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">A/B Test</span>
+          <span class="tag">Desktop</span>
+          <span class="tag">Responsive</span>
+          <span class="tag">UX / UI</span>
+        </div>
+        <div class="card-client">Hello bank!</div>
+        <div class="card-title">A/B Test de bannières CRMD</div>
+        <div class="card-desc">Lancement d'un A/B test sur les bannières rebond et bannières d'offres sur le ROP.</div>
+        <span class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
       </div>
-      <div class="value-item">
-        <div class="value-title">Le sentiment de liberté</div>
-        <div class="value-desc">déconnexion, lâcher prise, expression par le mouvement</div>
+    </a>
+ 
+    <a href="projet-abtest.html" class="project-card fade-up" style="transition-delay:0.2s">
+      <div class="card-image">
+        <img src="Projet_3_LP_devenir_client.png" alt="A/B Test LP Devenir Client">
       </div>
-    </div>
-    <div>
-      <div class="sports-card" style="margin-bottom:16px;">
-        <h4>Sports principaux</h4>
-        <ul class="sports-list">
-          <li>Gymnastique artistique — 12 ans</li>
-          <li>Boxe anglaise — 1 an</li>
-          <li>Escalade — 3 ans</li>
-        </ul>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Refonte</span>
+          <span class="tag">Responsive</span>
+          <span class="tag">Desktop</span>
+          <span class="tag">UX / UI</span>
+          <span class="tag">A/B Test</span>
+        </div>
+        <div class="card-client">Hello bank!</div>
+        <div class="card-title">A/B test de la Landing page "devenir client"</div>
+        <div class="card-desc">Refonte graphique complète de la landing page.</div>
+        <span class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
       </div>
-      <div class="sports-card">
-        <h4>Sports secondaires</h4>
-        <ul class="sports-list">
-          <li>Vélo</li>
-          <li>Tir à l'arc</li>
-          <li>Fitness</li>
-          <li>Rock</li>
-          <li>Rock acrobatique</li>
-        </ul>
+    </a>
+ 
+    <a href="projet-refonte.html" class="project-card fade-up" style="transition-delay:0.3s">
+      <div class="card-image">
+        <img src="Projet_4_LP_refonte_devenir_client.png" alt="Refonte LP Devenir Client">
       </div>
-    </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Responsive</span>
+          <span class="tag">Desktop</span>
+          <span class="tag">Partenariat</span>
+          <span class="tag">Refonte</span>
+        </div>
+        <div class="card-client">Hello bank!</div>
+        <div class="card-title">Refonte de la LP devenir client</div>
+        <div class="card-desc">Refonte graphique complète de la landing page en partenariat avec une agence de communication.</div>
+        <span class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+ 
   </div>
+</section>
+ 
+<div class="about-teaser fade-up">
+  <div class="about-teaser-text">
+    <p>Gymnaste, grimpeuse et product designer… quoi de commun ? Un goût pour l'équilibre, les défis… et les solutions qui font dire "ah, c'était simple en fait".</p>
+    <p style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--text-muted); font-style:normal;">Curieux ?</p>
+  </div>
+  <a href="about.html" class="btn-primary">Découvrir mon profil
+    <span class="arrow">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </a>
 </div>
-
+ 
 <footer>
   <p class="footer-name">Astrid de la Rüe du Can</p>
   <p>Product Designer — Paris</p>
 </footer>
-
+ 
 <script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
