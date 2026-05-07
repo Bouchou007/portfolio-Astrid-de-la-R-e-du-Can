@@ -3,114 +3,286 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A/B Test Bannières CRMD — Astrid de la Rüe du Can</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>A/B Test Banner CRMD — Astrid de la Rüe du Can</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --green: #1DE9B6; --green-dark: #00C9A7;
-    --navy: #0D1B2A; --text: #0D1B2A; --text-muted: #6B7280;
-    --bg: #F4F4F0; --white: #FFFFFF; --border: #E0E0D8;
-  }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #100B30; --green: #12F2A1; --bg: #F6F8FC;
+  --white: #FFFFFF; --border: #E2E8F0;
+  --text: #100B30; --text-muted: #6B7A99;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: system-ui, sans-serif; font-weight: 300;
+  background: var(--bg); color: var(--text);
+  font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+}
 
-  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; position: sticky; top: 0; background: var(--bg); z-index: 100; border-bottom: 1px solid var(--border); }
-  .nav-logo-placeholder { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--green); font-weight: 600; }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; position: relative; padding-bottom: 2px; }
-  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--green-dark); transition: width 0.2s; }
-  .nav-links a:hover::after { width: 100%; }
+/* NAV */
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 56px; position: sticky; top: 0;
+  background: var(--bg); z-index: 200;
+  border-bottom: 1px solid transparent; transition: border-color 0.3s;
+}
+nav.scrolled { border-color: var(--border); background: rgba(246,248,252,0.92); backdrop-filter: blur(12px); }
+a.nav-logo { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; border: 2px solid var(--green); flex-shrink: 0; display: block; }
+a.nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--text); font-size: 14px; font-weight: 400;
+  position: relative; padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--green); transition: width 0.25s; border-radius: 2px;
+}
+.nav-links a:hover::after { width: 100%; }
 
-  .breadcrumb { padding: 20px 48px 0; }
-  .breadcrumb a { font-size: 12px; color: var(--text-muted); text-decoration: none; }
-  .breadcrumb a:hover { color: var(--green-dark); }
+/* BREADCRUMB */
+.breadcrumb { max-width: 1200px; margin: 0 auto; padding: 24px 56px 0; }
+.breadcrumb a {
+  font-size: 13px; color: var(--text-muted); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
+}
+.breadcrumb a:hover { color: var(--navy); }
 
-  .project-hero { max-width: 1200px; margin: 0 auto; padding: 40px 48px 60px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-  .tag { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-muted); background: var(--white); }
-  .project-title { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 400; line-height: 1.1; margin-bottom: 8px; }
-  .project-subtitle { font-size: 14px; color: var(--text-muted); font-style: italic; margin-bottom: 32px; }
-  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
-  .meta-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
-  .meta-value { font-size: 13px; font-weight: 500; }
-  .context-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-  .context-box h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dark); font-weight: 600; margin-bottom: 10px; }
-  .context-box p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
-  .hero-visual { border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, #e8fff8 0%, #0D1B2A 100%); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+/* HERO */
+.project-hero {
+  max-width: 1200px; margin: 0 auto;
+  padding: 32px 56px 0;
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 64px; align-items: start;
+}
+.hero-image { border-radius: 16px; overflow: hidden; background: var(--white); }
+.hero-image img { width: 100%; display: block; }
 
-  .project-content { max-width: 1200px; margin: 0 auto; padding: 0 48px 80px; }
-  .step { margin-bottom: 64px; }
-  .step-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-  .step-number { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--green); line-height: 1; font-weight: 400; }
-  .step-title { font-family: 'Instrument Serif', serif; font-size: 28px; font-weight: 400; }
-  .step-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
-  .step-body strong { color: var(--text); font-weight: 600; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.tag {
+  font-size: 11px; font-weight: 400; padding: 5px 14px; border-radius: 20px;
+  border: 1px solid var(--border); color: var(--text-muted); background: var(--white);
+}
+.project-title {
+  font-size: clamp(24px, 2.8vw, 38px); font-weight: 700;
+  line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 12px;
+}
+.project-subtitle {
+  font-size: 15px; font-weight: 300; color: var(--text-muted);
+  margin-bottom: 28px; line-height: 1.65;
+}
+.meta-table {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 20px 0; margin-bottom: 28px;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.meta-row { display: flex; gap: 8px; align-items: baseline; }
+.meta-row .mlabel { font-size: 13px; font-weight: 600; min-width: 80px; flex-shrink: 0; }
+.meta-row .mlabel::after { content: ' :'; }
+.meta-row .mval { font-size: 13px; font-weight: 300; color: var(--text-muted); }
+.ctx-block { margin-bottom: 18px; }
+.ctx-label { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+.ctx-text { font-size: 14px; font-weight: 300; color: var(--text); line-height: 1.7; }
 
-  .highlight-box { background: var(--navy); border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
-  .highlight-box p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; }
-  .highlight-box strong { color: var(--green); }
+/* STAT PILLS in hero context */
+.stat-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(18,242,161,0.1); border: 1px solid rgba(18,242,161,0.3);
+  border-radius: 20px; padding: 5px 14px; margin: 3px 0;
+  font-size: 13px; font-weight: 500; color: var(--navy);
+}
+.stat-pill::before { content: '+'; color: var(--green); font-weight: 700; }
+.stat-bémol {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  margin-top: 10px; padding: 12px 16px;
+  border-left: 3px solid var(--border); line-height: 1.6;
+}
 
-  .two-col-step { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
-  .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-  .info-card h5 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
-  .info-card ul { list-style: none; }
-  .info-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; }
-  .info-card ul li:last-child { border: none; }
-  .info-card ul li::before { content: '→'; color: var(--green-dark); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+/* CONTRAINTES */
+.contraintes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.contrainte-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 16px;
+  font-size: 13px; color: var(--text-muted); line-height: 1.6; font-weight: 300;
+}
+.contrainte-card strong { display: block; color: var(--navy); font-weight: 600; margin-bottom: 4px; font-size: 13px; }
 
-  .visual-placeholder { background: var(--white); border: 1px solid var(--border); border-radius: 12px; aspect-ratio: 16/7; display: flex; align-items: center; justify-content: center; margin-top: 20px; color: var(--text-muted); font-size: 13px; }
+/* CONTENT */
+.project-content { max-width: 1200px; margin: 0 auto; padding: 72px 56px 96px; }
+.step { margin-bottom: 88px; }
 
-  /* AB comparison */
-  .ab-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
-  .ab-card { border-radius: 12px; padding: 24px; border: 2px solid var(--border); }
-  .ab-card.variant-a { border-color: var(--navy); background: var(--white); }
-  .ab-card.variant-b { border-color: var(--green-dark); background: var(--white); }
-  .ab-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .ab-badge { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
-  .ab-badge.a { background: var(--navy); color: white; }
-  .ab-badge.b { background: var(--green); color: var(--navy); }
-  .ab-card ul { list-style: none; }
-  .ab-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); color: var(--text-muted); }
-  .ab-card ul li:last-child { border: none; }
+.step-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.step-big-num {
+  font-size: 72px; font-weight: 700; line-height: 1;
+  color: var(--green); letter-spacing: -3px; flex-shrink: 0;
+}
+.step-big-title {
+  font-size: 28px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px;
+}
 
-  /* results */
-  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
-  .result-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
-  .result-number { font-family: 'Instrument Serif', serif; font-size: 32px; font-weight: 400; color: var(--green-dark); margin-bottom: 4px; }
-  .result-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+/* LAYOUTS */
+.side-by-side {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: start;
+}
+.three-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.img-wrap { background: var(--white); border-radius: 12px; overflow: hidden; }
+.img-wrap img { width: 100%; display: block; }
+.img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.full-width .img-wrap img { width: 100%; display: block; }
 
-  .takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
-  .takeaway-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; border-top: 3px solid var(--green); }
-  .takeaway-card h5 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-  .takeaway-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+/* TEXTE */
+.step-body { font-size: 14px; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+.step-body p { margin-bottom: 10px; }
+.step-body strong { color: var(--text); font-weight: 600; }
 
-  .project-nav { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
-  .proj-nav-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-muted); font-size: 13px; transition: color 0.2s; }
-  .proj-nav-link:hover { color: var(--green-dark); }
-  .arrow-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; background: var(--white); }
+/* BULLETS */
+.bullet-list { list-style: none; padding: 0; margin-top: 8px; }
+.bullet-list li {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  padding: 4px 0 4px 18px; position: relative; line-height: 1.6;
+}
+.bullet-list li::before { content: '•'; position: absolute; left: 0; color: var(--navy); font-size: 16px; line-height: 1.3; }
 
-  footer { background: var(--navy); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; }
-  footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
-  .footer-name { color: var(--green); font-size: 13px; font-weight: 600; }
+/* FLÈCHES */
+.arrow-list { list-style: none; padding: 0; margin-top: 8px; }
+.arrow-list li {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  padding: 5px 0 5px 20px; position: relative; line-height: 1.6;
+  border-bottom: 1px solid var(--border);
+}
+.arrow-list li:last-child { border: none; }
+.arrow-list li::before { content: '→'; position: absolute; left: 0; color: var(--navy); font-size: 12px; top: 7px; }
 
-  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* MÉTRIQUES cards */
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+.metric-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 20px; padding: 24px 20px;
+  border-top: 3px solid var(--green);
+  box-shadow: 0 2px 12px rgba(16,11,48,0.04);
+  text-align: center;
+}
+.metric-value { font-size: 32px; font-weight: 700; color: var(--green); letter-spacing: -1px; line-height: 1.1; margin-bottom: 8px; }
+.metric-label { font-size: 12px; color: var(--text-muted); line-height: 1.4; font-weight: 300; }
 
-  @media (max-width: 900px) {
-    nav, .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
-    .project-hero { grid-template-columns: 1fr; padding: 24px; }
-    .two-col-step, .ab-compare { grid-template-columns: 1fr; }
-    .results-grid { grid-template-columns: repeat(2, 1fr); }
-    .takeaway-grid { grid-template-columns: 1fr; }
-  }
+/* COMPROMIS */
+.compromis-stakeholders { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+.stakeholder-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px;
+}
+.stakeholder-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.stakeholder-card ul { list-style: none; padding: 0; }
+.stakeholder-card ul li {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  padding: 4px 0 4px 18px; position: relative; line-height: 1.6;
+}
+.stakeholder-card ul li::before { content: '•'; position: absolute; left: 0; color: var(--navy); font-size: 16px; line-height: 1.3; }
+
+.compromis-list { list-style: none; padding: 0; }
+.compromis-list li {
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+  font-size: 13px; line-height: 1.7;
+}
+.compromis-list li:last-child { border: none; }
+.compromis-mais { color: var(--text-muted); font-weight: 300; }
+.compromis-mais::before { content: '→ '; color: var(--green); font-weight: 700; }
+.compromis-main { color: var(--text); font-weight: 500; display: block; margin-bottom: 2px; }
+
+/* VALIDATION bannières */
+.validation-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.validation-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+}
+.validation-card-header {
+  background: var(--navy); padding: 14px 20px;
+  font-size: 13px; font-weight: 600; color: var(--white);
+}
+.validation-card-body { padding: 20px; }
+.validation-card-body ul { list-style: none; padding: 0; }
+.validation-card-body ul li {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  padding: 4px 0 4px 18px; position: relative; line-height: 1.6;
+}
+.validation-card-body ul li::before { content: '•'; position: absolute; left: 0; color: var(--green); font-size: 16px; line-height: 1.3; }
+
+/* CALLOUT */
+.callout {
+  background: var(--navy); border-radius: 14px; padding: 22px 26px; margin-top: 16px;
+}
+.callout p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.75; font-weight: 300; }
+.callout strong { color: var(--green); font-weight: 600; }
+
+/* TAKEAWAYS */
+.takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+.takeaway-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 20px; padding: 28px;
+  border-top: 3px solid var(--green);
+  box-shadow: 0 2px 12px rgba(16,11,48,0.04);
+}
+.takeaway-card h5 { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--navy); }
+.takeaway-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
+
+/* REMERCIEMENT */
+.remerciement {
+  font-size: 13px; color: var(--text-muted); font-style: italic;
+  margin-bottom: 28px; padding: 14px 18px;
+  border-left: 3px solid var(--green); background: var(--white);
+  border-radius: 0 8px 8px 0;
+}
+
+/* NAV PROJET (précédent + suivant) */
+.project-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 32px 56px; border-top: 1px solid var(--border);
+  max-width: 1200px; margin: 0 auto;
+}
+.btn-next, .btn-prev {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: var(--navy);
+  padding: 12px 20px; border-radius: 60px;
+  text-decoration: none; font-size: 14px; font-weight: 500;
+  border: 1.5px solid var(--border);
+  transition: border-color .25s, color .25s, background .25s;
+}
+.btn-next:hover, .btn-prev:hover { border-color: var(--navy); background: rgba(16,11,48,0.04); }
+.btn-next svg, .btn-prev svg { flex-shrink: 0; }
+.btn-next svg path, .btn-prev svg path { stroke: var(--navy); }
+
+footer {
+  background: var(--navy); padding: 44px 56px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
+.footer-name { color: var(--green) !important; font-size: 13px; font-weight: 500; }
+
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 960px) {
+  nav { padding: 16px 24px; }
+  .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
+  .project-hero { grid-template-columns: 1fr; padding: 24px; gap: 32px; }
+  .side-by-side, .three-cols, .metrics-grid, .compromis-stakeholders, .validation-grid, .contraintes-grid { grid-template-columns: 1fr; }
+  .takeaway-grid { grid-template-columns: 1fr; }
+  .step-big-num { font-size: 52px; }
+  .step-big-title { font-size: 22px; }
+  .project-nav { flex-direction: column; gap: 16px; }
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html"><div class="nav-logo-placeholder">A</div></a>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/ProfilAstrid.png" alt="Astrid">
+  </a>
   <ul class="nav-links">
     <li><a href="index.html">Mes projets</a></li>
     <li><a href="about.html">Qui suis-je ?</a></li>
@@ -118,11 +290,19 @@
 </nav>
 
 <div class="breadcrumb">
-  <a href="index.html">← Retour accueil</a>
+  <a href="index.html">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M11 7H3M6 4L3 7l3 3" stroke="#6B7A99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Retour accueil
+  </a>
 </div>
 
 <div class="project-hero">
-  <div class="project-meta fade-up">
+  <div class="hero-image fade-up">
+    <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Header-CRMD.png" alt="A/B Test Banner CRMD">
+  </div>
+  <div class="hero-meta fade-up" style="transition-delay:.1s">
     <div class="project-tags">
       <span class="tag">A/B Test</span>
       <span class="tag">Desktop</span>
@@ -130,234 +310,363 @@
       <span class="tag">UX / UI</span>
     </div>
     <h1 class="project-title">A/B Test Banner CRMD</h1>
-    <p class="project-subtitle">Mise en avant des bannières CRMD offres et rebonds</p>
-
-    <div class="meta-grid">
-      <div class="meta-item">
-        <div class="meta-label">Rôle</div>
-        <div class="meta-value">UX/UI designer</div>
+    <p class="project-subtitle">Mise en avant des bannières CRMD offres et rebonds.</p>
+    <div class="meta-table">
+      <div class="meta-row"><span class="mlabel">Rôle</span><span class="mval">UX/UI designer</span></div>
+      <div class="meta-row"><span class="mlabel">Périmètre</span><span class="mval">Acquisition, cible professionnelle</span></div>
+      <div class="meta-row"><span class="mlabel">Équipe</span><span class="mval">design, PO métier, dev, SEO, équipe LegalPlace, legal</span></div>
+    </div>
+    <div class="ctx-block">
+      <div class="ctx-label">Contexte</div>
+      <p class="ctx-text">Un test a été mené pour augmenter le nombre de clics vers les fiches produits et les parcours de souscription via le comparateur. Les résultats ont été très positifs :</p>
+      <div style="margin: 10px 0; display: flex; flex-direction: column; gap: 6px;">
+        <span class="stat-pill">232 % de visiteurs sur le comparateur Prime / One (100 % de confiance statistique)</span>
+        <span class="stat-pill">77 % d'accès aux parcours de souscription Prime / One (100 % de confiance statistique)</span>
       </div>
-      <div class="meta-item">
-        <div class="meta-label">Périmètre</div>
-        <div class="meta-value">Acquisition, cible particulier</div>
+      <p class="stat-bémol"><strong>Bémol :</strong> ce test a toutefois entraîné une baisse significative des performances des autres bannières CRMD (rebond, offre) ainsi que du bloc « Découvrez nos offres ».</p>
+    </div>
+    <div class="ctx-block">
+      <div class="ctx-label">Objectif du projet</div>
+      <p class="ctx-text">Augmenter le taux de clic sur ces bannières de rebond et d'animation.</p>
+    </div>
+    <div class="ctx-block">
+      <div class="ctx-label">Problématique</div>
+      <p class="ctx-text">Comment augmenter la visibilité de ces éléments sans cannibaliser le reste de la page, dont l'objectif principal reste l'accès au compte ?</p>
+    </div>
+    <div class="ctx-block">
+      <div class="ctx-label">Contraintes</div>
+      <div class="contraintes-grid">
+        <div class="contrainte-card"><strong>Équilibre visibilité / discrétion</strong>Les bannières doivent être visibles pour générer du clic, sans perturber la lecture.</div>
+        <div class="contrainte-card"><strong>Hiérarchisation des priorités</strong>L'accès au compte doit rester l'action principale.</div>
+        <div class="contrainte-card"><strong>Cohérence graphique</strong>Respect du système de design existant.</div>
+        <div class="contrainte-card"><strong>Accessibilité</strong>Interdiction de toucher à l'emplacement de la bannière comparateur.</div>
       </div>
-      <div class="meta-item">
-        <div class="meta-label">Équipe</div>
-        <div class="meta-value">PO, développeurs, analystes CRO</div>
-      </div>
     </div>
-
-    <div class="context-box">
-      <h4>Contexte</h4>
-      <p>L'outil de retargeting augmente le nombre des offres aux utilisateurs qui ont un parcours général et de la génération de CA distribué. L'objectif était d'augmenter la performance des bannières CRMD existantes via un A/B test comparatif.</p>
-    </div>
-
-    <div class="context-box">
-      <h4>Objectif du projet</h4>
-      <p>Augmenter le taux de clic (et in fine les conversions) sur les bannières rebond et d'offres, en repensant leur wording, leur design et leur emplacement comparatif.</p>
-    </div>
-
-    <div class="context-box">
-      <h4>Contraintes</h4>
-      <p>Respect de la charte Hello bank! · Accessibilité · Format imposé par le template · Maintien de l'emplacement des bannières comparatives</p>
-    </div>
-  </div>
-
-  <div class="hero-visual fade-up" style="transition-delay:0.15s">
-    <svg width="200" height="160" viewBox="0 0 200 160" fill="none">
-      <rect x="10" y="10" width="85" height="60" rx="8" fill="white" opacity="0.9"/>
-      <rect x="105" y="10" width="85" height="60" rx="8" fill="#1DE9B6" opacity="0.7"/>
-      <text x="52" y="44" text-anchor="middle" fill="#0D1B2A" font-size="18" font-weight="bold" font-family="sans-serif">A</text>
-      <text x="147" y="44" text-anchor="middle" fill="#0D1B2A" font-size="18" font-weight="bold" font-family="sans-serif">B</text>
-      <rect x="10" y="82" width="180" height="8" rx="4" fill="white" opacity="0.3"/>
-      <rect x="10" y="98" width="140" height="8" rx="4" fill="white" opacity="0.3"/>
-      <rect x="10" y="120" width="80" height="16" rx="6" fill="white" opacity="0.8"/>
-    </svg>
   </div>
 </div>
 
 <div class="project-content">
 
+  <!-- 01 EXISTANT -->
   <div class="step fade-up">
     <div class="step-header">
-      <div class="step-number">1.</div>
-      <div class="step-title">Existant</div>
+      <span class="step-big-num">01</span>
+      <span class="step-big-title">Existant</span>
     </div>
-    <p class="step-body">Analyse de l'existant pour comprendre les <strong>problèmes actuels</strong> des bannières en place. Revue des métriques de performance et identification des points de friction.</p>
-    <div class="two-col-step">
-      <div class="info-card">
-        <h5>Problèmes identifiés</h5>
-        <ul>
-          <li>CTR très en dessous des benchmarks comparatifs</li>
-          <li>Wording peu engageant et générique</li>
-          <li>Visuel peu différenciant de la concurrence</li>
-          <li>Mauvais positionnement dans la page</li>
-          <li>Manque de personnalisation selon le profil</li>
-        </ul>
-      </div>
-      <div class="visual-placeholder" style="aspect-ratio:4/3; margin-top:0;">Capture bannières existantes</div>
-    </div>
-  </div>
-
-  <div class="step fade-up">
-    <div class="step-header">
-      <div class="step-number">2.</div>
-      <div class="step-title">Récupération de data</div>
-    </div>
-    <p class="step-body">Récupération des <strong>données analytiques</strong> des bannières actuelles pour objectiver les problèmes et construire des hypothèses solides.</p>
-    <div class="highlight-box">
-      <p>Le taux de clic "de référence" a été défini à partir de la moyenne sectorielle bancaire. <strong>Les données actuelles montraient un écart significatif</strong> avec ce référentiel, justifiant l'urgence d'un A/B test.</p>
-    </div>
-  </div>
-
-  <div class="step fade-up">
-    <div class="step-header">
-      <div class="step-number">3.</div>
-      <div class="step-title">Guidelines</div>
-    </div>
-    <p class="step-body">Revue des guidelines de la marque Hello bank! pour s'assurer que les nouvelles variantes restent dans le cadre identitaire tout en testant des améliorations significatives.</p>
-    <div class="two-col-step">
-      <div class="info-card">
-        <h5>À respecter impérativement</h5>
-        <ul>
-          <li>Palette couleurs Hello bank!</li>
-          <li>Typographie officielle</li>
-          <li>Ratio de contraste WCAG AA</li>
-          <li>Format et dimensions imposés</li>
-          <li>Mentions légales obligatoires</li>
-        </ul>
-      </div>
-      <div class="info-card">
-        <h5>Marges de manœuvre</h5>
-        <ul>
-          <li>Wording et copywriting</li>
-          <li>Hiérarchie visuelle interne</li>
-          <li>Mise en avant de l'offre</li>
-          <li>CTA (libellé et couleur)</li>
-          <li>Illustration / icône</li>
-        </ul>
+    <div class="full-width">
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Existant-CRMD.png" alt="Existant CRMD">
       </div>
     </div>
   </div>
 
+  <!-- 02 RÉCUPÉRATION DE DATA -->
   <div class="step fade-up">
     <div class="step-header">
-      <div class="step-number">4.</div>
-      <div class="step-title">Formulation d'hypothèses</div>
+      <span class="step-big-num">02</span>
+      <span class="step-big-title">Récupération de data</span>
     </div>
-    <p class="step-body">Définition des hypothèses à tester, basées sur les données collectées et les bonnes pratiques CRO.</p>
-    <div class="ab-compare">
-      <div class="ab-card variant-a">
-        <div class="ab-label">
-          <span class="ab-badge a">A</span>
-          Variante contrôle
+    <div class="side-by-side" style="align-items: start;">
+      <div>
+        <div class="step-body">
+          <p>Forte concentration des interactions sur :</p>
         </div>
-        <ul>
-          <li>Bannière existante sans modification</li>
-          <li>Wording générique</li>
-          <li>CTA standard "En savoir plus"</li>
-          <li>Visuel existant</li>
+        <ul class="bullet-list" style="margin-top: 8px; margin-bottom: 16px;">
+          <li>La navigation principale (colonne gauche)</li>
+          <li>La zone opérations</li>
+          <li>Les boutons de déconnexion</li>
         </ul>
-      </div>
-      <div class="ab-card variant-b">
-        <div class="ab-label">
-          <span class="ab-badge b">B</span>
-          Variante challenger
+        <div class="step-body">
+          <p>Le bloc <strong>Découvrez nos offres</strong> a une visibilité faible mais intéresse tout de même.</p>
+          <p>Les bannières de rebond et d'offres n'intéressent pas les utilisateurs.</p>
+          <p>Le besoin utilisateur principal reste confirmé : <strong>accéder et gérer son compte</strong> et non consommer du marketing.</p>
         </div>
-        <ul>
-          <li>Wording orienté bénéfice utilisateur</li>
-          <li>Mise en avant du gain financier</li>
-          <li>CTA plus engageant "Je profite de l'offre"</li>
-          <li>Nouveau visuel différenciant</li>
+      </div>
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Data-CRMD.png" alt="Récupération de data">
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 GUIDELINES -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">03</span>
+      <span class="step-big-title">Guidelines</span>
+    </div>
+    <div class="side-by-side" style="align-items: start;">
+      <div>
+        <div class="step-body">
+          <p>Le ROP ayant été refondu l'année précédente, des guidelines précises avaient été définies pour ce type de bannières.</p>
+          <p>Il a fallu convaincre les équipes ayant mené cette refonte d'assouplir ces guidelines et de nous laisser expérimenter de nouvelles approches, leur principale crainte étant que la colonne de droite ne devienne un simple « fourre-tout ».</p>
+          <p>Cette colonne ne devant accueillir que <strong>2 bannières au grand max</strong> :</p>
+        </div>
+        <ul class="bullet-list" style="margin-top: 12px; margin-bottom: 20px;">
+          <li>Bannière de rebond : push pour reprendre un parcours</li>
+          <li>Bannière d'offre : communication sur les offres</li>
+        </ul>
+        <div class="step-body">
+          <p>Les dispositifs prévus pour mettre en avant certaines bannières n'ont jamais été exploités, tout comme les illustrations destinées à les accompagner. Il en va de même pour la pastille de notification, conçue pour attirer l'attention de l'utilisateur et l'inciter à reprendre un parcours abandonné.</p>
+          <p>Ce qui a quelque peu remis en question nos convictions initiales, à savoir que les gélules et badges n'apportaient aucun gain en termes de performance.</p>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="img-wrap">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Guidelines-CRMD.png" alt="Guidelines">
+        </div>
+        <div class="img-wrap">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Existant-CRMD.png" alt="Guidelines existant">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 FORMULATION D'HYPOTHÈSES -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">04</span>
+      <span class="step-big-title">Formulation d'hypothèses</span>
+    </div>
+    <div class="side-by-side" style="align-items: start;">
+      <div>
+        <div class="step-body"><p><strong>Hypothèses potentielles :</strong></p></div>
+        <ul class="bullet-list">
+          <li>Bannières peut-être pas assez voyantes ?</li>
+          <li>Wording non affordant ou incompris ?</li>
+          <li>Peu de cookies acceptés ?</li>
+          <li>Contenus inintéressants ?</li>
+          <li>Cannibalisation des contenus par la bannière comparateur</li>
+        </ul>
+      </div>
+      <div>
+        <div class="step-body"><p><strong>Solutions potentielles :</strong></p></div>
+        <ul class="bullet-list">
+          <li>Revoir le design de ces bannières et leur positionnement</li>
+          <li>Retravailler le wording de manière générale</li>
+          <li>Mettre plus en avant les cookies</li>
+          <li>Contextualiser les bannières</li>
+          <li>Revoir le positionnement de la bannière comparateur et/ou son design</li>
         </ul>
       </div>
     </div>
   </div>
 
+  <!-- 05 PISTES DE RECHERCHES -->
   <div class="step fade-up">
     <div class="step-header">
-      <div class="step-number">5.</div>
-      <div class="step-title">Pistes de recherches</div>
+      <span class="step-big-num">05</span>
+      <span class="step-big-title">Pistes de recherches</span>
     </div>
-    <p class="step-body">Exploration de plusieurs directions créatives pour les nouvelles bannières avant de sélectionner les variantes à tester.</p>
-    <div class="visual-placeholder">Explorations créatives — bannières rebond & offres</div>
-    <div class="highlight-box" style="margin-top:20px;">
-      <p><strong>Capitaliser sur d'anciens A/B Tests :</strong> Nous avons analysé les résultats de tests précédents pour identifier les patterns gagnants : couleurs de CTA, longueur optimale du wording, position des éléments clés dans la bannière.</p>
-    </div>
-    <div class="visual-placeholder" style="margin-top:16px;">Changement de positionnement et de graphisme des bannières rebond</div>
-  </div>
-
-  <div class="step fade-up">
-    <div class="step-header">
-      <div class="step-number">6.</div>
-      <div class="step-title">Validation</div>
-    </div>
-    <p class="step-body">Validation des maquettes finales avec l'équipe avant lancement du test. Vérification de la conformité légale, technique et graphique.</p>
-    <div class="two-col-step">
-      <div class="info-card">
-        <h5>Bannières rebond ✓</h5>
-        <ul>
-          <li>Wording validé par l'équipe juridique</li>
-          <li>Accessibilité vérifiée</li>
-          <li>Intégration technique confirmée</li>
-          <li>Métriques de suivi définies</li>
-        </ul>
-      </div>
-      <div class="info-card">
-        <h5>Bannières offres ✓</h5>
-        <ul>
-          <li>Conformité guidelines respectée</li>
-          <li>Responsive vérifié sur tous les breakpoints</li>
-          <li>CTA clairement identifiable</li>
-          <li>Durée du test déterminée</li>
-        </ul>
+    <!-- Image full width en premier -->
+    <div class="full-width" style="margin-bottom: 40px;">
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Pistes-CRMD.png" alt="Pistes de recherches">
       </div>
     </div>
-  </div>
 
-  <div class="step fade-up">
-    <div class="step-header">
-      <div class="step-number">8.</div>
-      <div class="step-title">Maquette finale</div>
+    <!-- Revoir le wording cookies -->
+    <div style="margin-bottom: 40px;">
+      <div class="step-body" style="margin-bottom: 14px;"><p><strong>Revoir le wording de la bannière cookies</strong></p></div>
+      <div class="step-body" style="margin-bottom: 10px;"><p>Proposition de wordings :</p></div>
+      <ul class="bullet-list">
+        <li>Des cookies pour mieux vous connaître</li>
+        <li>Données protégées, expérience dopée ! Cliquez pour en profiter</li>
+        <li>Vos données sont en sécurité, et les cookies nous aident à vous proposer l'expérience que vous méritez</li>
+        <li>Cookies acceptées, données sécurisées, expérience personnalisée ! (ou l'expérience que vous méritez)</li>
+        <li>Cookies acceptées, contenus adaptés</li>
+        <li>Moins de clics, plus de ce que vous aimez. Merci les cookies.</li>
+        <li>Accepter les cookies c'est profiter d'un contenu adapté à vos envies, en toute sécurité/confidentialité.</li>
+        <li>On respecte vos choix, on améliore les nôtres</li>
+        <li>Juste un clic pour des contenus qui vous ressemblent</li>
+        <li>Des produits pensés pour vos besoins</li>
+      </ul>
     </div>
-    <div class="visual-placeholder" style="aspect-ratio: 21/9;">Maquettes finales des bannières A et B</div>
+
+    <!-- Capitaliser sur anciens A/B Tests -->
+    <div style="margin-bottom: 40px;">
+      <div class="step-body" style="margin-bottom: 14px;">
+        <p><strong>Capitaliser sur d'anciens A/B Tests</strong></p>
+        <p>Sur la partie Pro de la marque, j'ai été amené à trouver des solutions de mise en avant d'offre sur la homepage. Un A/B Test a été mené sur une languette sticky mettant en avant une offre promo. Cet A/B test ayant été concluant, j'ai souhaité capitaliser dessus.</p>
+        <p>L'idée serait de remplacer le visuel de la languette par un cookie, voire un cadeau, afin de la rendre plus attractive et plus discrète. Le symbole du cadeau pourrait interpeller l'utilisateur en associant l'acceptation des cookies à l'accès aux offres, perçu comme une forme de récompense.</p>
+      </div>
+      <div class="img-wrap" style="margin-bottom: 24px;">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/ABtest-CRMD.png" alt="A/B Test concluant">
+      </div>
+      <!-- Métriques style maquette -->
+      <div style="margin-bottom: 10px;">
+        <p style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">Métriques d'impact de l'A/B test</p>
+      </div>
+      <div class="metrics-grid" style="grid-template-columns: repeat(4,1fr);">
+        <div class="metric-card">
+          <div style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">Taux de DI<br>(différence d'impact = uplift)</div>
+          <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 12px;">
+          <div class="metric-value">+ 13,35 %</div>
+        </div>
+        <div class="metric-card">
+          <div style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">Taux de Lead</div>
+          <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 12px;">
+          <div class="metric-value">+ 28,34 %</div>
+        </div>
+        <div class="metric-card">
+          <div style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">Valeur souscription Hello Business</div>
+          <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 12px;">
+          <div class="metric-value">+ 258 €</div>
+        </div>
+        <div class="metric-card">
+          <div style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">Valeur souscription Compte Sec</div>
+          <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 12px;">
+          <div class="metric-value">+ 56 €</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Changement positionnement + questionnement comparateur -->
+    <div>
+      <div class="step-body" style="margin-bottom: 20px;"><p><strong>Changement du positionnement et du graphisme de la bannière de rebond</strong></p></div>
+      <div class="side-by-side" style="align-items: start;">
+        <div class="img-wrap">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Repositionnement-CRMD.png" alt="Repositionnement bannière rebond">
+        </div>
+        <div>
+          <div class="step-body">
+            <p><strong>Questionnement sur le comparateur</strong></p>
+            <p>Faut-il le redescendre pour avoir une meilleure hiérarchisation des informations ? C'est-à-dire la bannière offre, puis le bloc Découvrez nos offres, et enfin le comparateur cartes.</p>
+            <p>Faut-il simplifier l'encart comparateur pour l'intégrer au bloc découverte d'offres ? Retirer le CTA qui alourdissait le bloc tout en gardant son contraste pour qu'il reste visible et attractif.</p>
+          </div>
+          <div class="callout" style="margin-top: 16px;">
+            <p>→ Solution permettant de faire remonter le bloc découverte d'offres qui, depuis l'ajout de l'entrée comparateur, a un uplift de <strong>-12%</strong>.</p>
+          </div>
+          <div class="img-wrap" style="margin-top: 20px;">
+            <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Comparateur-CRMD.png" alt="Comparateur CRMD">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- 06 TROUVER DES COMPROMIS -->
   <div class="step fade-up">
     <div class="step-header">
-      <div class="step-number">9.</div>
-      <div class="step-title">Ce que ça m'a apporté</div>
+      <span class="step-big-num">06</span>
+      <span class="step-big-title">Trouver des compromis</span>
+    </div>
+    <div class="step-body" style="margin-bottom: 24px;"><p>Après avoir exploré différentes possibilités, il a fallu trouver le juste équilibre afin d'aboutir à une solution qui convienne à tous.</p></div>
+    <div class="step-body" style="margin-bottom: 16px;"><p><strong>Les compromis</strong></p></div>
+    <ul class="compromis-list">
+      <li>
+        <span class="compromis-main">Ajouter une bannière de rebond en haut du ROP serait violent pour les utilisateurs...</span>
+        <span class="compromis-mais">...Mais l'ajouter après 3/4 opérations pourrait être moins pushy.</span>
+      </li>
+      <li>
+        <span class="compromis-main">Faire ressortir la bannière de rebond pour qu'elle soit vue et non perdue au milieu d'un flot d'informations...</span>
+        <span class="compromis-mais">...Mais en évitant l'effet « sapin de Noël » dans le choix des couleurs.</span>
+      </li>
+      <li>
+        <span class="compromis-main">Rendre visibles les bannières de manière générale...</span>
+        <span class="compromis-mais">...Mais pas au détriment du ROP ni de la bannière comparateur.</span>
+      </li>
+      <li>
+        <span class="compromis-main">Lancer rapidement l'A/B test...</span>
+        <span class="compromis-mais">...Mais sans perdre de vue l'expérience utilisateur.</span>
+      </li>
+      <li>
+        <span class="compromis-main">Rendre visibles les bannières de manière générale...</span>
+        <span class="compromis-mais">...Mais sans casser les guidelines déjà établies au niveau de la structure du ROP.</span>
+      </li>
+    </ul>
+    <div class="compromis-stakeholders" style="margin-top: 36px;">
+      <div class="stakeholder-card">
+        <div class="stakeholder-title">Ce que veulent les utilisateurs</div>
+        <ul>
+          <li>Gérer leur compte</li>
+          <li>Voir leurs dépenses</li>
+          <li>Comparer les offres</li>
+        </ul>
+      </div>
+      <div class="stakeholder-card">
+        <div class="stakeholder-title">Ce que veulent les PO métier</div>
+        <ul>
+          <li>Rendre toutes les bannières visibles</li>
+          <li>Caser les guidelines en plus</li>
+          <li>Engendrer du business</li>
+          <li>Lancer l'A/B test rapidement</li>
+        </ul>
+      </div>
+      <div class="stakeholder-card">
+        <div class="stakeholder-title">Ce que veulent les designers</div>
+        <ul>
+          <li>Ne pas acculer les utilisateurs d'informations</li>
+          <li>Avoir une interface cohérente et épurée</li>
+          <li>Ne pas casser les guidelines instaurés durant la refonte</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 VALIDATION -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">07</span>
+      <span class="step-big-title">Validation</span>
+    </div>
+    <div class="step-body" style="margin-bottom: 24px;"><p>Pour gagner du temps, nous avons fait le choix de ne pas modifier le wording, afin d'éviter une nouvelle validation par l'équipe juridique.</p></div>
+    <div class="full-width">
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Validation-CRMD.png" alt="Validation">
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 MAQUETTE FINALE -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">08</span>
+      <span class="step-big-title">Maquette finale</span>
+    </div>
+    <div class="full-width">
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Final-CRMD.png" alt="Maquette finale">
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 CE QUE ÇA M'A APPORTÉ -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">09</span>
+      <span class="step-big-title">Ce que ça m'a apporté</span>
     </div>
     <div class="takeaway-grid">
       <div class="takeaway-card">
-        <h5>Approche data-driven</h5>
-        <p>Apprendre à construire des hypothèses solides basées sur des données réelles plutôt que sur l'intuition.</p>
+        <h5>Empathie poussée</h5>
+        <p>Naviguer entre des besoins utilisateurs parfois opposés aux objectifs business, tout en maintenant une expérience cohérente et non intrusive.</p>
       </div>
       <div class="takeaway-card">
-        <h5>Compromis design/contraintes</h5>
-        <p>Innover dans un cadre très contraint : guidelines strictes, formats imposés, mentions légales obligatoires.</p>
+        <h5>Collaboration & compromis</h5>
+        <p>Travailler avec différentes équipes (PO, légal, dev, data) et trouver des compromis qui satisfont toutes les parties prenantes.</p>
       </div>
       <div class="takeaway-card">
-        <h5>Culture du test</h5>
-        <p>Intégrer l'expérimentation comme méthode de travail régulière et valoriser l'apprentissage par l'échec.</p>
+        <h5>Culture de l'expérimentation</h5>
+        <p>Capitaliser sur des A/B tests existants pour nourrir de nouvelles hypothèses et construire une vision data-driven de l'UX.</p>
       </div>
     </div>
+    <p style="margin-top: 28px; font-size: 13px; color: var(--navy); font-style: italic; font-weight: 300;">Merci à Mathieu Fauveaux, spécialiste en expérimentation, qui nous a poussé dans nos réflexions.</p>
   </div>
 
 </div>
 
 <div class="project-nav">
-  <a href="projet-legalplace.html" class="proj-nav-link">
-    <span class="arrow-circle">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </span>
-    Projet précédent : LegalPlace
+  <a href="projet-legalplace.html" class="btn-prev">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M11 7H3M6 4L3 7l3 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Projet précédent
   </a>
-  <a href="projet-abtest.html" class="proj-nav-link">
-    Projet suivant : A/B Test LP
-    <span class="arrow-circle">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </span>
+  <a href="projet-suivant.html" class="btn-next">
+    Projet suivant
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M3 7h8M7 4l4 3-4 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
   </a>
 </div>
 
@@ -367,9 +676,12 @@
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); });
+  const observer = new IntersectionObserver(
+    (entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); },
+    { threshold: 0.06 }
+  );
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 </body>
