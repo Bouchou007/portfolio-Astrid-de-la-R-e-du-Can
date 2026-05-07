@@ -88,32 +88,16 @@ a.nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: 
   max-width: 1200px; margin: 48px auto 0;
   padding: 0 56px;
 }
-.kpi-inner {
-  background: var(--navy); border-radius: 20px;
-  padding: 36px 48px;
-  display: grid; grid-template-columns: 1fr 1fr auto;
-  gap: 48px; align-items: center;
-}
 
-.kpi-label {
-  font-size: 10px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-bottom: 16px;
-}
-.kpi-items { display: flex; flex-direction: column; gap: 12px; }
-.kpi-item { display: flex; align-items: center; gap: 12px; }
-.kpi-value {
-  font-size: 28px; font-weight: 700; color: var(--green);
-  letter-spacing: -1px; min-width: 70px;
-}
-.kpi-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; font-weight: 300; }
-.kpi-divider { width: 1px; background: rgba(255,255,255,0.1); align-self: stretch; }
 
-/* Donut chart */
-.donut-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.donut-svg { width: 140px; height: 140px; }
-.donut-legend { display: flex; flex-direction: column; gap: 8px; }
-.legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: rgba(255,255,255,0.6); }
-.legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+
+
+
+
+
+
+
 
 /* CONTENT */
 .project-content { max-width: 1200px; margin: 0 auto; padding: 72px 56px 96px; }
@@ -205,8 +189,6 @@ a.nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: 
 /* CTA FINALITÉ */
 .finalite-cta {
   text-align: center;
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 24px; padding: 56px 48px;
   margin-top: 48px;
 }
 .finalite-cta h3 {
@@ -218,17 +200,22 @@ a.nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: 
 }
 .btn-cta-green {
   display: inline-flex; align-items: center; gap: 12px;
-  background: var(--green); color: var(--navy);
-  padding: 14px 14px 14px 28px; border-radius: 60px;
-  text-decoration: none; font-size: 15px; font-weight: 600;
-  transition: background .25s, transform .2s;
+  background: var(--navy); color: #fff;
+  padding: 14px 20px 14px 28px; border-radius: 60px;
+  text-decoration: none; font-size: 15px; font-weight: 500;
+  transition: background .25s, color .25s, box-shadow .25s;
 }
-.btn-cta-green:hover { background: #0dd98e; transform: scale(1.02); }
+.btn-cta-green:hover { background: var(--green); color: var(--navy); box-shadow: 0 6px 28px rgba(18,242,161,.3); }
 .btn-cta-green .ac {
-  width: 36px; height: 36px; border-radius: 50%; background: var(--navy);
-  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%; background: var(--green);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background .25s;
 }
-.btn-cta-green .ac svg path { stroke: var(--green); }
+.btn-cta-green:hover .ac { background: var(--navy); }
+.btn-cta-green .ia { display: block; transition: transform .25s; }
+.btn-cta-green:hover .ia { transform: rotate(-45deg); }
+.btn-cta-green .ia path { stroke: var(--navy); transition: stroke .25s; }
+.btn-cta-green:hover .ia path { stroke: var(--green); }
 
 /* NAV PROJET */
 .project-nav {
@@ -331,56 +318,8 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
 
 <!-- KPI BANNER -->
 <div class="kpi-banner fade-up">
-  <div class="kpi-inner">
-    <div class="kpi-block">
-      <div class="kpi-label">Objectifs de performance</div>
-      <div class="kpi-items">
-        <div class="kpi-item">
-          <span class="kpi-value">↑</span>
-          <span class="kpi-desc">Augmenter le taux de leads</span>
-        </div>
-        <div class="kpi-item">
-          <span class="kpi-value">↑</span>
-          <span class="kpi-desc">Augmenter le nombre d'UI (objectif +128)</span>
-        </div>
-        <div class="kpi-item">
-          <span class="kpi-value">↑</span>
-          <span class="kpi-desc">Augmenter le taux de leads Hello (leads/UI)</span>
-        </div>
-        <div class="kpi-item">
-          <span class="kpi-value">↑</span>
-          <span class="kpi-desc">Augmenter le nombre d'UIs Hello Prime</span>
-        </div>
-      </div>
-    </div>
-    <div class="kpi-divider"></div>
-    <div class="kpi-block">
-      <div class="kpi-label">Répartition du trafic (test)</div>
-      <div class="donut-wrap">
-        <!-- SVG Donut chart -->
-        <svg class="donut-svg" viewBox="0 0 140 140">
-          <circle cx="70" cy="70" r="52" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="22"/>
-          <!-- 24% vert = 0.24 * 326.7 = 78.4 -->
-          <circle cx="70" cy="70" r="52" fill="none" stroke="#12F2A1" stroke-width="22"
-            stroke-dasharray="78.4 248.3" stroke-dashoffset="81.7" stroke-linecap="butt"/>
-          <!-- Reste segments -->
-          <circle cx="70" cy="70" r="52" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="22"
-            stroke-dasharray="40 287" stroke-dashoffset="3.3" stroke-linecap="butt"/>
-          <circle cx="70" cy="70" r="52" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="22"
-            stroke-dasharray="60 267" stroke-dashoffset="-36.7" stroke-linecap="butt"/>
-          <circle cx="70" cy="70" r="52" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="22"
-            stroke-dasharray="168.3 158.4" stroke-dashoffset="-96.7" stroke-linecap="butt"/>
-          <text x="70" y="65" text-anchor="middle" fill="#12F2A1" font-size="22" font-weight="700" font-family="system-ui">24%</text>
-          <text x="70" y="83" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="10" font-family="system-ui">du trafic par 2A</text>
-        </svg>
-        <div class="donut-legend">
-          <div class="legend-item"><span class="legend-dot" style="background:#12F2A1"></span>Variation A (new)</div>
-          <div class="legend-item"><span class="legend-dot" style="background:rgba(255,255,255,0.25)"></span>Réseaux sociaux</div>
-          <div class="legend-item"><span class="legend-dot" style="background:rgba(255,255,255,0.12)"></span>SEO / direct</div>
-          <div class="legend-item"><span class="legend-dot" style="background:rgba(255,255,255,0.06)"></span>Autre</div>
-        </div>
-      </div>
-    </div>
+  <div class="img-wrap">
+    <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/RepartitionTraffic.png" alt="Répartition du trafic et KPIs">
   </div>
 </div>
 
@@ -389,6 +328,7 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
   <!-- 01 CONTRAINTES -->
   <div class="step fade-up">
     <div class="step-header">
+      <span class="step-big-num">01</span>
       <span class="step-big-title">Contraintes</span>
     </div>
     <div class="side-by-side" style="align-items: start;">
@@ -399,7 +339,7 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
         </ul>
       </div>
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Contraintes-Refonte.png" alt="Contraintes">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Existant.png" alt="Contraintes">
       </div>
     </div>
   </div>
@@ -415,10 +355,10 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
     </div>
     <div class="img-pair" style="margin-bottom: 32px;">
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/EmpathyMap1-Refonte.png" alt="Empathy map 1">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/EmpathyMap.png" alt="Empathy map 1">
       </div>
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/EmpathyMap2-Refonte.png" alt="Empathy map 2">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Data.png" alt="Empathy map 2">
       </div>
     </div>
     <div class="step-body" style="margin-bottom: 24px;">
@@ -426,10 +366,10 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
     </div>
     <div class="img-pair" style="margin-bottom: 32px;">
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Etudes1-Refonte.png" alt="Études 1">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/DataUSP.png" alt="Études 1">
       </div>
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Etudes2-Refonte.png" alt="Études 2">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/DataUSP.png" alt="Études 2">
       </div>
     </div>
     <!-- Axes d'améliorations + hypothèses -->
@@ -468,20 +408,19 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
       <span class="step-big-num">03</span>
       <span class="step-big-title">Wireframe</span>
     </div>
-    <div class="step-body" style="margin-bottom: 24px;">
-      <p>Réalisation de wireframes high fidelity afin d'aligner l'ensemble des parties prenantes sur une vision commune et validée, avant de passer à la phase de design UI, et représentant les axes d'améliorations définies précédemment.</p>
-    </div>
     <div class="step-body" style="margin-bottom: 20px;">
-      <ul class="bullet-list">
-        <li>Sur mobile, ajout d'un CTA sticky présent tout au long de la page</li>
-        <li>Simplification du tableau comparateur et mise en avant des USP dans les blocs intéressants</li>
-        <li>Simplifier le texte pour rendre les résultats bancaires, enjeux fort pour les entreprises</li>
-        <li>Mise en avant de l'offre Prime</li>
-      </ul>
+      <p>Réalisation de wireframes high fidelity afin d'aligner l'ensemble des parties prenantes sur une vision commune et validée, avant de passer à la phase de design UI, en reprenant les axes d'améliorations définies précédemment.</p>
     </div>
+    <ul class="bullet-list" style="margin-bottom: 28px;">
+      <li>Formulaire mis derrière un CTA et non de but en blanc sur la page</li>
+      <li>Sur mobile, ajout d'un CTA sticky présent tout au long de la page</li>
+      <li>Simplification du tableau comparateur et mise en avant des USP les plus intéressants</li>
+      <li>Ajout d'un bloc portant sur la mobilité bancaire, enjeu fort pour l'entreprise</li>
+      <li>Mise en avant de l'offre Prime</li>
+    </ul>
     <div class="full-width">
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Wireframe-Refonte.png" alt="Wireframe">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Wireframe.png" alt="Wireframe">
       </div>
     </div>
   </div>
@@ -494,7 +433,7 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
     </div>
     <div class="full-width">
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/MaquettesUI-Refonte.png" alt="Maquettes UI">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/MaquetteUI.png" alt="Maquettes UI">
       </div>
     </div>
   </div>
@@ -525,20 +464,18 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
         <div class="result-sub">uplift mesuré</div>
       </div>
     </div>
-    <div class="side-by-side" style="align-items: start; margin-top: 32px;">
-      <div>
-        <div class="step-body">
-          <p>Le seul point négatif observé a été une hausse des clics sur le contenu de l'hero banner.</p>
-          <p>Nous proposions dans un second temps un quickwin pour cet hero banner en capitalisant sur le fait que si les utilisateurs cliquent sur les cartes il faut que celles-ci redirigent vers le tableau comparateur, élément central de la page.</p>
-          <p>Lors de la refonte de la homepage Hello bank!, l'usage d'un carrousel pour présenter les offres n'avait pas été concluant : les données montraient que les utilisateurs ne scrollaient pas latéralement. Cela pouvait s'expliquer par le nombre d'offres, qui n'incitait pas à en scroller, et car des produits qui ne correspondaient pas aux attentes des utilisateurs.</p>
-          <p>Le contexte étant ici différent, avec seulement deux offres, nous avons choisi de retenir l'expérience.</p>
-        </div>
-        <div class="callout" style="margin-top: 16px;">
-          <p>→ En attendant le lancement du second test (ci-dessous), la version précédente sera implémentée.</p>
-        </div>
-      </div>
+    <div class="step-body" style="margin-top: 32px;">
+      <p>Le seul point négatif observé a été une hausse des clics sur le contenu de l'hero banner.</p>
+      <p>Nous proposions dans un second temps un quickwin pour cet hero banner en capitalisant sur le fait que si les utilisateurs cliquent sur les cartes il faut que celles-ci redirigent vers le tableau comparateur, élément central de la page.</p>
+      <p>Lors de la refonte de la homepage Hello bank!, l'usage d'un carrousel pour présenter les offres n'avait pas été concluant : les données montraient que les utilisateurs ne scrollaient pas latéralement. Cela pouvait s'expliquer par le nombre d'offres, qui n'incitait pas à en scroller, et car des produits qui ne correspondaient pas aux attentes des utilisateurs.</p>
+      <p>Le contexte étant ici différent, avec seulement deux offres, nous avons choisi de retenir l'expérience.</p>
+    </div>
+    <div class="callout" style="margin-top: 16px; margin-bottom: 32px;">
+      <p>→ En attendant le lancement du second test (ci-dessous), la version précédente sera implémentée.</p>
+    </div>
+    <div class="full-width">
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Resultats-Refonte.png" alt="Résultats">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Final.png" alt="Résultats">
       </div>
     </div>
   </div>
@@ -558,7 +495,7 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
       <a href="#" class="btn-cta-green">
         Découvrir la suite du projet
         <span class="ac">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <svg class="ia" width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M3 7h8M7 4l4 3-4 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
