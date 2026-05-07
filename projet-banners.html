@@ -129,7 +129,7 @@ a.nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: 
   gap: 48px; align-items: start;
 }
 .three-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
-.img-wrap { background: var(--white); border-radius: 12px; overflow: hidden; }
+.img-wrap { background: transparent; border-radius: 12px; overflow: hidden; }
 .img-wrap img { width: 100%; display: block; }
 .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .full-width .img-wrap img { width: 100%; display: block; }
@@ -244,16 +244,16 @@ a.nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: 
   max-width: 1200px; margin: 0 auto;
 }
 .btn-next, .btn-prev {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: transparent; color: var(--navy);
-  padding: 12px 20px; border-radius: 60px;
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--navy); color: #fff;
+  padding: 12px 24px; border-radius: 60px;
   text-decoration: none; font-size: 14px; font-weight: 500;
-  border: 1.5px solid var(--border);
-  transition: border-color .25s, color .25s, background .25s;
+  border: none; transition: background .25s, color .25s;
 }
-.btn-next:hover, .btn-prev:hover { border-color: var(--navy); background: rgba(16,11,48,0.04); }
+.btn-next:hover, .btn-prev:hover { background: #B3E5FC; color: var(--navy); }
 .btn-next svg, .btn-prev svg { flex-shrink: 0; }
-.btn-next svg path, .btn-prev svg path { stroke: var(--navy); }
+.btn-next svg path, .btn-prev svg path { stroke: #fff; transition: stroke .25s; }
+.btn-next:hover svg path, .btn-prev:hover svg path { stroke: var(--navy); }
 
 footer {
   background: var(--navy); padding: 44px 56px;
@@ -300,7 +300,7 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
 
 <div class="project-hero">
   <div class="hero-image fade-up">
-    <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Header-CRMD.png" alt="A/B Test Banner CRMD">
+    <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/CRMD.png" alt="A/B Test Banner CRMD">
   </div>
   <div class="hero-meta fade-up" style="transition-delay:.1s">
     <div class="project-tags">
@@ -333,19 +333,24 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
       <div class="ctx-label">Problématique</div>
       <p class="ctx-text">Comment augmenter la visibilité de ces éléments sans cannibaliser le reste de la page, dont l'objectif principal reste l'accès au compte ?</p>
     </div>
-    <div class="ctx-block">
-      <div class="ctx-label">Contraintes</div>
-      <div class="contraintes-grid">
-        <div class="contrainte-card"><strong>Équilibre visibilité / discrétion</strong>Les bannières doivent être visibles pour générer du clic, sans perturber la lecture.</div>
-        <div class="contrainte-card"><strong>Hiérarchisation des priorités</strong>L'accès au compte doit rester l'action principale.</div>
-        <div class="contrainte-card"><strong>Cohérence graphique</strong>Respect du système de design existant.</div>
-        <div class="contrainte-card"><strong>Accessibilité</strong>Interdiction de toucher à l'emplacement de la bannière comparateur.</div>
-      </div>
-    </div>
   </div>
 </div>
 
 <div class="project-content">
+
+  <!-- 00 CONTRAINTES -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num" style="font-size:48px;">⚡</span>
+      <span class="step-big-title">Contraintes</span>
+    </div>
+    <div class="contraintes-grid">
+      <div class="contrainte-card"><strong>Équilibre visibilité / discrétion</strong>Les bannières doivent être suffisamment visibles pour générer du clic, sans perturber la lecture ni détourner l'attention.</div>
+      <div class="contrainte-card"><strong>Hiérarchisation des priorités</strong>L'accès au compte doit rester l'action principale, devant toute animation ou bannière promotionnelle.</div>
+      <div class="contrainte-card"><strong>Cohérence graphique</strong>Respect du système de design existant.</div>
+      <div class="contrainte-card"><strong>Accessibilité</strong>Interdiction de toucher à l'emplacement de la bannière comparateur.</div>
+    </div>
+  </div>
 
   <!-- 01 EXISTANT -->
   <div class="step fade-up">
@@ -378,12 +383,11 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
         </ul>
         <div class="step-body">
           <p>Le bloc <strong>Découvrez nos offres</strong> a une visibilité faible mais intéresse tout de même.</p>
-          <p>Les bannières de rebond et d'offres n'intéressent pas les utilisateurs.</p>
-          <p>Le besoin utilisateur principal reste confirmé : <strong>accéder et gérer son compte</strong> et non consommer du marketing.</p>
+          <p>Les bannières de rebond et d'offres n'intéressent pas les utilisateurs. Le besoin utilisateur principal reste confirmé : <strong>accéder et gérer son compte</strong> et non consommer du marketing.</p>
         </div>
       </div>
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Data-CRMD.png" alt="Récupération de data">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/RecuperationData-CRMD.png" alt="Récupération de data">
       </div>
     </div>
   </div>
@@ -394,28 +398,39 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
       <span class="step-big-num">03</span>
       <span class="step-big-title">Guidelines</span>
     </div>
-    <div class="side-by-side" style="align-items: start;">
+    <!-- Ligne 1 : 2 images gauche + texte guidelines droite -->
+    <div class="side-by-side" style="align-items: start; margin-bottom: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="img-wrap" style="background: transparent;">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Guidelines-CRMD.png" alt="Guidelines">
+        </div>
+      </div>
       <div>
         <div class="step-body">
           <p>Le ROP ayant été refondu l'année précédente, des guidelines précises avaient été définies pour ce type de bannières.</p>
           <p>Il a fallu convaincre les équipes ayant mené cette refonte d'assouplir ces guidelines et de nous laisser expérimenter de nouvelles approches, leur principale crainte étant que la colonne de droite ne devienne un simple « fourre-tout ».</p>
           <p>Cette colonne ne devant accueillir que <strong>2 bannières au grand max</strong> :</p>
         </div>
-        <ul class="bullet-list" style="margin-top: 12px; margin-bottom: 20px;">
+        <ul class="bullet-list" style="margin-top: 12px;">
           <li>Bannière de rebond : push pour reprendre un parcours</li>
           <li>Bannière d'offre : communication sur les offres</li>
         </ul>
+      </div>
+    </div>
+    <!-- Ligne 2 : image Existant gauche + texte "Existant" droite -->
+    <div class="side-by-side" style="align-items: start;">
+      <div class="img-wrap" style="background: transparent;">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Existant-CRMD.png" alt="Existant">
+      </div>
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+          <span style="font-size: 20px;">⚠️</span>
+          <span style="font-size: 22px; font-weight: 700; color: var(--navy);">Existant</span>
+        </div>
         <div class="step-body">
+          <p>C'est après que nous nous sommes rendu compte que les maquettes design qui avaient été livrées n'avaient pas été respectées...</p>
           <p>Les dispositifs prévus pour mettre en avant certaines bannières n'ont jamais été exploités, tout comme les illustrations destinées à les accompagner. Il en va de même pour la pastille de notification, conçue pour attirer l'attention de l'utilisateur et l'inciter à reprendre un parcours abandonné.</p>
           <p>Ce qui a quelque peu remis en question nos convictions initiales, à savoir que les gélules et badges n'apportaient aucun gain en termes de performance.</p>
-        </div>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div class="img-wrap">
-          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Guidelines-CRMD.png" alt="Guidelines">
-        </div>
-        <div class="img-wrap">
-          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Existant-CRMD.png" alt="Guidelines existant">
         </div>
       </div>
     </div>
@@ -459,64 +474,70 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
     </div>
     <!-- Image full width en premier -->
     <div class="full-width" style="margin-bottom: 40px;">
-      <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Pistes-CRMD.png" alt="Pistes de recherches">
+      <div class="img-wrap" style="background:transparent;">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/PisteDeRecherches-CRMD.png" alt="Pistes de recherches">
       </div>
     </div>
 
-    <!-- Revoir le wording cookies -->
-    <div style="margin-bottom: 40px;">
-      <div class="step-body" style="margin-bottom: 14px;"><p><strong>Revoir le wording de la bannière cookies</strong></p></div>
-      <div class="step-body" style="margin-bottom: 10px;"><p>Proposition de wordings :</p></div>
-      <ul class="bullet-list">
-        <li>Des cookies pour mieux vous connaître</li>
-        <li>Données protégées, expérience dopée ! Cliquez pour en profiter</li>
-        <li>Vos données sont en sécurité, et les cookies nous aident à vous proposer l'expérience que vous méritez</li>
-        <li>Cookies acceptées, données sécurisées, expérience personnalisée ! (ou l'expérience que vous méritez)</li>
-        <li>Cookies acceptées, contenus adaptés</li>
-        <li>Moins de clics, plus de ce que vous aimez. Merci les cookies.</li>
-        <li>Accepter les cookies c'est profiter d'un contenu adapté à vos envies, en toute sécurité/confidentialité.</li>
-        <li>On respecte vos choix, on améliore les nôtres</li>
-        <li>Juste un clic pour des contenus qui vous ressemblent</li>
-        <li>Des produits pensés pour vos besoins</li>
-      </ul>
+    <!-- Revoir le wording cookies : texte gauche + image droite -->
+    <div class="side-by-side" style="align-items: start; margin-bottom: 40px;">
+      <div>
+        <div class="step-body" style="margin-bottom: 14px;"><p><strong>Revoir le wording de la bannière cookies</strong></p></div>
+        <div class="step-body" style="margin-bottom: 10px;"><p>Proposition de wordings :</p></div>
+        <ul class="bullet-list">
+          <li>Des cookies pour mieux vous connaître</li>
+          <li>Données protégées, expérience dopée ! Cliquez pour en profiter</li>
+          <li>Vos données sont en sécurité, et les cookies nous aident à vous proposer l'expérience que vous méritez</li>
+          <li>Cookies acceptées, données sécurisées, expérience personnalisée ! (ou l'expérience que vous méritez)</li>
+          <li>Cookies acceptées, contenus adaptés</li>
+          <li>Moins de clics, plus de ce que vous aimez. Merci les cookies.</li>
+          <li>Accepter les cookies c'est profiter d'un contenu adapté à vos envies, en toute sécurité/confidentialité.</li>
+          <li>On respecte vos choix, on améliore les nôtres</li>
+          <li>Juste un clic pour des contenus qui vous ressemblent</li>
+          <li>Des produits pensés pour vos besoins</li>
+        </ul>
+      </div>
+      <div class="img-wrap" style="background:transparent;">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/BannerCookies-CRMD.png" alt="Banner Cookies">
+      </div>
     </div>
 
-    <!-- Capitaliser sur anciens A/B Tests -->
-    <div style="margin-bottom: 40px;">
-      <div class="step-body" style="margin-bottom: 14px;">
-        <p><strong>Capitaliser sur d'anciens A/B Tests</strong></p>
-        <p>Sur la partie Pro de la marque, j'ai été amené à trouver des solutions de mise en avant d'offre sur la homepage. Un A/B Test a été mené sur une languette sticky mettant en avant une offre promo. Cet A/B test ayant été concluant, j'ai souhaité capitaliser dessus.</p>
-        <p>L'idée serait de remplacer le visuel de la languette par un cookie, voire un cadeau, afin de la rendre plus attractive et plus discrète. Le symbole du cadeau pourrait interpeller l'utilisateur en associant l'acceptation des cookies à l'accès aux offres, perçu comme une forme de récompense.</p>
+    <!-- Capitaliser sur anciens A/B Tests : texte gauche + image droite -->
+    <div class="side-by-side" style="align-items: start; margin-bottom: 32px;">
+      <div>
+        <div class="step-body" style="margin-bottom: 14px;">
+          <p><strong>Capitaliser sur d'anciens A/B Tests</strong></p>
+          <p>Sur la partie Pro de la marque, j'ai été amené à trouver des solutions de mise en avant d'offre sur la homepage. Un A/B Test a été mené sur une languette sticky mettant en avant une offre promo. Cet A/B test ayant été concluant, j'ai souhaité capitaliser dessus.</p>
+          <p>L'idée serait de remplacer le visuel de la languette par un cookie, voire un cadeau, afin de la rendre plus attractive et plus discrète. Le symbole du cadeau pourrait interpeller l'utilisateur en associant l'acceptation des cookies à l'accès aux offres, perçu comme une forme de récompense.</p>
+        </div>
       </div>
-      <div class="img-wrap" style="margin-bottom: 24px;">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/ABtest-CRMD.png" alt="A/B Test concluant">
+      <div class="img-wrap" style="background:transparent;">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/AncienABTest-CRMD.png" alt="Ancien A/B Test">
       </div>
-      <!-- Métriques style maquette -->
-      <div style="margin-bottom: 10px;">
-        <p style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">Métriques d'impact de l'A/B test</p>
+    </div>
+
+    <!-- Métriques style maquette -->
+    <p style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">Métriques d'impact de l'A/B test</p>
+    <div class="metrics-grid" style="grid-template-columns: repeat(4,1fr); margin-bottom: 40px;">
+      <div class="metric-card" style="padding: 16px 14px;">
+        <div style="font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;">Taux de DI<br>(différence d'impact = uplift)</div>
+        <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 10px;">
+        <div class="metric-value" style="font-size: 22px;">+ 13,35 %</div>
       </div>
-      <div class="metrics-grid" style="grid-template-columns: repeat(4,1fr);">
-        <div class="metric-card">
-          <div style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">Taux de DI<br>(différence d'impact = uplift)</div>
-          <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 12px;">
-          <div class="metric-value">+ 13,35 %</div>
-        </div>
-        <div class="metric-card">
-          <div style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">Taux de Lead</div>
-          <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 12px;">
-          <div class="metric-value">+ 28,34 %</div>
-        </div>
-        <div class="metric-card">
-          <div style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">Valeur souscription Hello Business</div>
-          <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 12px;">
-          <div class="metric-value">+ 258 €</div>
-        </div>
-        <div class="metric-card">
-          <div style="font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">Valeur souscription Compte Sec</div>
-          <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 12px;">
-          <div class="metric-value">+ 56 €</div>
-        </div>
+      <div class="metric-card" style="padding: 16px 14px;">
+        <div style="font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;">Taux de Lead</div>
+        <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 10px;">
+        <div class="metric-value" style="font-size: 22px;">+ 28,34 %</div>
+      </div>
+      <div class="metric-card" style="padding: 16px 14px;">
+        <div style="font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;">Valeur souscription Hello Business</div>
+        <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 10px;">
+        <div class="metric-value" style="font-size: 22px;">+ 258 €</div>
+      </div>
+      <div class="metric-card" style="padding: 16px 14px;">
+        <div style="font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;">Valeur souscription Compte Sec</div>
+        <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 10px;">
+        <div class="metric-value" style="font-size: 22px;">+ 56 €</div>
       </div>
     </div>
 
@@ -524,8 +545,8 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
     <div>
       <div class="step-body" style="margin-bottom: 20px;"><p><strong>Changement du positionnement et du graphisme de la bannière de rebond</strong></p></div>
       <div class="side-by-side" style="align-items: start;">
-        <div class="img-wrap">
-          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Repositionnement-CRMD.png" alt="Repositionnement bannière rebond">
+        <div class="img-wrap" style="background:transparent;">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Benchmark-CRMD.png" alt="Repositionnement bannière rebond">
         </div>
         <div>
           <div class="step-body">
@@ -536,8 +557,8 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
           <div class="callout" style="margin-top: 16px;">
             <p>→ Solution permettant de faire remonter le bloc découverte d'offres qui, depuis l'ajout de l'entrée comparateur, a un uplift de <strong>-12%</strong>.</p>
           </div>
-          <div class="img-wrap" style="margin-top: 20px;">
-            <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Comparateur-CRMD.png" alt="Comparateur CRMD">
+          <div class="img-wrap" style="margin-top: 20px; background:transparent;">
+            <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Comprarateur-CRMD.png" alt="Comparateur CRMD">
           </div>
         </div>
       </div>
@@ -550,54 +571,60 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
       <span class="step-big-num">06</span>
       <span class="step-big-title">Trouver des compromis</span>
     </div>
-    <div class="step-body" style="margin-bottom: 24px;"><p>Après avoir exploré différentes possibilités, il a fallu trouver le juste équilibre afin d'aboutir à une solution qui convienne à tous.</p></div>
-    <div class="step-body" style="margin-bottom: 16px;"><p><strong>Les compromis</strong></p></div>
-    <ul class="compromis-list">
-      <li>
-        <span class="compromis-main">Ajouter une bannière de rebond en haut du ROP serait violent pour les utilisateurs...</span>
-        <span class="compromis-mais">...Mais l'ajouter après 3/4 opérations pourrait être moins pushy.</span>
-      </li>
-      <li>
-        <span class="compromis-main">Faire ressortir la bannière de rebond pour qu'elle soit vue et non perdue au milieu d'un flot d'informations...</span>
-        <span class="compromis-mais">...Mais en évitant l'effet « sapin de Noël » dans le choix des couleurs.</span>
-      </li>
-      <li>
-        <span class="compromis-main">Rendre visibles les bannières de manière générale...</span>
-        <span class="compromis-mais">...Mais pas au détriment du ROP ni de la bannière comparateur.</span>
-      </li>
-      <li>
-        <span class="compromis-main">Lancer rapidement l'A/B test...</span>
-        <span class="compromis-mais">...Mais sans perdre de vue l'expérience utilisateur.</span>
-      </li>
-      <li>
-        <span class="compromis-main">Rendre visibles les bannières de manière générale...</span>
-        <span class="compromis-mais">...Mais sans casser les guidelines déjà établies au niveau de la structure du ROP.</span>
-      </li>
-    </ul>
-    <div class="compromis-stakeholders" style="margin-top: 36px;">
-      <div class="stakeholder-card">
-        <div class="stakeholder-title">Ce que veulent les utilisateurs</div>
-        <ul>
-          <li>Gérer leur compte</li>
-          <li>Voir leurs dépenses</li>
-          <li>Comparer les offres</li>
-        </ul>
+    <div class="step-body" style="margin-bottom: 28px;"><p>Après avoir exploré différentes possibilités, il a fallu trouver le juste équilibre afin d'aboutir à une solution qui convienne à tous.</p></div>
+    <!-- Layout PJ: stakeholders gauche, box compromis droite -->
+    <div class="side-by-side" style="align-items: start;">
+      <div>
+        <div style="margin-bottom: 20px;">
+          <div class="stakeholder-title" style="font-size:14px; font-weight:700; color:var(--navy); margin-bottom:10px;">Ce que veulent les utilisateurs :</div>
+          <ul class="bullet-list">
+            <li>Gérer leur compte</li>
+            <li>Voir leurs dépenses</li>
+            <li>Comparer les offres</li>
+          </ul>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="stakeholder-title" style="font-size:14px; font-weight:700; color:var(--navy); margin-bottom:10px;">Ce que veulent les PO métier :</div>
+          <ul class="bullet-list">
+            <li>Rendre toutes les bannières visibles</li>
+            <li>Caser les guidelines en plus</li>
+            <li>Engendrer du business</li>
+            <li>Lancer l'A/B test rapidement</li>
+          </ul>
+        </div>
+        <div>
+          <div class="stakeholder-title" style="font-size:14px; font-weight:700; color:var(--navy); margin-bottom:10px;">Ce que veulent les designers :</div>
+          <ul class="bullet-list">
+            <li>Ne pas acculer les utilisateurs d'informations</li>
+            <li>Avoir une interface cohérente et "épurée"</li>
+            <li>Ne pas caser les guidelines instaurés durant la refonte</li>
+          </ul>
+        </div>
       </div>
-      <div class="stakeholder-card">
-        <div class="stakeholder-title">Ce que veulent les PO métier</div>
-        <ul>
-          <li>Rendre toutes les bannières visibles</li>
-          <li>Caser les guidelines en plus</li>
-          <li>Engendrer du business</li>
-          <li>Lancer l'A/B test rapidement</li>
-        </ul>
-      </div>
-      <div class="stakeholder-card">
-        <div class="stakeholder-title">Ce que veulent les designers</div>
-        <ul>
-          <li>Ne pas acculer les utilisateurs d'informations</li>
-          <li>Avoir une interface cohérente et épurée</li>
-          <li>Ne pas casser les guidelines instaurés durant la refonte</li>
+      <!-- Box compromis avec border vert -->
+      <div style="border: 1.5px solid var(--green); border-radius: 16px; padding: 28px;">
+        <div style="font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 18px;">Les compromis</div>
+        <ul class="arrow-list" style="margin-top: 0;">
+          <li style="border-bottom: none; padding-bottom: 12px;">
+            Ajouter une banner de rebond en haut du ROP serait violent pour les utilisateurs...
+            <span style="display: block; font-style: italic; color: var(--text-muted); margin-top: 4px;">...Mais l'ajouter après 3/4 opérations pourrait être moins pushy.</span>
+          </li>
+          <li style="border-bottom: none; padding-bottom: 12px;">
+            Faire ressortir la bannière de rebond pour qu'elle soit vue et non perdue au milieu d'un flot d'informations...
+            <span style="display: block; font-style: italic; color: var(--text-muted); margin-top: 4px;">...Mais en évitant l'effet "sapin de Noël" dans le choix des couleurs.</span>
+          </li>
+          <li style="border-bottom: none; padding-bottom: 12px;">
+            Rendre visible les banners de manière générale...
+            <span style="display: block; font-style: italic; color: var(--text-muted); margin-top: 4px;">...Mais pas au détriment du ROP ni de la banner comparateur qui sont des éléments centraux pour les utilisateurs.</span>
+          </li>
+          <li style="border-bottom: none; padding-bottom: 12px;">
+            Lancer rapidement l'A/B test...
+            <span style="display: block; font-style: italic; color: var(--text-muted); margin-top: 4px;">...Mais sans perdre de vue l'expérience utilisateur.</span>
+          </li>
+          <li style="border-bottom: none; padding-bottom: 0;">
+            Rendre visible les banners de manière générale...
+            <span style="display: block; font-style: italic; color: var(--text-muted); margin-top: 4px;">...Mais sans casser les guidelines déjà établies au niveau de la structure du ROP.</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -625,7 +652,7 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
     </div>
     <div class="full-width">
       <div class="img-wrap">
-        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/Final-CRMD.png" alt="Maquette finale">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/CRMD/MaquetteFinale-CRMD.png" alt="Maquette finale">
       </div>
     </div>
   </div>
