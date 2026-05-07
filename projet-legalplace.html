@@ -194,21 +194,14 @@ nav.scrolled { border-color: var(--border); background: rgba(246,248,252,0.92); 
 .btn-next {
   display: inline-flex; align-items: center; gap: 12px;
   background: var(--navy); color: #fff;
-  padding: 14px 20px 14px 28px; border-radius: 60px;
-  text-decoration: none; font-size: 15px; font-weight: 500;
-  transition: background .25s, color .25s, box-shadow .25s;
+  padding: 12px 24px; border-radius: 60px;
+  text-decoration: none; font-size: 14px; font-weight: 500;
+  border: none; transition: background .25s, color .25s;
 }
-.btn-next:hover { background: var(--green); color: var(--navy); box-shadow: 0 6px 28px rgba(18,242,161,.3); }
-.btn-next .ac {
-  width: 32px; height: 32px; border-radius: 50%; background: var(--green);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  transition: background .25s;
-}
-.btn-next:hover .ac { background: var(--navy); }
-.btn-next .ia { display: block; transition: transform .25s; }
-.btn-next:hover .ia { transform: rotate(-45deg); }
-.btn-next .ia path { stroke: var(--navy); transition: stroke .25s; }
-.btn-next:hover .ia path { stroke: var(--green); }
+.btn-next:hover { background: #B3E5FC; color: var(--navy); }
+.btn-next svg { flex-shrink: 0; }
+.btn-next svg path { stroke: #fff; transition: stroke .25s; }
+.btn-next:hover svg path { stroke: var(--navy); }
 
 footer {
   background: var(--navy); padding: 44px 56px;
@@ -493,11 +486,9 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
 <div class="project-nav">
   <a href="projet-banners.html" class="btn-next">
     Projet suivant
-    <span class="ac">
-      <svg class="ia" width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <path d="M3 7h8M7 4l4 3-4 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M3 7h8M7 4l4 3-4 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
   </a>
 </div>
 
