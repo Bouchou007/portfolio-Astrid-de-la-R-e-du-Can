@@ -213,6 +213,17 @@ a.nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: 
 .btn-next svg path, .btn-prev svg path { stroke: #fff; transition: stroke .25s; }
 .btn-next:hover svg path, .btn-prev:hover svg path { stroke: var(--navy); }
 
+/* TAKEAWAYS */
+.takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+.takeaway-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 20px; padding: 28px;
+  border-top: 3px solid var(--green);
+  box-shadow: 0 2px 12px rgba(16,11,48,0.04);
+}
+.takeaway-card h5 { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--navy); }
+.takeaway-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
+
 footer {
   background: var(--navy); padding: 44px 56px;
   display: flex; justify-content: space-between; align-items: center;
@@ -225,12 +236,24 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
 
 @media (max-width: 960px) {
   nav { padding: 16px 24px; }
-  .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
+  .breadcrumb, .project-content, .project-nav, /* TAKEAWAYS */
+.takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+.takeaway-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 20px; padding: 28px;
+  border-top: 3px solid var(--green);
+  box-shadow: 0 2px 12px rgba(16,11,48,0.04);
+}
+.takeaway-card h5 { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--navy); }
+.takeaway-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
+
+footer { padding-left: 24px; padding-right: 24px; }
   .project-hero { grid-template-columns: 1fr; padding: 24px; gap: 32px; }
   .side-by-side { grid-template-columns: 1fr; }
   .img-pair, .img-trio { grid-template-columns: 1fr; }
   .step-big-num { font-size: 52px; }
   .step-big-title { font-size: 22px; }
+  .takeaway-grid { grid-template-columns: 1fr; }
   .project-nav { flex-direction: column; gap: 16px; }
 }
 </style>
@@ -369,9 +392,9 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
     <div class="subsection">
       <div class="subsection-title">Hero banner</div>
       <div class="subsection-label">Objectifs :</div>
-      <ul class="circle-list" style="margin-bottom: 24px;">
-        <li data-n="1">Trouver un compromis entre les attentes des PO métier, les contraintes techniques des développeurs et les besoins des utilisateurs.</li>
-        <li data-n="2">Trouver un juste milieu entre attractivité des offres, incarnation de la marque, dimension humaine, le tout sans allonger la longueur de la page et en évitant une photo trop publi-trop commerciale/ agressive.</li>
+      <ul class="arrow-list" style="margin-bottom: 24px;">
+        <li>Trouver un compromis entre les attentes des PO métier, les contraintes techniques des développeurs et les besoins des utilisateurs.</li>
+        <li>Trouver un juste milieu entre attractivité des offres, incarnation de la marque, dimension humaine, le tout sans allonger la longueur de la page et en évitant une photo trop publi-trop commerciale/ agressive.</li>
       </ul>
       <div class="full-width" style="margin-bottom: 24px;">
         <div class="img-wrap">
@@ -393,44 +416,52 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
 
     <!-- Tableau comparateur -->
     <div class="subsection">
-      <div class="subsection-title">Tableau comparateur</div>
       <div class="side-by-side" style="align-items: start;">
         <div class="img-wrap">
           <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Comparateur.png" alt="Tableau comparateur">
         </div>
         <div>
+          <div class="subsection-title">Tableau comparateur</div>
           <div class="step-body" style="margin-bottom: 16px;">
-            <p>Recherches réalisées en capitalisant sur les enseignements des A/B tests menés sur le comparateur d'offres. Objectif : rendre le choix simple, visuel et instructif.</p>
+            <p>Benchmark réalisé au préalable et capitalisation sur les enseignements tirés des A/B tests menés sur le comparateur d'offres. L'objectif étant de rendre le choix simple et instinctif.</p>
+            <p>Utilisation d'un segmented control pour :</p>
           </div>
           <ul class="bullet-list" style="margin-bottom: 20px;">
-            <li>Utilisation d'un segmented control pour : clarifier immédiatement les offres visuels, faciliter la comparaison des offres, mettre en évidence rapidement l'option la plus avantageuse.</li>
+            <li>optimiser l'espace pour les visuels,</li>
+            <li>faciliter la comparaison des offres,</li>
+            <li>mettre en évidence rapidement l'option la plus avantageuse.</li>
           </ul>
-          <div class="step-body" style="margin-bottom: 16px;">
-            <p>Conservation par rapport à l'existant, d'une "pill" pour mettre en avant l'offre Prime, mais en choisissant une teinte visible, complémentaire au fond dégradé orangé, à base d'éviter toute confusion avec les CTA, qui eux restent en vert.</p>
+          <div class="step-body" style="margin-bottom: 20px;">
+            <p>Conservation par rapport à l'existant, d'une "pill" pour mettre en avant l'offre Prime, mais en choisissant une teinte violette, complémentaire au fond dégradé orangé. L'idée étant d'éviter toute confusion avec les CTA, qui eux restent bleus.</p>
           </div>
-          <ul class="bullet-list">
-            <li>Cartes visuels des cartes de la HP repris pour les lier visuellement.</li>
-            <li><span class="pill-orange">OFFRE SPÉCIALE JUSQU'AU 15 NOVEMBRE</span> Ajout d'un badge orange stipulé pour les rendre plus attractives, en respectant l'identité visuelle des cartes.</li>
-            <li>L'objectif n'étant pas de tromper l'utilisateur sur leur apparence.</li>
-          </ul>
+          <!-- 2 cartes avec texte -->
+          <div style="display: flex; gap: 16px; align-items: flex-start; margin-bottom: 12px;">
+            <div class="img-wrap" style="width: 80px; flex-shrink: 0;">
+              <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Cartes.png" alt="Carte Hello Prime">
+            </div>
+            <div class="step-body" style="font-size: 13px;">
+              <p>Codes visuels des cartes de la HP repris pour les faire ressortir. Léger dégradé ajouté pour les rendre plus attractives, tout en respectant l'identité réelle des cartes.</p>
+              <p>⚠️ l'objectif n'étant pas de tromper l'utilisateur sur leur apparence.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Stepper -->
     <div class="subsection">
-      <div class="subsection-title">Stepper</div>
       <div class="side-by-side" style="align-items: start;">
+        <div class="img-wrap">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Stepper.png" alt="Stepper">
+        </div>
         <div>
+          <div class="subsection-title">Stepper</div>
           <div class="step-body" style="margin-bottom: 16px;">
             <p>Conçu pour rassurer sur la durée du parcours d'ouverture de compte, celui-ci est ramené à 3 grandes étapes, chacune décrite en deux lignes maximum, afin d'éviter toute perception de complexité ou de longueur.</p>
           </div>
           <div class="step-body">
             <p>La continuité visuelle est assurée par l'usage des pills réalisées, en écho à celles du comparateur. Leur teinte, complémentaire au fond orangé, permet également une mise en avant claire et naturel du CTA « Ouvrir un compte », qui demeure le point focal principal de la section.</p>
           </div>
-        </div>
-        <div class="img-wrap">
-          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Stepper.png" alt="Stepper">
         </div>
       </div>
     </div>
@@ -439,9 +470,9 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
     <div class="subsection">
       <div class="subsection-title">Intention globale</div>
       <div class="subsection-label">Objectifs :</div>
-      <ul class="circle-list" style="margin-bottom: 24px;">
-        <li data-n="1">La page est plus épurée, plus lisible et un peu plus haut de gamme.</li>
-        <li data-n="2">Une expérience fluide, claire, qui valorise l'offre et renforce la perception premium de la marque.</li>
+      <ul class="arrow-list" style="margin-bottom: 24px;">
+        <li>La page est plus épurée, plus lisible et un peu plus haut de gamme.</li>
+        <li>Une expérience fluide, claire, qui valorise l'offre et renforce la perception premium de la marque.</li>
       </ul>
       <div class="img-wrap">
         <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Cartes.png" alt="Intention globale — cartes">
@@ -457,6 +488,28 @@ footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
     </div>
     <div class="img-wrap">
       <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Final.png" alt="Maquette finale">
+    </div>
+  </div>
+
+  <!-- CE QUE ÇA M'A APPORTÉ -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">09</span>
+      <span class="step-big-title">Ce que ça m'a apporté</span>
+    </div>
+    <div class="takeaway-grid">
+      <div class="takeaway-card">
+        <h5>Travail en agence</h5>
+        <p>Collaborer avec une agence externe sur la refonte d'une identité de marque : aligner les visions, comprendre les contraintes créatives et s'approprier un nouveau système visuel.</p>
+      </div>
+      <div class="takeaway-card">
+        <h5>Conception système</h5>
+        <p>Créer des composants cohérents et réutilisables (hero, comparateur, stepper) en respectant la nouvelle charte graphique tout en répondant aux contraintes techniques et métier.</p>
+      </div>
+      <div class="takeaway-card">
+        <h5>Capitalisation data</h5>
+        <p>Tirer parti des enseignements des A/B tests précédents pour orienter les choix UI, et valider les décisions de design avec des données concrètes plutôt que par intuition.</p>
+      </div>
     </div>
   </div>
 
