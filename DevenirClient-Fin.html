@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refonte LP "Devenir client" — Fin — Astrid de la Rüe du Can</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #100B30; --green: #12F2A1; --bg: #F6F8FC;
+  --white: #FFFFFF; --border: #E2E8F0;
+  --text: #100B30; --text-muted: #6B7A99;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: system-ui, sans-serif; font-weight: 300;
+  background: var(--bg); color: var(--text);
+  font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 56px; position: sticky; top: 0;
+  background: var(--bg); z-index: 200;
+  border-bottom: 1px solid transparent; transition: border-color 0.3s;
+}
+nav.scrolled { border-color: var(--border); background: rgba(246,248,252,0.92); backdrop-filter: blur(12px); }
+a.nav-logo { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; border: 2px solid var(--green); flex-shrink: 0; display: block; }
+a.nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--text); font-size: 14px; font-weight: 400;
+  position: relative; padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--green); transition: width 0.25s; border-radius: 2px;
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* BREADCRUMB */
+.breadcrumb { max-width: 1200px; margin: 0 auto; padding: 24px 56px 0; }
+.breadcrumb a {
+  font-size: 13px; color: var(--text-muted); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
+}
+.breadcrumb a:hover { color: var(--navy); }
+
+/* HERO */
+.project-hero {
+  max-width: 1200px; margin: 0 auto;
+  padding: 32px 56px 0;
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 64px; align-items: start;
+}
+.hero-image { border-radius: 16px; overflow: hidden; background: transparent; }
+.hero-image img { width: 100%; display: block; }
+
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.tag {
+  font-size: 11px; font-weight: 400; padding: 5px 14px; border-radius: 20px;
+  border: 1px solid var(--border); color: var(--text-muted); background: var(--white);
+}
+.project-title {
+  font-size: clamp(24px, 2.8vw, 38px); font-weight: 700;
+  line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 12px;
+}
+.project-subtitle {
+  font-size: 15px; font-weight: 300; color: var(--text-muted);
+  margin-bottom: 28px; line-height: 1.65;
+}
+.meta-table {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 20px 0; margin-bottom: 28px;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.meta-row { display: flex; gap: 8px; align-items: baseline; }
+.meta-row .mlabel { font-size: 13px; font-weight: 600; min-width: 80px; flex-shrink: 0; }
+.meta-row .mlabel::after { content: ' :'; }
+.meta-row .mval { font-size: 13px; font-weight: 300; color: var(--text-muted); }
+.ctx-block { margin-bottom: 18px; }
+.ctx-label { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+.ctx-text { font-size: 14px; font-weight: 300; color: var(--text); line-height: 1.7; }
+
+/* CONTENT */
+.project-content { max-width: 1200px; margin: 0 auto; padding: 72px 56px 96px; }
+.step { margin-bottom: 88px; }
+
+.step-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.step-big-num {
+  font-size: 72px; font-weight: 700; line-height: 1;
+  color: var(--green); letter-spacing: -3px; flex-shrink: 0;
+}
+.step-big-title {
+  font-size: 28px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px;
+}
+
+/* LAYOUTS */
+.side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.img-wrap { background: transparent; border-radius: 12px; overflow: hidden; }
+.img-wrap img { width: 100%; display: block; }
+.img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.img-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* TEXTE */
+.step-body { font-size: 14px; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+.step-body p { margin-bottom: 10px; }
+.step-body strong { color: var(--text); font-weight: 600; }
+
+/* BULLETS */
+.bullet-list { list-style: none; padding: 0; margin-top: 8px; }
+.bullet-list li {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  padding: 3px 0 3px 18px; position: relative; line-height: 1.6;
+}
+.bullet-list li::before { content: '•'; position: absolute; left: 0; color: var(--navy); font-size: 16px; line-height: 1.3; }
+
+/* CERCLES numérotés verts */
+.circle-list { list-style: none; padding: 0; margin-top: 8px; }
+.circle-list li {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  padding: 4px 0 4px 32px; position: relative; line-height: 1.6; margin-bottom: 8px;
+}
+.circle-list li::before {
+  content: attr(data-n);
+  position: absolute; left: 0; top: 4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--green); color: var(--navy);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* FLÈCHES */
+.arrow-list { list-style: none; padding: 0; margin-top: 8px; }
+.arrow-list li {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  padding: 4px 0 4px 20px; position: relative; line-height: 1.6;
+}
+.arrow-list li::before { content: '→'; position: absolute; left: 0; color: var(--green); font-size: 12px; top: 6px; }
+
+/* SOUS-SECTION */
+.subsection { margin-bottom: 48px; }
+.subsection-title {
+  font-size: 16px; font-weight: 700; color: var(--navy);
+  margin-bottom: 16px;
+}
+.subsection-label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px;
+}
+
+/* CALLOUT */
+.callout {
+  background: var(--navy); border-radius: 14px; padding: 22px 26px; margin-top: 16px;
+}
+.callout p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.75; font-weight: 300; }
+.callout strong { color: var(--green); font-weight: 600; }
+
+/* NOTE inline */
+.note {
+  font-size: 12px; color: var(--text-muted); font-style: italic;
+  padding: 10px 14px; border-left: 3px solid var(--green);
+  margin-top: 12px; line-height: 1.6;
+}
+
+/* PILL orange */
+.pill-orange {
+  display: inline-block; background: #FF6B47; color: white;
+  font-size: 11px; font-weight: 600; padding: 3px 12px; border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+/* BTN CTA vert primary */
+.btn-cta-green {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--navy); color: #fff;
+  padding: 14px 20px 14px 28px; border-radius: 60px;
+  text-decoration: none; font-size: 15px; font-weight: 500;
+  transition: background .25s, color .25s, box-shadow .25s;
+}
+.btn-cta-green:hover { background: var(--green); color: var(--navy); box-shadow: 0 6px 28px rgba(18,242,161,.3); }
+.btn-cta-green .ac {
+  width: 32px; height: 32px; border-radius: 50%; background: var(--green);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background .25s;
+}
+.btn-cta-green:hover .ac { background: var(--navy); }
+.btn-cta-green .ia { display: block; transition: transform .25s; }
+.btn-cta-green:hover .ia { transform: rotate(-45deg); }
+.btn-cta-green .ia path { stroke: var(--navy); transition: stroke .25s; }
+.btn-cta-green:hover .ia path { stroke: var(--green); }
+
+/* NAV PROJET */
+.project-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 32px 56px; border-top: 1px solid var(--border);
+  max-width: 1200px; margin: 0 auto;
+}
+.btn-next, .btn-prev {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--navy); color: #fff;
+  padding: 12px 24px; border-radius: 60px;
+  text-decoration: none; font-size: 14px; font-weight: 500;
+  border: none; transition: background .25s, color .25s;
+}
+.btn-next:hover, .btn-prev:hover { background: #B3E5FC; color: var(--navy); }
+.btn-next svg, .btn-prev svg { flex-shrink: 0; }
+.btn-next svg path, .btn-prev svg path { stroke: #fff; transition: stroke .25s; }
+.btn-next:hover svg path, .btn-prev:hover svg path { stroke: var(--navy); }
+
+footer {
+  background: var(--navy); padding: 44px 56px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
+.footer-name { color: var(--green) !important; font-size: 13px; font-weight: 500; }
+
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 960px) {
+  nav { padding: 16px 24px; }
+  .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
+  .project-hero { grid-template-columns: 1fr; padding: 24px; gap: 32px; }
+  .side-by-side { grid-template-columns: 1fr; }
+  .img-pair, .img-trio { grid-template-columns: 1fr; }
+  .step-big-num { font-size: 52px; }
+  .step-big-title { font-size: 22px; }
+  .project-nav { flex-direction: column; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/ProfilAstrid.png" alt="Astrid">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Mes projets</a></li>
+    <li><a href="about.html">Qui suis-je ?</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M11 7H3M6 4L3 7l3 3" stroke="#6B7A99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Retour accueil
+  </a>
+</div>
+
+<div class="project-hero">
+  <div class="hero-image fade-up">
+    <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/HeroBanner.png" alt="Refonte LP Devenir client — Fin">
+  </div>
+  <div class="hero-meta fade-up" style="transition-delay:.1s">
+    <div class="project-tags">
+      <span class="tag">UX/UI</span>
+      <span class="tag">Refonte</span>
+      <span class="tag">Desktop</span>
+      <span class="tag">Responsive</span>
+    </div>
+    <h1 class="project-title">Refonte LP "Devenir client"</h1>
+    <p class="project-subtitle">Refonte graphique complète de la landing page.</p>
+    <div class="meta-table">
+      <div class="meta-row"><span class="mlabel">Rôle</span><span class="mval">UX/UI designer</span></div>
+      <div class="meta-row"><span class="mlabel">Périmètre</span><span class="mval">Acquisition, cible particulier</span></div>
+      <div class="meta-row"><span class="mlabel">Équipe</span><span class="mval">design, PO métier, dev, des, accessibilité, SEO, legal</span></div>
+    </div>
+    <div class="ctx-block">
+      <div class="ctx-label">Contexte</div>
+      <p class="ctx-text">Dans un contexte concurrentiel extrêmement compétitif, Hello bank! souhaitait moderniser son image et renforcer sa visibilité. En raison d'une capacité interne limitée liée à la taille de l'équipe, nous nous sommes tournés vers une agence digitale pour identifier et définir des éléments d'expression de marque. Notre priorité était de revoir nos 2 pages emblématiques, à savoir notre homepage et notre landing page.</p>
+    </div>
+    <div class="ctx-block">
+      <div class="ctx-label">Objectif du projet</div>
+      <p class="ctx-text">Construire une image de marque homogène, cohérente et déclinable sur l'ensemble de nos devices et supports de com.</p>
+    </div>
+    <div class="ctx-block">
+      <div class="ctx-label">Problématique</div>
+      <p class="ctx-text">Comment moderniser la marque et se différencier de la concurrence tout en préservant son identité ?</p>
+    </div>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <!-- 1. COLLABORATION -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">1</span>
+      <span class="step-big-title">Collaboration</span>
+    </div>
+    <div class="step-body" style="margin-bottom: 20px;">
+      <p>Je n'y ai pas participé directement, mais des ateliers ont été menés en collaboration avec l'agence (équipes communication, marketing et acquisition), afin d'affiner besoins et de définir collectivement la direction à prendre en matière d'expression digitale.</p>
+      <p>Ces échanges ont porté sur les marqueurs identitaires de la marque, à travers différents éléments comme :</p>
+    </div>
+    <ul class="bullet-list">
+      <li>le langage visuel,</li>
+      <li>les partis pris créatifs,</li>
+      <li>l'introduction de nouveaux codes</li>
+    </ul>
+  </div>
+
+  <!-- 2. REFONTE -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">2</span>
+      <span class="step-big-title">Refonte</span>
+    </div>
+    <div class="side-by-side" style="align-items: start;">
+      <div>
+        <div class="step-body" style="margin-bottom: 16px;">
+          <p>Sous l'impulsion de notre Lead UI, nous avons :</p>
+        </div>
+        <ul class="bullet-list">
+          <li>Revu l'ensemble de la palette de couleurs afin de rendre notre couleur de marque accessible, ce qui n'était pas le cas auparavant. Pour rester cohérents avec les autres teintes, la palette a donc été rationalisée dans sa globalité.</li>
+          <li>Réalisé de nombreux tests sur mobile et desktop afin de garantir la lisibilité et l'adaptabilité des interfaces.</li>
+          <li>Nous avons également fait évoluer les typographies pour renforcer le professionnalisme de la marque, tout en conservant un ton humain et chaleureux, en cohérence avec notre positionnement de leader de la relation client sur le marché.</li>
+        </ul>
+      </div>
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Charte.png" alt="Charte graphique">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SYNCHRO -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">3</span>
+      <span class="step-big-title">Synchro</span>
+    </div>
+    <div class="side-by-side" style="align-items: start;">
+      <div>
+        <div class="step-body" style="margin-bottom: 16px;">
+          <p>L'agence nous a proposé plusieurs pistes pour la homepage, à partir desquelles nous avons décliné la landing page en utilisant certaines strates.</p>
+          <p>J'ai été chargé de créer les strates manquantes, à savoir :</p>
+        </div>
+        <ul class="bullet-list" style="margin-bottom: 16px;">
+          <li>l'hero banner</li>
+          <li>le comparateur</li>
+          <li>le stepper</li>
+        </ul>
+        <div class="step-body">
+          <p>Pour chaque strate réalisée, des points de partage étaient obligatoires avec l'équipe design puis avec l'équipe métier. Une fois l'alignement obtenu, le projet passait en POA, une instance de validation durant laquelle le contexte, la problématique et la solution étaient présentés à notre manager.</p>
+        </div>
+      </div>
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Synchro.png" alt="Synchro">
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. RECHERCHES UI -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">4</span>
+      <span class="step-big-title">Recherches UI</span>
+    </div>
+
+    <!-- Hero banner -->
+    <div class="subsection">
+      <div class="subsection-title">Hero banner</div>
+      <div class="subsection-label">Objectifs :</div>
+      <ul class="circle-list" style="margin-bottom: 24px;">
+        <li data-n="1">Trouver un compromis entre les attentes des PO métier, les contraintes techniques des développeurs et les besoins des utilisateurs.</li>
+        <li data-n="2">Trouver un juste milieu entre attractivité des offres, incarnation de la marque, dimension humaine, le tout sans allonger la longueur de la page et en évitant une photo trop publi-trop commerciale/ agressive.</li>
+      </ul>
+      <div class="full-width" style="margin-bottom: 24px;">
+        <div class="img-wrap">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/HeroBanner.png" alt="Hero Banner recherches">
+        </div>
+      </div>
+
+      <!-- Prototype du header -->
+      <div class="subsection-title" style="margin-top: 32px;">Prototype du header</div>
+      <div class="step-body" style="margin-bottom: 20px;">
+        <p>Réalisation d'un prototype haute fidélité afin de présenter la solution à l'équipe de développement et d'en valider la faisabilité technique, notamment le passage des offres vers le focus principal au scroll, tout en conservant une image de fond sticky.</p>
+      </div>
+      <div style="display: flex; justify-content: center; margin-bottom: 32px;">
+        <div class="img-wrap" style="max-width: 320px;">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/ProtoGIF.gif" alt="Prototype GIF">
+        </div>
+      </div>
+    </div>
+
+    <!-- Tableau comparateur -->
+    <div class="subsection">
+      <div class="subsection-title">Tableau comparateur</div>
+      <div class="side-by-side" style="align-items: start;">
+        <div class="img-wrap">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Comparateur.png" alt="Tableau comparateur">
+        </div>
+        <div>
+          <div class="step-body" style="margin-bottom: 16px;">
+            <p>Recherches réalisées en capitalisant sur les enseignements des A/B tests menés sur le comparateur d'offres. Objectif : rendre le choix simple, visuel et instructif.</p>
+          </div>
+          <ul class="bullet-list" style="margin-bottom: 20px;">
+            <li>Utilisation d'un segmented control pour : clarifier immédiatement les offres visuels, faciliter la comparaison des offres, mettre en évidence rapidement l'option la plus avantageuse.</li>
+          </ul>
+          <div class="step-body" style="margin-bottom: 16px;">
+            <p>Conservation par rapport à l'existant, d'une "pill" pour mettre en avant l'offre Prime, mais en choisissant une teinte visible, complémentaire au fond dégradé orangé, à base d'éviter toute confusion avec les CTA, qui eux restent en vert.</p>
+          </div>
+          <ul class="bullet-list">
+            <li>Cartes visuels des cartes de la HP repris pour les lier visuellement.</li>
+            <li><span class="pill-orange">OFFRE SPÉCIALE JUSQU'AU 15 NOVEMBRE</span> Ajout d'un badge orange stipulé pour les rendre plus attractives, en respectant l'identité visuelle des cartes.</li>
+            <li>L'objectif n'étant pas de tromper l'utilisateur sur leur apparence.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stepper -->
+    <div class="subsection">
+      <div class="subsection-title">Stepper</div>
+      <div class="side-by-side" style="align-items: start;">
+        <div>
+          <div class="step-body" style="margin-bottom: 16px;">
+            <p>Conçu pour rassurer sur la durée du parcours d'ouverture de compte, celui-ci est ramené à 3 grandes étapes, chacune décrite en deux lignes maximum, afin d'éviter toute perception de complexité ou de longueur.</p>
+          </div>
+          <div class="step-body">
+            <p>La continuité visuelle est assurée par l'usage des pills réalisées, en écho à celles du comparateur. Leur teinte, complémentaire au fond orangé, permet également une mise en avant claire et naturel du CTA « Ouvrir un compte », qui demeure le point focal principal de la section.</p>
+          </div>
+        </div>
+        <div class="img-wrap">
+          <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Stepper.png" alt="Stepper">
+        </div>
+      </div>
+    </div>
+
+    <!-- Intention globale -->
+    <div class="subsection">
+      <div class="subsection-title">Intention globale</div>
+      <div class="subsection-label">Objectifs :</div>
+      <ul class="circle-list" style="margin-bottom: 24px;">
+        <li data-n="1">La page est plus épurée, plus lisible et un peu plus haut de gamme.</li>
+        <li data-n="2">Une expérience fluide, claire, qui valorise l'offre et renforce la perception premium de la marque.</li>
+      </ul>
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Cartes.png" alt="Intention globale — cartes">
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. MAQUETTE FINALE -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">8</span>
+      <span class="step-big-title">Maquette finale</span>
+    </div>
+    <div class="img-wrap">
+      <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/DevenirClientFin/Final.png" alt="Maquette finale">
+    </div>
+  </div>
+
+</div>
+
+<div class="project-nav">
+  <a href="Refonte-LP-Devenir-Client.html" class="btn-prev">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M11 7H3M6 4L3 7l3 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Projet précédent
+  </a>
+  <a href="#" class="btn-next">
+    Projet suivant
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M3 7h8M7 4l4 3-4 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</div>
+
+<footer>
+  <p class="footer-name">Astrid de la Rüe du Can</p>
+  <p>Product Designer — Paris</p>
+</footer>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); });
+  const observer = new IntersectionObserver(
+    (entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); },
+    { threshold: 0.06 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
