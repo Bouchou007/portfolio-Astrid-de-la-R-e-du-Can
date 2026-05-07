@@ -3,119 +3,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A/B Test LP "Devenir Client" — Astrid de la Rüe du Can</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Refonte LP "Devenir client" — Astrid de la Rüe du Can</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --green: #1DE9B6; --green-dark: #00C9A7;
-    --navy: #0D1B2A; --text: #0D1B2A; --text-muted: #6B7280;
-    --bg: #F4F4F0; --white: #FFFFFF; --border: #E0E0D8;
-  }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #100B30; --green: #12F2A1; --bg: #F6F8FC;
+  --white: #FFFFFF; --border: #E2E8F0;
+  --text: #100B30; --text-muted: #6B7A99;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: system-ui, sans-serif; font-weight: 300;
+  background: var(--bg); color: var(--text);
+  font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+}
 
-  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; position: sticky; top: 0; background: var(--bg); z-index: 100; border-bottom: 1px solid var(--border); }
-  .nav-logo-placeholder { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--green); font-weight: 600; }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; position: relative; padding-bottom: 2px; }
-  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--green-dark); transition: width 0.2s; }
-  .nav-links a:hover::after { width: 100%; }
+/* NAV */
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 56px; position: sticky; top: 0;
+  background: var(--bg); z-index: 200;
+  border-bottom: 1px solid transparent; transition: border-color 0.3s;
+}
+nav.scrolled { border-color: var(--border); background: rgba(246,248,252,0.92); backdrop-filter: blur(12px); }
+a.nav-logo { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; border: 2px solid var(--green); flex-shrink: 0; display: block; }
+a.nav-logo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--text); font-size: 14px; font-weight: 400;
+  position: relative; padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--green); transition: width 0.25s; border-radius: 2px;
+}
+.nav-links a:hover::after { width: 100%; }
 
-  .breadcrumb { padding: 20px 48px 0; }
-  .breadcrumb a { font-size: 12px; color: var(--text-muted); text-decoration: none; }
-  .breadcrumb a:hover { color: var(--green-dark); }
+/* BREADCRUMB */
+.breadcrumb { max-width: 1200px; margin: 0 auto; padding: 24px 56px 0; }
+.breadcrumb a {
+  font-size: 13px; color: var(--text-muted); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
+}
+.breadcrumb a:hover { color: var(--navy); }
 
-  .project-hero { max-width: 1200px; margin: 0 auto; padding: 40px 48px 60px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-  .tag { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-muted); background: var(--white); }
-  .project-title { font-family: 'Instrument Serif', serif; font-size: clamp(30px, 4vw, 48px); font-weight: 400; line-height: 1.1; margin-bottom: 8px; }
-  .project-subtitle { font-size: 14px; color: var(--text-muted); font-style: italic; margin-bottom: 32px; }
-  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-  .meta-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
-  .meta-value { font-size: 13px; font-weight: 500; }
-  .context-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-  .context-box h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-dark); font-weight: 600; margin-bottom: 10px; }
-  .context-box p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
-  .hero-visual { border-radius: 16px; background: linear-gradient(135deg, #fff3e8 0%, #1DE9B6 100%); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+/* HERO */
+.project-hero {
+  max-width: 1200px; margin: 0 auto;
+  padding: 32px 56px 0;
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 64px; align-items: start;
+}
+.hero-image { border-radius: 16px; overflow: hidden; background: transparent; }
+.hero-image img { width: 100%; display: block; }
 
-  .project-content { max-width: 1200px; margin: 0 auto; padding: 0 48px 80px; }
-  .step { margin-bottom: 64px; }
-  .step-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-  .step-number { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--green); line-height: 1; font-weight: 400; }
-  .step-title { font-family: 'Instrument Serif', serif; font-size: 28px; font-weight: 400; }
-  .step-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
-  .step-body strong { color: var(--text); font-weight: 600; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.tag {
+  font-size: 11px; font-weight: 400; padding: 5px 14px; border-radius: 20px;
+  border: 1px solid var(--border); color: var(--text-muted); background: var(--white);
+}
+.project-title {
+  font-size: clamp(24px, 2.8vw, 38px); font-weight: 700;
+  line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 12px;
+}
+.project-subtitle {
+  font-size: 15px; font-weight: 300; color: var(--text-muted);
+  margin-bottom: 28px; line-height: 1.65;
+}
+.meta-table {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 20px 0; margin-bottom: 28px;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.meta-row { display: flex; gap: 8px; align-items: baseline; }
+.meta-row .mlabel { font-size: 13px; font-weight: 600; min-width: 80px; flex-shrink: 0; }
+.meta-row .mlabel::after { content: ' :'; }
+.meta-row .mval { font-size: 13px; font-weight: 300; color: var(--text-muted); }
+.ctx-block { margin-bottom: 18px; }
+.ctx-label { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+.ctx-text { font-size: 14px; font-weight: 300; color: var(--text); line-height: 1.7; }
 
-  .highlight-box { background: var(--navy); border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
-  .highlight-box p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.65; }
-  .highlight-box strong { color: var(--green); }
+/* KPI BANNER */
+.kpi-banner {
+  max-width: 1200px; margin: 48px auto 0;
+  padding: 0 56px;
+}
+.kpi-inner {
+  background: var(--navy); border-radius: 20px;
+  padding: 36px 48px;
+  display: grid; grid-template-columns: 1fr 1fr auto;
+  gap: 48px; align-items: center;
+}
+.kpi-block 
+.kpi-label {
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-bottom: 16px;
+}
+.kpi-items { display: flex; flex-direction: column; gap: 12px; }
+.kpi-item { display: flex; align-items: center; gap: 12px; }
+.kpi-value {
+  font-size: 28px; font-weight: 700; color: var(--green);
+  letter-spacing: -1px; min-width: 70px;
+}
+.kpi-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; font-weight: 300; }
+.kpi-divider { width: 1px; background: rgba(255,255,255,0.1); align-self: stretch; }
 
-  .two-col-step { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
-  .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-  .info-card h5 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
-  .info-card ul { list-style: none; }
-  .info-card ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; }
-  .info-card ul li:last-child { border: none; }
-  .info-card ul li::before { content: '→'; color: var(--green-dark); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+/* Donut chart */
+.donut-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.donut-svg { width: 140px; height: 140px; }
+.donut-legend { display: flex; flex-direction: column; gap: 8px; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: rgba(255,255,255,0.6); }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
-  .visual-placeholder { background: var(--white); border: 1px solid var(--border); border-radius: 12px; aspect-ratio: 16/7; display: flex; align-items: center; justify-content: center; margin-top: 20px; color: var(--text-muted); font-size: 13px; }
+/* CONTENT */
+.project-content { max-width: 1200px; margin: 0 auto; padding: 72px 56px 96px; }
+.step { margin-bottom: 88px; }
 
-  /* kpis */
-  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
-  .kpi-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-  .kpi-device { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-  .kpi-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); }
-  .kpi-item:last-child { border: none; }
-  .kpi-label { font-size: 12px; color: var(--text-muted); }
-  .kpi-value { font-size: 13px; font-weight: 600; color: var(--navy); }
+.step-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.step-big-num {
+  font-size: 72px; font-weight: 700; line-height: 1;
+  color: var(--green); letter-spacing: -3px; flex-shrink: 0;
+}
+.step-big-title {
+  font-size: 28px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px;
+}
 
-  /* results */
-  .results-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
-  .result-card { border-radius: 12px; padding: 24px; text-align: center; }
-  .result-card.positive { background: rgba(29,233,182,0.1); border: 1px solid rgba(29,233,182,0.3); }
-  .result-card.negative { background: rgba(255,100,100,0.08); border: 1px solid rgba(255,100,100,0.2); }
-  .result-card.neutral { background: var(--white); border: 1px solid var(--border); }
-  .result-number { font-family: 'Instrument Serif', serif; font-size: 36px; font-weight: 400; line-height: 1; margin-bottom: 6px; }
-  .result-card.positive .result-number { color: var(--green-dark); }
-  .result-card.negative .result-number { color: #e24b4a; }
-  .result-card.neutral .result-number { color: var(--navy); }
-  .result-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+/* LAYOUTS */
+.side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.img-wrap { background: transparent; border-radius: 12px; overflow: hidden; }
+.img-wrap img { width: 100%; display: block; }
+.img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.img-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.full-width .img-wrap img { width: 100%; display: block; }
 
-  .takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
-  .takeaway-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; border-top: 3px solid var(--green); }
-  .takeaway-card h5 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-  .takeaway-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+/* TEXTE */
+.step-body { font-size: 14px; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+.step-body p { margin-bottom: 10px; }
+.step-body strong { color: var(--text); font-weight: 600; }
 
-  .next-cta { background: var(--navy); border-radius: 16px; padding: 40px; text-align: center; margin: 40px 0; }
-  .next-cta p { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 16px; }
-  .next-cta a { display: inline-flex; align-items: center; gap: 10px; background: var(--green); color: var(--navy); padding: 14px 28px; border-radius: 60px; text-decoration: none; font-size: 14px; font-weight: 600; transition: transform 0.2s; }
-  .next-cta a:hover { transform: translateY(-1px); }
+/* BULLETS */
+.bullet-list { list-style: none; padding: 0; margin-top: 8px; }
+.bullet-list li {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  padding: 3px 0 3px 18px; position: relative; line-height: 1.5;
+}
+.bullet-list li::before { content: '•'; position: absolute; left: 0; color: var(--navy); font-size: 16px; line-height: 1.3; }
 
-  .project-nav { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
-  .proj-nav-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-muted); font-size: 13px; transition: color 0.2s; }
-  .proj-nav-link:hover { color: var(--green-dark); }
-  .arrow-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; background: var(--white); }
+/* BULLETS VERTS */
+.bullet-green li::before { color: var(--green); }
 
-  footer { background: var(--navy); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; }
-  footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
-  .footer-name { color: var(--green); font-size: 13px; font-weight: 600; }
+/* FLÈCHES */
+.arrow-list { list-style: none; padding: 0; margin-top: 8px; }
+.arrow-list li {
+  font-size: 13px; color: var(--text-muted); font-weight: 300;
+  padding: 4px 0 4px 20px; position: relative; line-height: 1.6;
+}
+.arrow-list li::before { content: '→'; position: absolute; left: 0; color: var(--green); font-size: 12px; top: 6px; }
 
-  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* CONTRAINTES */
+.contraintes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 0; }
+.contrainte-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 16px;
+  font-size: 13px; color: var(--text-muted); line-height: 1.6; font-weight: 300;
+}
+.contrainte-card strong { display: block; color: var(--navy); font-weight: 600; margin-bottom: 4px; font-size: 13px; }
 
-  @media (max-width: 900px) {
-    nav, .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
-    .project-hero { grid-template-columns: 1fr; padding: 24px; }
-    .two-col-step, .kpi-row, .results-strip, .takeaway-grid { grid-template-columns: 1fr; }
-  }
+/* MÉTRIQUES résultats */
+.results-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+.result-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; padding: 20px;
+  border-top: 3px solid var(--green);
+}
+.result-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
+.result-value { font-size: 32px; font-weight: 700; color: var(--green); letter-spacing: -1px; line-height: 1; margin-bottom: 4px; }
+.result-sub { font-size: 11px; color: var(--text-muted); font-weight: 300; }
+
+/* TAKEAWAYS */
+.takeaway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 8px; }
+.takeaway-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 20px; padding: 28px;
+  border-top: 3px solid var(--green);
+  box-shadow: 0 2px 12px rgba(16,11,48,0.04);
+}
+.takeaway-card h5 { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--navy); }
+.takeaway-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
+
+/* CALLOUT */
+.callout {
+  background: var(--navy); border-radius: 14px; padding: 22px 26px; margin-top: 16px;
+}
+.callout p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.75; font-weight: 300; }
+.callout strong { color: var(--green); font-weight: 600; }
+
+/* CTA FINALITÉ */
+.finalite-cta {
+  text-align: center;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 24px; padding: 56px 48px;
+  margin-top: 48px;
+}
+.finalite-cta h3 {
+  font-size: 24px; font-weight: 700; color: var(--navy);
+  margin-bottom: 8px; letter-spacing: -0.3px;
+}
+.finalite-cta p {
+  font-size: 14px; color: var(--text-muted); margin-bottom: 28px; font-weight: 300;
+}
+.btn-cta-green {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--green); color: var(--navy);
+  padding: 14px 14px 14px 28px; border-radius: 60px;
+  text-decoration: none; font-size: 15px; font-weight: 600;
+  transition: background .25s, transform .2s;
+}
+.btn-cta-green:hover { background: #0dd98e; transform: scale(1.02); }
+.btn-cta-green .ac {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-cta-green .ac svg path { stroke: var(--green); }
+
+/* NAV PROJET */
+.project-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 32px 56px; border-top: 1px solid var(--border);
+  max-width: 1200px; margin: 0 auto;
+}
+.btn-next, .btn-prev {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--navy); color: #fff;
+  padding: 12px 24px; border-radius: 60px;
+  text-decoration: none; font-size: 14px; font-weight: 500;
+  border: none; transition: background .25s, color .25s;
+}
+.btn-next:hover, .btn-prev:hover { background: #B3E5FC; color: var(--navy); }
+.btn-next svg, .btn-prev svg { flex-shrink: 0; }
+.btn-next svg path, .btn-prev svg path { stroke: #fff; transition: stroke .25s; }
+.btn-next:hover svg path, .btn-prev:hover svg path { stroke: var(--navy); }
+
+footer {
+  background: var(--navy); padding: 44px 56px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 300; }
+.footer-name { color: var(--green) !important; font-size: 13px; font-weight: 500; }
+
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 960px) {
+  nav { padding: 16px 24px; }
+  .breadcrumb, .project-content, .project-nav, footer { padding-left: 24px; padding-right: 24px; }
+  .project-hero { grid-template-columns: 1fr; padding: 24px; gap: 32px; }
+  .side-by-side, .contraintes-grid, .results-metrics { grid-template-columns: 1fr; }
+  .img-pair, .img-trio { grid-template-columns: 1fr; }
+  .takeaway-grid { grid-template-columns: 1fr; }
+  .kpi-inner { grid-template-columns: 1fr; }
+  .kpi-divider { display: none; }
+  .step-big-num { font-size: 52px; }
+  .step-big-title { font-size: 22px; }
+  .project-nav { flex-direction: column; gap: 16px; }
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html"><div class="nav-logo-placeholder">A</div></a>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/ProfilAstrid.png" alt="Astrid">
+  </a>
   <ul class="nav-links">
     <li><a href="index.html">Mes projets</a></li>
     <li><a href="about.html">Qui suis-je ?</a></li>
@@ -123,207 +286,300 @@
 </nav>
 
 <div class="breadcrumb">
-  <a href="index.html">← Retour accueil</a>
+  <a href="index.html">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M11 7H3M6 4L3 7l3 3" stroke="#6B7A99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Retour accueil
+  </a>
 </div>
 
 <div class="project-hero">
-  <div class="project-meta fade-up">
+  <div class="hero-image fade-up">
+    <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Header-Refonte.png" alt="Refonte LP Devenir client">
+  </div>
+  <div class="hero-meta fade-up" style="transition-delay:.1s">
     <div class="project-tags">
-      <span class="tag">Refonte</span>
       <span class="tag">Responsive</span>
       <span class="tag">Desktop</span>
-      <span class="tag">UX / UI</span>
       <span class="tag">A/B Test</span>
+      <span class="tag">Refonte</span>
+      <span class="tag">UX / UI</span>
     </div>
     <h1 class="project-title">Landing page "devenir client"</h1>
-    <p class="project-subtitle">Refonte graphique complète de la landing page</p>
-
-    <div class="meta-grid">
-      <div class="meta-item">
-        <div class="meta-label">Rôle</div>
-        <div class="meta-value">UX/UI designer</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-label">Périmètre</div>
-        <div class="meta-value">Acquisition, cible particulier</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-label">Équipe</div>
-        <div class="meta-value">Design, PO, des développeurs, SEO, CRO</div>
-      </div>
+    <p class="project-subtitle">Refonte graphique complète de la landing page.</p>
+    <div class="meta-table">
+      <div class="meta-row"><span class="mlabel">Rôle</span><span class="mval">UX/UI designer</span></div>
+      <div class="meta-row"><span class="mlabel">Périmètre</span><span class="mval">Acquisition, cible particulier</span></div>
+      <div class="meta-row"><span class="mlabel">Équipe</span><span class="mval">design, PO métier, dev, SEO, CRMD, CRO</span></div>
     </div>
-
-    <div class="context-box">
-      <h4>Contexte</h4>
-      <p>Projet en 2 temps : Des A/B tests dans un premier temps, puis une refonte complète avec une toute nouvelle UI (à voir dans le projet suivant). Cette landing page, utilisée comme point de redirection pour nos campagnes médias acquisition (Hello bank!), n'était plus alignée visuellement sur la stratégie actuelle de la marque. La page présentait les bénéfices et les différentes offres Hello bank!, mais n'avait pas été rénovée en profondeur depuis plus d'un an.</p>
+    <div class="ctx-block">
+      <div class="ctx-label">Contexte</div>
+      <p class="ctx-text">Projet en 2 temps : Des A/B tests dans un premier temps, puis une refonte complète avec une toute nouvelle UX (à voir dans le projet suivant).</p>
+      <p class="ctx-text" style="margin-top: 8px;">Cette landing page, utilisée comme point de redirection pour les campagnes médias performance (meta, bank), n'était plus alignée avec la stratégie actuelle de la marque. Cette page présentant les bénéfices et les deux offres disponibles n'avait pas été rénovée en profondeur depuis plus d'un an, seules quelques optimisations ponctuelles avaient été apportées.</p>
     </div>
-
-    <div class="context-box">
-      <h4>Objectif du projet</h4>
-      <p>Améliorer la conversion des prospects en clients.</p>
+    <div class="ctx-block">
+      <div class="ctx-label">Objectif du projet</div>
+      <p class="ctx-text">Améliorer la conversion des prospects en clients.</p>
     </div>
-
-    <div class="context-box">
-      <h4>Problématique</h4>
-      <p>Comment faire évoluer cette landing page pour maximiser la performance des campagnes médias et augmenter le taux de conversion vers les offres Hello bank! ?</p>
+    <div class="ctx-block">
+      <div class="ctx-label">Problématique</div>
+      <p class="ctx-text">Comment faire évoluer cette landing page pour maximiser la performance des campagnes médias et augmenter la conversion vers les offres Hello bank! ?</p>
     </div>
   </div>
+</div>
 
-  <div class="hero-visual fade-up" style="transition-delay:0.15s">
-    <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
-      <rect x="30" y="15" width="65" height="110" rx="6" fill="white" opacity="0.9"/>
-      <rect x="105" y="15" width="65" height="110" rx="6" fill="white" opacity="0.5"/>
-      <rect x="35" y="22" width="55" height="8" rx="3" fill="#0D1B2A"/>
-      <rect x="35" y="36" width="42" height="5" rx="2" fill="#0D1B2A" opacity="0.4"/>
-      <rect x="35" y="50" width="55" height="30" rx="4" fill="#1DE9B6" opacity="0.6"/>
-      <rect x="35" y="88" width="40" height="10" rx="5" fill="#0D1B2A"/>
-      <rect x="110" y="22" width="55" height="8" rx="3" fill="#0D1B2A"/>
-      <rect x="110" y="36" width="42" height="5" rx="2" fill="#0D1B2A" opacity="0.4"/>
-      <rect x="110" y="50" width="55" height="30" rx="4" fill="#0D1B2A" opacity="0.3"/>
-      <rect x="110" y="88" width="40" height="10" rx="5" fill="#0D1B2A" opacity="0.5"/>
-      <rect x="60" y="145" width="80" height="30" rx="8" fill="#0D1B2A"/>
-      <text x="100" y="165" text-anchor="middle" fill="#1DE9B6" font-size="10" font-weight="600" font-family="sans-serif">RÉSULTATS</text>
-    </svg>
+<!-- KPI BANNER -->
+<div class="kpi-banner fade-up">
+  <div class="kpi-inner">
+    <div class="kpi-block">
+      <div class="kpi-label">Objectifs de performance</div>
+      <div class="kpi-items">
+        <div class="kpi-item">
+          <span class="kpi-value">↑</span>
+          <span class="kpi-desc">Augmenter le taux de leads</span>
+        </div>
+        <div class="kpi-item">
+          <span class="kpi-value">↑</span>
+          <span class="kpi-desc">Augmenter le nombre d'UI (objectif +128)</span>
+        </div>
+        <div class="kpi-item">
+          <span class="kpi-value">↑</span>
+          <span class="kpi-desc">Augmenter le taux de leads Hello (leads/UI)</span>
+        </div>
+        <div class="kpi-item">
+          <span class="kpi-value">↑</span>
+          <span class="kpi-desc">Augmenter le nombre d'UIs Hello Prime</span>
+        </div>
+      </div>
+    </div>
+    <div class="kpi-divider"></div>
+    <div class="kpi-block">
+      <div class="kpi-label">Répartition du trafic (test)</div>
+      <div class="donut-wrap">
+        <!-- SVG Donut chart -->
+        <svg class="donut-svg" viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="52" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="22"/>
+          <!-- 24% vert = 0.24 * 326.7 = 78.4 -->
+          <circle cx="70" cy="70" r="52" fill="none" stroke="#12F2A1" stroke-width="22"
+            stroke-dasharray="78.4 248.3" stroke-dashoffset="81.7" stroke-linecap="butt"/>
+          <!-- Reste segments -->
+          <circle cx="70" cy="70" r="52" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="22"
+            stroke-dasharray="40 287" stroke-dashoffset="3.3" stroke-linecap="butt"/>
+          <circle cx="70" cy="70" r="52" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="22"
+            stroke-dasharray="60 267" stroke-dashoffset="-36.7" stroke-linecap="butt"/>
+          <circle cx="70" cy="70" r="52" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="22"
+            stroke-dasharray="168.3 158.4" stroke-dashoffset="-96.7" stroke-linecap="butt"/>
+          <text x="70" y="65" text-anchor="middle" fill="#12F2A1" font-size="22" font-weight="700" font-family="system-ui">24%</text>
+          <text x="70" y="83" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="10" font-family="system-ui">du trafic par 2A</text>
+        </svg>
+        <div class="donut-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:#12F2A1"></span>Variation A (new)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:rgba(255,255,255,0.25)"></span>Réseaux sociaux</div>
+          <div class="legend-item"><span class="legend-dot" style="background:rgba(255,255,255,0.12)"></span>SEO / direct</div>
+          <div class="legend-item"><span class="legend-dot" style="background:rgba(255,255,255,0.06)"></span>Autre</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="project-content">
 
+  <!-- 01 CONTRAINTES -->
   <div class="step fade-up">
-    <div class="step-header"><div class="step-number">1.</div><div class="step-title">Contraintes</div></div>
-    <div class="two-col-step">
-      <div class="info-card">
-        <h5>Contraintes techniques</h5>
-        <ul>
-          <li>Impossible de modifier le mini formulaire qui se fait au niveau du contenu, de l'agencement des questions ou du design, car celui-ci est géré par Maaza (domaine CX)</li>
-          <li>Respect de la charte Hello bank!</li>
+    <div class="step-header">
+      <span class="step-big-title">Contraintes</span>
+    </div>
+    <div class="side-by-side" style="align-items: start;">
+      <div>
+        <ul class="bullet-list">
+          <li>Impossible de modifier le mini formulaire qui se loit au niveau du contenu, de l'agencement des questions ou du design car celui-ci est géré par Maaza (domaine CX).</li>
+          <li>Respect de la charte</li>
         </ul>
       </div>
-      <div class="info-card">
-        <h5>Contraintes business</h5>
-        <ul>
-          <li>Maintien des KPIs de tracking en place</li>
-          <li>Budget et délais contraints</li>
-          <li>Intégration par les développeurs existants</li>
-          <li>Compatibilité avec les campagnes médias en cours</li>
-        </ul>
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Contraintes-Refonte.png" alt="Contraintes">
       </div>
     </div>
   </div>
 
+  <!-- 02 EMPATHY MAP & ÉTUDES -->
   <div class="step fade-up">
-    <div class="step-header"><div class="step-number">2.</div><div class="step-title">Empathy map & études</div></div>
-    <p class="step-body">Réalisation d'empathy map dans le but de mieux comprendre les utilisateurs afin d'identifier ce qu'ils pensent, ressentent, voient et font et ainsi construire une proposition de valeur qui répond à leurs besoins.</p>
-    <div class="visual-placeholder">Empathy map + études utilisateurs</div>
-    <div class="two-col-step">
-      <div class="info-card">
-        <h5>Axes d'améliorations identifiés</h5>
-        <ul>
-          <li>Clarifier immédiatement la comparaison des offres</li>
-          <li>Structure / hiérarchisation de l'information</li>
+    <div class="step-header">
+      <span class="step-big-num">02</span>
+      <span class="step-big-title">Empathy map & études</span>
+    </div>
+    <div class="step-body" style="margin-bottom: 24px;">
+      <p>Réalisation d'empathy map dans le but de mieux comprendre les utilisateurs afin d'identifier ce qu'ils pensent, ressentent, voient et font et ainsi concevoir une page qui répond mieux à leurs besoins.</p>
+    </div>
+    <div class="img-pair" style="margin-bottom: 32px;">
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/EmpathyMap1-Refonte.png" alt="Empathy map 1">
+      </div>
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/EmpathyMap2-Refonte.png" alt="Empathy map 2">
+      </div>
+    </div>
+    <div class="step-body" style="margin-bottom: 24px;">
+      <p>Il s'appuyer également sur des études réalisées pour savoir ce qu'attendent/cherchent les utilisateurs d'une banque.</p>
+    </div>
+    <div class="img-pair" style="margin-bottom: 32px;">
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Etudes1-Refonte.png" alt="Études 1">
+      </div>
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Etudes2-Refonte.png" alt="Études 2">
+      </div>
+    </div>
+    <!-- Axes d'améliorations + hypothèses -->
+    <div class="side-by-side" style="align-items: start;">
+      <div>
+        <div class="step-body" style="margin-bottom: 12px;"><p><strong>Axes d'améliorations :</strong></p></div>
+        <ul class="arrow-list">
+          <li>Clarifier immédiatement comparaison des offres</li>
+          <li>Structure/hiérarchisation de l'information</li>
           <li>Simplification de la page</li>
-          <li>Ajouter des indicateurs de comparaison et mise en avant</li>
+          <li>Ajouter indicateur de comparaison et mise sur inscription</li>
           <li>Ajouter de la réassurance visuelle</li>
+          <li>Simplifier le bloc RGPD</li>
           <li>Apparition du formulaire dans un second temps</li>
         </ul>
       </div>
-      <div class="info-card">
-        <h5>Hypothèses d'impact business</h5>
-        <ul>
+      <div>
+        <div class="step-body" style="margin-bottom: 12px;"><p><strong>Hypothèses d'impact business, ces améliorations pourraient :</strong></p></div>
+        <ul class="bullet-list bullet-green">
           <li>Renforcer la crédibilité de la marque</li>
           <li>Réduire le taux de rebond</li>
           <li>Accélérer la prise de décision</li>
           <li>Réduire la charge cognitive</li>
           <li>Améliorer la compréhension de l'offre</li>
-          <li>Accélérer complétion formulaire</li>
+          <li>Accélérer completion formulaire</li>
+          <li>Réduire la compréhension externe</li>
           <li>Améliorer la fluidité du parcours</li>
         </ul>
       </div>
     </div>
   </div>
 
+  <!-- 03 WIREFRAME -->
   <div class="step fade-up">
-    <div class="step-header"><div class="step-number">3.</div><div class="step-title">Wireframe</div></div>
-    <p class="step-body">Réalisation de wireframes high fidelity afin d'aligner l'ensemble des parties prenantes sur une vision commune et validée, avant de passer à la phase de design UI, et représenter les deux offres sur le tableau, et non du bas en haut sur la page.</p>
-    <div class="highlight-box">
-      <p>Sur mobile, ajout d'un CTA sticky présent tout au long de la page · Simplification du tableau comparatif et mise en avant des 3 offres les plus intéressantes · Ajouter du blocs bannières, pour guider l'utilisateur · Mise en avant de l'offre Hello Prime</p>
+    <div class="step-header">
+      <span class="step-big-num">03</span>
+      <span class="step-big-title">Wireframe</span>
     </div>
-    <div class="visual-placeholder">Wireframes haute fidélité — Desktop & Mobile</div>
-  </div>
-
-  <div class="step fade-up">
-    <div class="step-header"><div class="step-number">4.</div><div class="step-title">Maquettes UI validées pour l'A/B Test</div></div>
-    <div class="visual-placeholder" style="aspect-ratio: 21/9;">Maquettes UI finales A et B</div>
-  </div>
-
-  <div class="step fade-up">
-    <div class="step-header"><div class="step-number">5.</div><div class="step-title">Résultats et hypothèses</div></div>
-    <p class="step-body">Cette version démontre de bonnes performances.</p>
-
-    <div class="results-strip">
-      <div class="result-card positive">
-        <div class="result-number">+2,01%</div>
-        <div class="result-label">Taux de clic sur l'offre Prime</div>
-      </div>
-      <div class="result-card positive">
-        <div class="result-number">+7,07%</div>
-        <div class="result-label">Augmentation leads (RCP)</div>
-      </div>
-      <div class="result-card positive">
-        <div class="result-number">+7,06%</div>
-        <div class="result-label">Leads (totaux)</div>
-      </div>
+    <div class="step-body" style="margin-bottom: 24px;">
+      <p>Réalisation de wireframes high fidelity afin d'aligner l'ensemble des parties prenantes sur une vision commune et validée, avant de passer à la phase de design UI, et représentant les axes d'améliorations définies précédemment.</p>
     </div>
-
-    <div class="highlight-box">
-      <p>Le seul point négatif observé a été une hausse des clics sur l'hero banner. Nous proposons dans un second temps un quick-win pour cet hero banner en capitalisant sur le fait que les utilisateurs cliquent sur les cartes : il faut co-rédiger le tableau comparatif. Les données montraient que les utilisateurs ne scrollent pas suffisamment. Cela pousse à expliquer le nombre d'offres, qui induit au scroll, et la page — dans un contexte différent, avec seulement deux offres, nous avons alors choisi de retirer l'expérience. <strong>→ En attendant le lancement du second test (à-dessus), la version précédente sera implémentée</strong></p>
+    <div class="step-body" style="margin-bottom: 20px;">
+      <ul class="bullet-list">
+        <li>Sur mobile, ajout d'un CTA sticky présent tout au long de la page</li>
+        <li>Simplification du tableau comparateur et mise en avant des USP dans les blocs intéressants</li>
+        <li>Simplifier le texte pour rendre les résultats bancaires, enjeux fort pour les entreprises</li>
+        <li>Mise en avant de l'offre Prime</li>
+      </ul>
+    </div>
+    <div class="full-width">
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Wireframe-Refonte.png" alt="Wireframe">
+      </div>
     </div>
   </div>
 
+  <!-- 04 MAQUETTES UI -->
   <div class="step fade-up">
-    <div class="step-header"><div class="step-number">6.</div><div class="step-title">Finalité</div></div>
-    <p class="step-body">Une refonte globale de la charte étant programmée, ce quick-win bien qu'il démontre son efficacité, n'a pas été déployé. Cette refonte capitalisera sur les enseignements clés issus des deux A/B tests menés en amont.</p>
-    <div class="next-cta">
-      <p>Curieux de voir jusqu'où ce projet a été poussé ?</p>
-      <a href="projet-refonte.html">
+    <div class="step-header">
+      <span class="step-big-num">04</span>
+      <span class="step-big-title">Maquettes UI validée pour l'A/B Test</span>
+    </div>
+    <div class="full-width">
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/MaquettesUI-Refonte.png" alt="Maquettes UI">
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 RÉSULTATS ET HYPOTHÈSES -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">05</span>
+      <span class="step-big-title">Résultats et hypothèses</span>
+    </div>
+    <div class="step-body" style="margin-bottom: 28px;">
+      <p>Cette version démontre de bonnes performances.</p>
+    </div>
+    <div class="results-metrics">
+      <div class="result-card">
+        <div class="result-label">Métriques d'impact de la/b test<br>Taux de leads / offre prime</div>
+        <div class="result-value">+ 2,01 %</div>
+        <div class="result-sub">uplift mesuré</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Métriques d'impact de la/b test<br>Taux de clic offre prime</div>
+        <div class="result-value">+ 7,07 %</div>
+        <div class="result-sub">uplift mesuré</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Métriques d'impact de la/b test<br>Taux de leads hello</div>
+        <div class="result-value">+ 7,06 %</div>
+        <div class="result-sub">uplift mesuré</div>
+      </div>
+    </div>
+    <div class="side-by-side" style="align-items: start; margin-top: 32px;">
+      <div>
+        <div class="step-body">
+          <p>Le seul point négatif observé a été une hausse des clics sur le contenu de l'hero banner.</p>
+          <p>Nous proposions dans un second temps un quickwin pour cet hero banner en capitalisant sur le fait que si les utilisateurs cliquent sur les cartes il faut que celles-ci redirigent vers le tableau comparateur, élément central de la page.</p>
+          <p>Lors de la refonte de la homepage Hello bank!, l'usage d'un carrousel pour présenter les offres n'avait pas été concluant : les données montraient que les utilisateurs ne scrollaient pas latéralement. Cela pouvait s'expliquer par le nombre d'offres, qui n'incitait pas à en scroller, et car des produits qui ne correspondaient pas aux attentes des utilisateurs.</p>
+          <p>Le contexte étant ici différent, avec seulement deux offres, nous avons choisi de retenir l'expérience.</p>
+        </div>
+        <div class="callout" style="margin-top: 16px;">
+          <p>→ En attendant le lancement du second test (ci-dessous), la version précédente sera implémentée.</p>
+        </div>
+      </div>
+      <div class="img-wrap">
+        <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Refonte/Resultats-Refonte.png" alt="Résultats">
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 FINALITÉ -->
+  <div class="step fade-up">
+    <div class="step-header">
+      <span class="step-big-num">06</span>
+      <span class="step-big-title">Finalité</span>
+    </div>
+    <div class="step-body">
+      <p>Une refonte globale de la charte étant programmée, ce quickwin bien qu'il ait démontré son efficacité, n'a pas été déployé... Cette refonte capitalisera sur les enseignements clés issus des deux A/B tests menés en amont.</p>
+    </div>
+    <div class="finalite-cta">
+      <h3>Curieux de jusqu'où ce projet a été poussé ?</h3>
+      <p>Découvrez son évolution dans le projet suivant.</p>
+      <a href="#" class="btn-cta-green">
         Découvrir la suite du projet
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="ac">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M7 4l4 3-4 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
       </a>
-    </div>
-  </div>
-
-  <div class="step fade-up">
-    <div class="step-header"><div class="step-number">7.</div><div class="step-title">Ce que ça m'a apporté</div></div>
-    <div class="takeaway-grid">
-      <div class="takeaway-card">
-        <h5>Gestion des compromis</h5>
-        <p>Naviguer entre contraintes techniques fortes et ambitions design tout en restant centré sur la performance.</p>
-      </div>
-      <div class="takeaway-card">
-        <h5>Lecture des résultats</h5>
-        <p>Analyser des résultats d'A/B test, distinguer signaux forts et bruit, formuler des hypothèses pour la suite.</p>
-      </div>
-      <div class="takeaway-card">
-        <h5>Vision long terme</h5>
-        <p>Comprendre qu'un test peut ne pas être déployé mais nourrir la stratégie design sur le long terme.</p>
-      </div>
     </div>
   </div>
 
 </div>
 
 <div class="project-nav">
-  <a href="projet-banners.html" class="proj-nav-link">
-    <span class="arrow-circle">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 4L3 7l3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </span>
-    Projet précédent : Bannières CRMD
+  <a href="AB-Test-CRMD.html" class="btn-prev">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M11 7H3M6 4L3 7l3 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Projet précédent
   </a>
-  <a href="projet-refonte.html" class="proj-nav-link">
-    Projet suivant : Refonte LP
-    <span class="arrow-circle">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </span>
+  <a href="#" class="btn-next">
+    Projet suivant
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M3 7h8M7 4l4 3-4 3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
   </a>
 </div>
 
@@ -333,9 +589,12 @@
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); });
+  const observer = new IntersectionObserver(
+    (entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); },
+    { threshold: 0.06 }
+  );
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 </body>
