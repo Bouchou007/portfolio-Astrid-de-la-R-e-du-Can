@@ -33,13 +33,15 @@ nav.scrolled { border-color:var(--border); background:rgba(246,248,252,.92); bac
 .nav-links a.active { font-weight:600; }
 
 /* HERO */
-.hero-wrap { max-width:860px; margin:0 auto; padding:72px 24px 56px; text-align:center; }
-.hero-wrap h1 { font-size:clamp(40px,6vw,64px); font-weight:700; letter-spacing:-1px; margin-bottom:4px; }
+.hero-wrap { max-width:900px; margin:0 auto; padding:72px 24px 56px; text-align:center; }
+.hero-wrap h1 { font-size:clamp(48px,7vw,80px); font-weight:700; letter-spacing:-1px; margin-bottom:12px; }
+.hero-name { font-size:clamp(22px,3vw,36px); font-weight:400; color:var(--text); margin-bottom:4px; }
 .hero-sub { font-size:13px; color:var(--muted); margin-bottom:40px; line-height:1.6; }
-.hero-body { display:grid; grid-template-columns:180px 1fr; gap:48px; text-align:left; align-items:start; }
-.hero-photo { width:230px; height:230px; border-radius:50%; overflow:hidden; border:3px solid var(--green); flex-shrink:0; }
-.hero-photo img { width:150%; height:150%; object-fit:cover; object-position:top; }
-.hero-text p { font-size:14px; font-weight:300; color:var(--muted); line-height:1.8; margin-bottom:10px; }
+.hero-body { display:grid; grid-template-columns:160px 1fr; gap:48px; text-align:left; align-items:start; }
+.hero-photo-wrap { display:flex; justify-content:center; }
+.hero-photo { width:180px; border-radius:16px; overflow:hidden; flex-shrink:0; }
+.hero-photo img { width:100%; display:block; object-fit:cover; object-position:top; }
+.hero-text p { font-size:14px; font-weight:300; color:var(--muted); line-height:1.8; margin-bottom:14px; }
 .hero-text p strong { font-weight:600; color:var(--text); }
 .hero-text .bonus { font-size:13px; color:var(--muted); margin-top:8px; }
 .hero-text .bonus strong { color:var(--text); font-weight:600; }
@@ -229,16 +231,16 @@ footer p { color:rgba(255,255,255,.35); font-size:12px; font-weight:300; }
 
 <div class="hero-wrap fade-up">
   <h1>HELLO !</h1>
-  <div class="hero-sub">Je m'appelle Astrid de la Rüe du Can<br><em>oui, c'est bien mon nom, pas mon adresse</em></div>
+  <div class="hero-name">Je m'appelle Astrid de la Rüe du Can</div>
+  <div class="hero-sub"><em>(oui c'est bien mon nom, pas mon adresse)</em></div>
   <div class="hero-body">
-    <div class="hero-photo">
-      <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Photo-astrid.png" alt="Astrid">
+    <div class="hero-photo-wrap">
+      <img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/Photo-astrid.png" alt="Astrid" style="width:180px; border-radius:16px; display:block;">
     </div>
     <div class="hero-text">
-      <p>J'ai 31 ans et je conçois des produits qui font dire "ah, c'était simple en fait"... <strong>bref je suis Product designer.</strong></p>
-      <p>Avec 12 ans de gymnastique artistique derrière moi, l'équilibre est devenu une seconde nature : utile pour jongler entre idées, contraintes et créativité... et surtout <strong>rester stable quand tout part un peu en vrille.</strong></p>
-      <p>L'escalade m'a appris à observer, anticiper et trouver la bonne voie, même quand elle n'est pas évidente.</p>
-      <p>On dit également que j'ai une <strong>énergie contagieuse</strong>, le sourire facile et un <strong>goût prononcé pour les défis</strong> (dans le travail et en dehors).</p>
+      <p>J'ai 31 ans et je conçois des produits qui font dire "ah, c'était simple en fait",<br>…bref je suis <strong>Product designer.</strong></p>
+      <p>Avec 12 ans de gymnastique artistique derrière moi, l'équilibre est devenu une seconde nature : utile pour jongler entre idées, contraintes et créativité… et <strong>surtout rester stable même quand tout part un peu en vrille.</strong><br>L'escalade, elle, m'a appris à observer, anticiper et trouver la bonne voie, même quand elle n'est pas évidente.</p>
+      <p>On dit également que j'ai une é<strong>nergie contagieuse, le sourire facile</strong> et un <strong>goût prononcé pour les défis</strong> (dans le travail et en dehors).</p>
       <p class="bonus"><strong>Bonus :</strong> je parle couramment "utilisateur perdu", "stakeholder pressé" et "deadline imminente".</p>
     </div>
   </div>
