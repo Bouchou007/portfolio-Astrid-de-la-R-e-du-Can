@@ -70,7 +70,7 @@ nav.scrolled { border-color:var(--border); background:rgba(246,248,252,.92); bac
 .section-title {
   font-size:13px; font-weight:700; letter-spacing:.25em; text-transform:uppercase;
   color:var(--text); margin-bottom:40px;
-  display:inline-block;
+.exp-logo { height:40px; margin-bottom:14px; display:flex; align-items:center; position:relative; z-index:1; }
   padding-bottom:8px;
   border-bottom:2px solid var(--navy);
 }
@@ -99,17 +99,6 @@ nav.scrolled { border-color:var(--border); background:rgba(246,248,252,.92); bac
 .exp-logo {
   height:32px; margin-bottom:14px; display:flex; align-items:center;
   position:relative; z-index:1;
-}
-.exp-logo::before {
-  content:'';
-  position:absolute;
-  left:-6px;
-  top:50%; transform:translateY(-50%);
-  width:12px; height:12px;
-  border-radius:50%;
-  background:var(--navy);
-  border:2px solid var(--bg);
-  z-index:2;
 }
 .exp-date { font-size:11px; color:var(--muted); letter-spacing:.05em; }
 /* exp-logo defined above */
