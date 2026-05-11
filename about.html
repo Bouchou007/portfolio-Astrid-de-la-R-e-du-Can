@@ -66,43 +66,26 @@ nav.scrolled { border-color:var(--border); background:rgba(246,248,252,.92); bac
 /* SECTION */
 .section { max-width:1100px; margin:0 auto; padding:0 56px 80px; }
 
-/* Section title — trait collé au texte */
+/* ── CORRECTION 1 : .section-title propre + .exp-logo sorti du bloc ── */
 .section-title {
   font-size:13px; font-weight:700; letter-spacing:.25em; text-transform:uppercase;
   color:var(--text); margin-bottom:40px;
-.exp-logo { height:40px; margin-bottom:14px; display:flex; align-items:center; position:relative; z-index:1; }
+  display:inline-block;
   padding-bottom:8px;
   border-bottom:2px solid var(--navy);
 }
+.exp-logo { height:40px; margin-bottom:14px; display:flex; align-items:center; position:relative; z-index:1; }
 
 /* EXPÉRIENCES — timeline horizontale 3 col */
 .exp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; position:relative; }
-/* Trait horizontal de la timeline */
-.exp-timeline-bar {
-  position:relative; margin-bottom:20px;
-  display:flex; align-items:center;
-}
-/* La ligne qui relie les 3 dots — simulée via pseudo-element sur le wrapper */
+.exp-timeline-bar { position:relative; margin-bottom:20px; display:flex; align-items:center; }
 .exp-grid-wrap { position:relative; }
-.exp-grid-wrap::before {
-  content:'';
-  position:absolute;
-  top:46px;
-  left:0; right:0;
-  height:2px;
-  background:var(--navy);
-  z-index:0;
-}
+.exp-grid-wrap::before { content:''; position:absolute; top:46px; left:0; right:0; height:2px; background:var(--navy); z-index:0; }
 .exp-col { position:relative; }
 .exp-top { display:block; margin-bottom:12px; position:relative; z-index:1; }
 .exp-dot { display:none; }
-.exp-logo {
-  height:32px; margin-bottom:14px; display:flex; align-items:center;
-  position:relative; z-index:1;
-}
 .exp-date { font-size:11px; color:var(--muted); letter-spacing:.05em; }
-/* exp-logo defined above */
-.exp-logo img { height:100%; width:auto; object-fit:contain; max-width:140px; }
+.exp-logo img { height:100%; width:auto; object-fit:contain; max-width:160px; }
 .exp-role { font-size:14px; font-weight:600; color:var(--text); margin-bottom:2px; }
 .exp-company { font-size:12px; font-weight:300; color:var(--muted); font-style:italic; margin-bottom:10px; }
 .exp-desc { font-size:12px; font-weight:300; color:var(--muted); line-height:1.65; margin-bottom:10px; }
@@ -113,27 +96,13 @@ nav.scrolled { border-color:var(--border); background:rgba(246,248,252,.92); bac
 /* 2 COL */
 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:80px; }
 
-/* ÉTUDES — timeline verticale avec icônes agrandies SANS agrandir le fond */
+/* ÉTUDES */
 .tl { display:flex; flex-direction:column; }
 .tl-item { display:flex; gap:16px; padding-bottom:28px; }
 .tl-item:last-child { padding-bottom:0; }
 .tl-spine { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
-
-/* Fond navy fixe 36x36, icône agrandie à l'intérieur */
-.tl-icon {
-  width:36px; height:36px;
-  border-radius:10px;
-  background:var(--navy);
-  display:flex; align-items:center; justify-content:center;
-  flex-shrink:0; overflow:hidden;
-}
-/* L'image de l'icône est plus grande que le conteneur → overflow:hidden la crop joliment */
-.tl-icon img {
-  width:36px; height:36px;
-  object-fit:cover;
-  object-position:center;
-}
-
+.tl-icon { width:36px; height:36px; border-radius:10px; background:var(--navy); display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; }
+.tl-icon img { width:36px; height:36px; object-fit:cover; object-position:center; }
 .tl-line { width:1px; flex:1; background:var(--border); margin-top:6px; }
 .tl-item:last-child .tl-line { display:none; }
 .tl-body { padding-top:4px; }
@@ -276,7 +245,9 @@ footer p { color:rgba(255,255,255,.35); font-size:12px; font-weight:300; }
       </div>
       <div class="exp-col">
         <div class="exp-top"><div class="exp-dot"></div><span class="exp-date">2020 — 2022</span></div>
-        <div class="exp-logo"><img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/IconCrit.png" class="exp-role">UX/UI · 2 ans et 4 mois</div>
+        <!-- ── CORRECTION 2 : logo et rôle séparés proprement ── -->
+        <div class="exp-logo"><img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/IconCrit.png" alt="Crit"></div>
+        <div class="exp-role">UX/UI · 2 ans et 4 mois</div>
         <div class="exp-company">Refonte globale de l'application mobile et Quickwin sur le site web.</div>
         <ul class="exp-list">
           <li>Recherche utilisateur (protocoles de test, interviews)</li>
@@ -359,10 +330,10 @@ footer p { color:rgba(255,255,255,.35); font-size:12px; font-weight:300; }
         </div>
       </div>
     </div>
- 
+
     <div>
       <div class="section-title">Mes compétences</div>
- 
+
       <!-- Logiciels -->
       <div class="comp-block">
         <div class="comp-label">Logiciels</div>
@@ -375,7 +346,7 @@ footer p { color:rgba(255,255,255,.35); font-size:12px; font-weight:300; }
           <div class="comp-logo"><img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/logoZeplin.png" alt="Zeplin"></div>
         </div>
       </div>
- 
+
       <!-- Outils -->
       <div class="comp-block">
         <div class="comp-label">Outils</div>
@@ -384,7 +355,7 @@ footer p { color:rgba(255,255,255,.35); font-size:12px; font-weight:300; }
           <div class="comp-logo"><img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/logo-Invision.png" alt="InVision"></div>
         </div>
       </div>
- 
+
       <!-- Outils d'analyse -->
       <div class="comp-block">
         <div class="comp-label">Outils d'analyse</div>
@@ -393,7 +364,7 @@ footer p { color:rgba(255,255,255,.35); font-size:12px; font-weight:300; }
           <div class="comp-logo wide"><img src="https://raw.githubusercontent.com/Bouchou007/portfolio-image/main/LogoCS.png" alt="Content Square"></div>
         </div>
       </div>
- 
+
       <!-- Langues -->
       <div class="comp-block">
         <div class="comp-label">Langues</div>
@@ -402,13 +373,13 @@ footer p { color:rgba(255,255,255,.35); font-size:12px; font-weight:300; }
           <span class="comp-tag">Anglais — <em>En cours d'apprentissage</em></span>
         </div>
       </div>
- 
+
       <!-- Centres d'intérêts -->
       <div class="comp-block">
         <div class="comp-label">Centres d'intérêts</div>
         <div class="comp-text">Illustration<br>Peinture sur céramique<br>Sports : escalade, boxe, gymnastique artistique<br>Urbex</div>
       </div>
- 
+
     </div>
   </div>
 </section>
